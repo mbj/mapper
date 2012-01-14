@@ -13,7 +13,7 @@ module Mapper
       when NilClass
         nil
       when BSON::ObjectId
-        Stocktrade.current_db_session.first(@model,:_id => value)
+        Mapper.current_db_session.first(@model,:_id => value)
       else
         raise
       end
@@ -25,7 +25,7 @@ module Mapper
       when NilClass
         nil
       when value
-        session = Stocktrade.current_db_session
+        session = Mapper.current_db_session
         unless session.loaded?(value)
           raise "cannot save a unloaded reference to: #{value.inspect}"
         end
