@@ -8,9 +8,18 @@ module Mapper
         @db = db
       end
 
+      def get(model,id)
+        identity_map[id] || first(model,:_id => id)
+      end
+
+      def reload(object)
+        get(object.class,object.id)
+      end
+
       def do_insert(object)
         collection_name = @mapper.repository_name(object.class)
         doc = dump(object)
+
         collection = @db.collection(collection_name)
         collection.insert(doc)
       end
@@ -36,7 +45,7 @@ module Mapper
         end
       end
      
-      def all(model,query,options=EMPTY_OPTIONS)
+      def all(model,query,options={})
         cursor = collection(model).find(query,options)
         all_from_cursor(model,cursor)
       end

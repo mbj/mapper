@@ -1,14 +1,19 @@
 module Mapper
   class ModelMapper
-    attr_reader :repository_name
     attr_reader :model
 
     def initialize(model,options={})
       @model = model
-      @repository_name = options.fetch(:repository_name) do
-        raise ArgumentError,'missing :repository_name in options'
-      end
+      @repository_name = options.fetch(:repository_name,nil)
       @attribute_mappers = {}
+    end
+
+    def repository_name
+      if @repository_name
+        @repository_name
+      else
+        raise "#{@model} does not have a repository name (EV?)"
+      end
     end
 
     def dump(object)

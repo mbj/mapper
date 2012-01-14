@@ -1,8 +1,14 @@
 module Mapper
   class Session
+    attr_reader :mapper
+
     def initialize(mapper)
       @mapper = mapper
-      @insert,@update,@delete = {},{},{}
+      clear
+    end
+
+    def clear
+      @identity_map,@insert,@update,@delete = {},{},{},{}
     end
 
     def commit
@@ -51,11 +57,10 @@ module Mapper
       raise if @delete.key?(object)
     end
 
-    def identity_map
-      @identity_map ||= {}
-    end
-
   protected
+
+    attr_reader :identity_map
+    protected :identity_map
 
     def do_insert(object)
       raise NotImplemented,'Implement in db specific subclass'
