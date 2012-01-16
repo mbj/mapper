@@ -98,10 +98,10 @@ thought.
 
     # FIXME: as I do not used this pattern before I might use it wrong.
     # This is basically belongs_to :address from dm-1.0
-    # I can also imagine the case someone whats to save a brunch of 
+    # I can also imagine the case someone whants to save a brunch of 
     # attributes in another collection, but im not very sure if this is not 
     # just only the same pattern with flat attributes instead of the explict 
-    # address object.
+    # address ev object.
     class Address
       include GenericOrmLibrary
       attribute :city, String
