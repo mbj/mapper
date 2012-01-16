@@ -15,8 +15,7 @@ clashes. You have been warned.
 I decided to stick with the programming naming since this matches the names 
 we all know from programming much better than the RDBMS terminology. 
 
-Please refer to the following (still incomplete) table to make sure you get the
-naming.
+Please refer to the following (still incomplete) table:
 
     RDBMS  | Mongo      | Used in this document:
     ============================================
@@ -50,7 +49,7 @@ As we are all used ActiveRecord, we know the concept about one business-object
 corresponds to one row of a specific collection. A mapper should be able to 
 break this.
 
-Example (using an imaginary ORM library :D)
+Example (using an imaginary ORM library :D - greez virtus)
 
     class Address
       include GenericOrmLibrary
@@ -141,29 +140,30 @@ thought.
 Implementation
 --------------
 
-If you call #dump(object) on a root level mapper you'll end up in a so called 
-Intermediate Format that carries all information an adapter needs to write data 
-into the database. The intermediate Format should be the same for all adapters.
+When calling #dump(object) on a model mapper it should return a so called
+intermediate format that carries all information an adapter needs to write data 
+into the database. The intermediate format should be the same for all adapters.
 
-The intermediate format has all information regarding hit collections, values 
-for each collection and keys.
+The intermediate format has all information regarding collections, values 
+for each collection and it marks the values that are keys.
 
-The mapper should not know if you are updating or inserting a record/object. It
-should populate the intermediate format and let the adapter can decide. 
+The mapper should not know if it is mapping for an update or insert. 
 
 The same intermediate format is used when loading objects from database, only 
-the key information is missing. Basically you should be able to round-trip the 
-intermediate format ending up in a business object with exactly the same 
-attributes and behaviour but new identity (object id). The Unit of Work session 
-would have to take care about eliminating such duplicates in the first step.
+the information about what values are keys is missing. 
+
+Basically the mapper should be able to round-trip the intermediate format ending
+up in a business object with exactly the same attributes and behaviour but new 
+identity (object id). The Unit of Work session identity map should have to take
+care about eliminating in memory duplicates.
 
 Dirty-Tracking
 --------------
 
 The intermediate format could be saved when the business object had been loaded.
-On updated the intermediate format could be compared with the saved one 
-resulting in a clear update without any need to track state at the business 
-object level. Yes this wastes space. But it is nice at an option.
+On update the intermediate format could be compared with the saved one 
+resulting in a clear update set without any need to track state at the business 
+object level. Yes, this wastes memory. 
 
 Intermediate Format:
 --------------------
