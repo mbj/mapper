@@ -18,10 +18,11 @@ we all know from programming much better than the RDBMS terminology.
 Please refer to the following (still incomplete) table to make sure you get the
 naming.
 
-RDBMS  | Mongo      | Used in this document:
-============================================
-Table  | Collection | Collection
-Record | Document   | Object
+    RDBMS  | Mongo      | Used in this document:
+    ============================================
+    Table  | Collection | Collection
+    Record | Document   | Object
+    something missing?
 
 For my use case I can map 99% of my business objects to a first class mongo
 collection member document. For RDBMS this could be much more complicated. 
