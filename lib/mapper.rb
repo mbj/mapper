@@ -1,6 +1,2 @@
 require 'mapper/version'
-require 'mapper/mapper'
-require 'mapper/model_mapper'
-require 'mapper/attribute_mapper'
-require 'mapper/session'
-require 'mapper/session/mongo'
+require 'mapper/registry'
