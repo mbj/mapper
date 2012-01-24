@@ -1,3 +1,5 @@
+# Old example not related to the Readme document
+
 module Mapper
   # Mongo specific Mapper for rationals.
   class RationalMapper < ::Mapper::AttributeMapper

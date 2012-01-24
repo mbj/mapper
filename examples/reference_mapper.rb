@@ -1,3 +1,5 @@
+# Old example not related to the readme document
+
 module Mapper
   # Mongo specific mapper for storing references 
   class ReferenceMapper < ::Mapper::AttributeMapper

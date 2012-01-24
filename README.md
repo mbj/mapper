@@ -5,6 +5,9 @@ An attempt to create a total agnostic mapper to transform business objects
 into a DB compatible representations. And a database representation back to 
 domain objects.
 
+My thoughts here are not new but I'd writtem them down to make sure I can 
+structure them.
+
 Terminology:
 ------------
 
