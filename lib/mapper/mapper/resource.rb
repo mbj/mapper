@@ -25,7 +25,7 @@ module Mapper
           name = attribute.name
           data[name] = attribute.load(object[name])
         end
-   
+
         @model.new(data)
       end
     end

@@ -28,26 +28,27 @@ describe 'building a mapper for virtus with EV and embedded collection' do
     )
   end
 
+  let(:address_mapper) do
+    attributes = [
+      Mapper::Mapper::Attribute.new(:address_line),
+      Mapper::Mapper::Attribute.new(:postcode),
+      Mapper::Mapper::Attribute.new(:city)
+    ]
+
+    Mapper::Mapper::Resource.new(:address,Examples::Virtus::Address,attributes)
+  end
+
+  let(:placement_mapper) do
+    attributes = [
+      Mapper::Mapper::Attribute.new(:rank),
+      Mapper::Mapper::Attribute.new(:name)
+    ]
+
+    Mapper::Mapper::Resource.new(:placement,Examples::Virtus::Placement,attributes)
+  end
+
+
   context 'when mapping to EV and EC at a default repository' do
-
-    let(:address_mapper) do
-      attributes = [
-        Mapper::Mapper::Attribute.new(:address_line),
-        Mapper::Mapper::Attribute.new(:postcode),
-        Mapper::Mapper::Attribute.new(:city)
-      ]
-
-      Mapper::Mapper::Resource.new(:address,Examples::Virtus::Address,attributes)
-    end
-
-    let(:placement_mapper) do
-      attributes = [
-        Mapper::Mapper::Attribute.new(:rank),
-        Mapper::Mapper::Attribute.new(:name)
-      ]
-
-      Mapper::Mapper::Resource.new(:placement,Examples::Virtus::Placement,attributes)
-    end
 
     let(:driver_mapper) do
       attributes = [
@@ -57,11 +58,11 @@ describe 'building a mapper for virtus with EV and embedded collection' do
         address_mapper,
         Mapper::Mapper::Collection.new(:placements,placement_mapper)
       ]
-
-      Mapper::Mapper::Resource.new(:driver,Examples::Virtus::Address,attributes)
+    
+      Mapper::Mapper::Resource.new(:driver,Examples::Virtus::Driver,attributes)
     end
 
-    let(:intern) do
+    let(:internal) do
       {
         :greeting   => 'Mr',
         :firstname  => 'John',
@@ -81,8 +82,12 @@ describe 'building a mapper for virtus with EV and embedded collection' do
       }
     end
 
-    it 'should map to intern representation' do
-      driver_mapper.dump(object).should == intern
+    it 'should map to internal representation' do
+      driver_mapper.dump(object).should == internal
+    end
+
+    it 'should load internal representation' do
+      driver_mapper.dump(driver_mapper.load(internal)).should == internal
     end
   end
 end
