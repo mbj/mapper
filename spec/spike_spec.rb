@@ -3,9 +3,9 @@
 # Will/should be transferred into an integration spec.
 require 'spec_helper'
 
-describe 'building a mapper for virtus with EV and embedded collection' do
+describe 'building a mapper for virtus with EV and EC (embedded collection)' do
 
-  let(:object) do
+  let(:driver) do
     Examples::Virtus::Driver.new(
       :greeting  => 'Mr',
       :firstname => 'John',
@@ -55,8 +55,47 @@ describe 'building a mapper for virtus with EV and embedded collection' do
     )
   end
 
+  shared_examples_for 'correct mapping' do
+    it 'should dump to internal' do
+      mapper.dump(object).should == internal
+    end
+
+    it 'should round trip' do
+      mapper.dump(mapper.load(internal)).should == internal
+    end
+  end
+
+  context 'when attribute does dump to another name' do
+    let(:mapper) do
+      attributes = [
+        Mapper::Mapper::Attribute.new(:address_line),
+        Mapper::Mapper::Attribute.new(:postcode),
+        Mapper::Mapper::Attribute.new(:city,:dump_name => :location)
+      ]
+
+      Mapper::Mapper::Resource.new(
+        :address,
+        :model => Examples::Virtus::Address,
+        :attributes => attributes
+      )
+    end
+
+    let(:object) { driver.address }
+
+    let(:internal) do
+      {
+        :address_line => 'Zum verrückten Fahrradfahrer 1',
+        :postcode     => '0815',
+        :location     => 'Musterstadt'
+      }
+    end
+
+    it_should_behave_like 'correct mapping'
+  end
+
 
   context 'when mapping to EV and EC at a default repository' do
+
     let(:driver_mapper) do
       attributes = [
         Mapper::Mapper::Attribute.new(:greeting),
@@ -96,12 +135,9 @@ describe 'building a mapper for virtus with EV and embedded collection' do
       }
     end
 
-    it 'should map to internal representation' do
-      driver_mapper.dump(object).should == internal
-    end
+    let(:mapper) { driver_mapper }
+    let(:object) { driver }
 
-    it 'should round trip internal representation' do
-      driver_mapper.dump(driver_mapper.load(internal)).should == internal
-    end
+    it_should_behave_like 'correct mapping'
   end
 end

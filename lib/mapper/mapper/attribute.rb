@@ -4,7 +4,7 @@ module Mapper
       attr_reader :key
    
       def initialize(name,options=EMPTY_OPTIONS)
-        super(name)
+        super(name,options)
         @key = !!options.fetch(:key,false)
       end
    

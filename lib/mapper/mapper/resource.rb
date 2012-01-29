@@ -1,8 +1,10 @@
 module Mapper
   class Mapper
     class Resource < Mapper
+      attr_reader :model,:attributes
+
       def initialize(name,options=EMPTY_OPTIONS)
-        super(name)
+        super(name,options)
         @model = options.fetch(:model) do
           raise ArgumentError,'missing :model in +options+'
         end
@@ -15,10 +17,10 @@ module Mapper
         values = {}
    
         @attributes.each do |attribute|
-          name = attribute.name
-          values[name] = attribute.dump(object.send(name))
+          value =attribute.dump(object.send(attribute.name))
+          values[attribute.dump_name] = value
         end
-   
+
         values
       end
    
@@ -26,8 +28,8 @@ module Mapper
         data = {}
    
         @attributes.each do |attribute|
-          name = attribute.name
-          data[name] = attribute.load(object[name])
+          value = attribute.load(object[attribute.dump_name])
+          data[attribute.name] = value
         end
 
         @model.new(data)

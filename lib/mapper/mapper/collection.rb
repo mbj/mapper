@@ -1,8 +1,10 @@
 module Mapper
   class Mapper
     class Collection < Mapper
+      attr_reader :mapper
+
       def initialize(name,options=EMPTY_OPTIONS)
-        super(name)
+        super(name,options)
         @mapper = options.fetch(:mapper) do 
           raise ArgumentError,'missing :mapper in +options+'
         end
