@@ -1,8 +1,10 @@
 module Mapper
   class Mapper
+    EMPTY_OPTIONS={}.freeze
+
     attr_reader :name
    
-    def initialize(name)
+    def initialize(name,options=EMPTY_OPTIONS)
       @name = name
     end
    

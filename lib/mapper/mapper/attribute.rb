@@ -3,9 +3,9 @@ module Mapper
     class Attribute < Mapper
       attr_reader :key
    
-      def initialize(name,key=false)
+      def initialize(name,options=EMPTY_OPTIONS)
         super(name)
-        @key = !!key
+        @key = !!options.fetch(:key,false)
       end
    
       alias :key? :key

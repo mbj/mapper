@@ -35,7 +35,11 @@ describe 'building a mapper for virtus with EV and embedded collection' do
       Mapper::Mapper::Attribute.new(:city)
     ]
 
-    Mapper::Mapper::Resource.new(:address,Examples::Virtus::Address,attributes)
+    Mapper::Mapper::Resource.new(
+      :address,
+      :model => Examples::Virtus::Address,
+      :attributes => attributes
+    )
   end
 
   let(:placement_mapper) do
@@ -44,22 +48,32 @@ describe 'building a mapper for virtus with EV and embedded collection' do
       Mapper::Mapper::Attribute.new(:name)
     ]
 
-    Mapper::Mapper::Resource.new(:placement,Examples::Virtus::Placement,attributes)
+    Mapper::Mapper::Resource.new(
+      :placement,
+      :model => Examples::Virtus::Placement,
+      :attributes => attributes
+    )
   end
 
 
   context 'when mapping to EV and EC at a default repository' do
-
     let(:driver_mapper) do
       attributes = [
         Mapper::Mapper::Attribute.new(:greeting),
         Mapper::Mapper::Attribute.new(:firstname),
         Mapper::Mapper::Attribute.new(:lastname),
         address_mapper,
-        Mapper::Mapper::Collection.new(:placements,placement_mapper)
+        Mapper::Mapper::Collection.new(
+          :placements, 
+          :mapper => placement_mapper
+        )
       ]
     
-      Mapper::Mapper::Resource.new(:driver,Examples::Virtus::Driver,attributes)
+      Mapper::Mapper::Resource.new(
+        :driver,
+        :model => Examples::Virtus::Driver,
+        :attributes => attributes
+      )
     end
 
     let(:internal) do
@@ -86,7 +100,7 @@ describe 'building a mapper for virtus with EV and embedded collection' do
       driver_mapper.dump(object).should == internal
     end
 
-    it 'should load internal representation' do
+    it 'should round trip internal representation' do
       driver_mapper.dump(driver_mapper.load(internal)).should == internal
     end
   end

@@ -1,10 +1,14 @@
 module Mapper
   class Mapper
     class Resource < Mapper
-      def initialize(name,model,attributes)
+      def initialize(name,options=EMPTY_OPTIONS)
         super(name)
-        @model = model
-        @attributes = attributes
+        @model = options.fetch(:model) do
+          raise ArgumentError,'missing :model in +options+'
+        end
+        @attributes = options.fetch(:attributes) do
+          raise ArgumentError,'missing :attributes in +options+'
+        end
       end
    
       def dump(object)

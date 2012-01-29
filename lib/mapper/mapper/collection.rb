@@ -1,9 +1,11 @@
 module Mapper
   class Mapper
     class Collection < Mapper
-      def initialize(name,mapper)
+      def initialize(name,options=EMPTY_OPTIONS)
         super(name)
-        @mapper = mapper
+        @mapper = options.fetch(:mapper) do 
+          raise ArgumentError,'missing :mapper in +options+'
+        end
       end
    
       def dump(object)
