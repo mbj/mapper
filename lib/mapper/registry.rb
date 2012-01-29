@@ -5,12 +5,12 @@ module Mapper
     #
     # @param [Object, #model] mapper to be added for model
     # @return self
-    def add_mapper(mapper)
+    def register(mapper)
       @mappers[mapper.model]=mapper
 
       self
     end
-    alias :[]= :add_mapper
+    alias :[]= :register
    
     # Find a mapper for given model.
     #

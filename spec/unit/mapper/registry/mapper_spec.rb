@@ -16,7 +16,7 @@ describe Mapper::Registry,'#mapper' do
     let(:mapper) { FakeMapper.new(model) }
 
     before do
-      object.add_mapper(mapper)
+      object.register(mapper)
     end
 
     it 'should return mapper' do

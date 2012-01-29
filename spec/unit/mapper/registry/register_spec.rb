@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Registry,'#add_mapper' do
+describe Mapper::Registry,'#register' do
   class FakeMapper
     attr_reader :model
     def initialize(model)
@@ -12,7 +12,7 @@ describe Mapper::Registry,'#add_mapper' do
   let(:model)  { :some_model }
   let(:mapper) { FakeMapper.new(model) }
 
-  subject { object.add_mapper(mapper) }
+  subject { object.register(mapper) }
 
   shared_examples_for 'a command method' do
     it 'should return object' do
@@ -20,7 +20,7 @@ describe Mapper::Registry,'#add_mapper' do
     end
   end
 
-  context 'when adding a new mapper' do
+  context 'when registring a new mapper' do
     it_should_behave_like 'a command method'
 
     it 'should add the mapper' do
@@ -31,7 +31,7 @@ describe Mapper::Registry,'#add_mapper' do
 
   context 'when mapper was already present' do
     before do
-      object.add_mapper(FakeMapper.new(:some_other_model))
+      object.register(FakeMapper.new(:some_other_model))
     end
 
     it_should_behave_like 'a command method'
