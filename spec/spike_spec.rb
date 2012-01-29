@@ -54,8 +54,8 @@ describe 'building a mapper for virtus with EV and embedded collection' do
         Mapper::Mapper::Attribute.new(:greeting),
         Mapper::Mapper::Attribute.new(:firstname),
         Mapper::Mapper::Attribute.new(:lastname),
-        Mapper::Mapper::EmbeddedValue.new(:address,address_mapper),
-        Mapper::Mapper::EmbeddedCollection.new(:placements,placement_mapper)
+        address_mapper,
+        Mapper::Mapper::Collection.new(:placements,placement_mapper)
       ]
 
       Mapper::Mapper::Resource.new(:driver,Examples::Virtus::Address,attributes)
