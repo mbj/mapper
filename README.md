@@ -173,3 +173,13 @@ Intermediate Format:
 
 To be documented. Will be implemented tomorrow, I'm thinking about an array of 
 hashes, but maybe a specialized class can/should be created.
+
+    { 
+      :repo_name => [{
+        :values => {
+          :field_a => :value_resource_a,
+          :field_b => :value_resource_b
+        }
+      }]
+    ]
+
