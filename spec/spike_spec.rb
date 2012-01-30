@@ -94,7 +94,7 @@ describe 'building a mapper for virtus with EV and EC (embedded collection)' do
   end
 
 
-  context 'when mapping to EV and EC at a default repository' do
+  context 'when mapping to EV and EC' do
 
     let(:driver_mapper) do
       attributes = [
