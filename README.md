@@ -1,3 +1,10 @@
+DISCLAIMER:
+===========
+
+This document is old already. Pls see 
+[the spike speck](https://github.com/mbj/mapper/blob/master/spec/spike_spec.rb )
+for uptodate information.
+
 Pure Mapper
 ===========
 
