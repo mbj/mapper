@@ -1,10 +1,11 @@
+#encoding: utf-8
 require 'virtus'
 module Examples
   module Virtus
 
     class Address
       include ::Virtus
-      attribute :address_line,String
+      attribute :line,String
       attribute :country,String
       attribute :postcode,String
       attribute :city,String
@@ -25,6 +26,42 @@ module Examples
       # Virtus currently does not have some kind of "typed array" 
       # so using plain arrays here.
       attribute :placements,Array
+
+      def placements=(placement_attributes)
+        placements = placement_attributes.map do |attributes|
+          if attributes.kind_of?(Placement)
+            attributes
+          else
+            Placement.new(attributes)
+          end
+        end
+        super(placements)
+
+        self
+      end
+
+      def self.example
+        Driver.new(
+          :greeting  => 'Mr',
+          :firstname => 'John',
+          :lastname  => 'Doe',
+          :placements => [
+            Placement.new(
+              :rank => 2,
+              :name => 'Stadrrundfahrt Oberhausen'
+            ),
+            Placement.new(
+              :rank => 20,
+              :name => 'Rü Cup Essen'
+            )
+          ],
+          :address => Address.new(
+            :line         => 'Zum verrückten Fahrradfahrer 1',
+            :postcode     => '0815',
+            :city         => 'Musterstadt'
+          )
+        )
+      end
     end
   end
 end

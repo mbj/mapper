@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Mapper::Collection,'.new' do 
+describe Mapper::Mapper::EmbeddedCollection,'.new' do 
   subject { described_class.new(*arguments) }
 
   context 'with name given' do

@@ -2,11 +2,10 @@ module Mapper
   class Mapper
     EMPTY_OPTIONS={}.freeze
 
-    attr_reader :name, :dump_name
+    attr_reader :name
    
-    def initialize(name,options=EMPTY_OPTIONS)
+    def initialize(name)
       @name = name
-      @dump_name = options.fetch(:dump_name,name)
     end
    
     def dump(object)

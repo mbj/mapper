@@ -1,38 +1,40 @@
 module Mapper
   class Mapper
     class Resource < Mapper
-      attr_reader :model,:attributes
+      attr_reader :mappers
 
-      def initialize(name,options=EMPTY_OPTIONS)
-        super(name,options)
-        @model = options.fetch(:model) do
-          raise ArgumentError,'missing :model in +options+'
-        end
-        @attributes = options.fetch(:attributes) do
-          raise ArgumentError,'missing :attributes in +options+'
-        end
+      def initialize(name,mappers)
+        super(name)
+        @mappers = mappers
       end
    
       def dump(object)
+        { @name => dump_value(object) }
+      end
+
+      def dump_value(object)
         values = {}
-   
-        @attributes.each do |attribute|
-          value =attribute.dump(object.send(attribute.name))
-          values[attribute.dump_name] = value
+
+        @mappers.each do |mapper|
+          value = mapper.dump(object)
+          values.merge!(value)
         end
 
         values
       end
-   
-      def load(object)
-        data = {}
-   
-        @attributes.each do |attribute|
-          value = attribute.load(object[attribute.dump_name])
-          data[attribute.name] = value
+
+      def load_value(object)
+        attributes = {}
+
+        @mappers.each do |mapper|
+          attributes.merge!(mapper.load(object))
         end
 
-        @model.new(data)
+        attributes
+      end
+   
+      def load(object)
+        load_value(object.fetch(@name,{}))
       end
     end
   end
