@@ -3,17 +3,25 @@
 # Will/should be transferred into an integration spec.
 require 'spec_helper'
 
+# FIXME: 
+#
+#   name of the resource mappers is used as collection name
+#   maybe the resource mapper should just be renamed to collection?
+#
+#   There is no support for keys currently.
+
 describe 'building an attribute tree in differend ways' do
+  # This is the complex resource beeing mapped to the database 
+  # with multiple patterns.
+  #
+  # I opted out for POROS here since hashes of hashes/arrays 
+  # can easily be build from DM / Virtus / AR.
   let(:driver) do
     {
       :greeting=>'Mr', 
       :firstname=>'John', 
       :lastname=>'Doe', 
-      :address=> {
-        :line=>'Zum verrückten Fahrradfahrer 1',
-        :postcode=>'0815', 
-        :city=>'Musterstadt'
-      }, 
+      :address=> address,
       :placements=>[
         {
           :rank=>2, 
@@ -27,10 +35,16 @@ describe 'building an attribute tree in differend ways' do
     }
   end
 
+  # Easy resouce
   let(:address) do
-    driver.fetch(:address)
+    {
+      :line=>'Zum verrückten Fahrradfahrer 1',
+      :postcode=>'0815', 
+      :city=>'Musterstadt'
+    }
   end
 
+  # A simple 1:1 mapper for address used later to build more complex ones.
   let(:address_mapper) do
     attributes = [
       Mapper::Mapper::Attribute.new(:line),
@@ -41,6 +55,7 @@ describe 'building an attribute tree in differend ways' do
     Mapper::Mapper::Resource.new(:address,attributes)
   end
 
+  # A simple mapper for ONE placement
   let(:placement_mapper) do
     attributes = [
       Mapper::Mapper::Attribute.new(:rank),
@@ -49,15 +64,6 @@ describe 'building an attribute tree in differend ways' do
 
     Mapper::Mapper::Resource.new(:placement,attributes)
   end
-
-  let(:address_internal) do
-    {
-      :line => 'Zum verrückten Fahrradfahrer 1',
-      :postcode     => '0815',
-      :city         => 'Musterstadt'
-    }
-  end
-
 
   shared_examples_for 'a correct mapping' do
     it 'should dump to internal' do
@@ -73,50 +79,6 @@ describe 'building an attribute tree in differend ways' do
     end
   end
 
-
-  context 'when mapping address to multiple collections' do
-    let(:mapper) do
-      Mapper::Mapper::Root.new(:address,
-        [
-          Mapper::Mapper::Repository.new(:default,
-            [
-              Mapper::Mapper::Resource.new(:address_a,
-                [
-                  Mapper::Mapper::Attribute.new(:line),
-                  Mapper::Mapper::Attribute.new(:postcode)
-                ]
-              ),
-              Mapper::Mapper::Resource.new(:address_b,
-                [
-                  Mapper::Mapper::Attribute.new(:city)
-                ]
-              )
-            ]
-          ),
-        ]
-      )
-    end
-
-    let(:object) { address }
-
-    let(:internal) do
-      {
-        :default => {
-          :address_a => {
-            :line => address.fetch(:line),
-            :postcode => address.fetch(:postcode),
-          },
-          :address_b => {
-            :city => address.fetch(:city)
-          }
-        }
-      }
-    end
-
-    it_should_behave_like 'a correct mapping'
-  end
-
-
   context 'when attribute does dump to another name' do
     let(:mapper) do
       attributes = [
@@ -131,9 +93,13 @@ describe 'building an attribute tree in differend ways' do
     let(:object) { address }
 
     let(:internal) do
-      address = address_internal
-      address[:location] = address.delete(:city)
-      { :address => address }
+      { 
+        :address => {
+          :line=>'Zum verrückten Fahrradfahrer 1',
+          :postcode=>'0815', 
+          :location=>'Musterstadt'
+        }
+      }
     end
 
     it_should_behave_like 'a correct mapping'
@@ -183,7 +149,7 @@ describe 'building an attribute tree in differend ways' do
           :greeting   => 'Mr',
           :firstname  => 'John',
           :lastname   => 'Doe',
-          :address    => address_internal,
+          :address    => address,
         }
       }
     end
@@ -252,6 +218,51 @@ describe 'building an attribute tree in differend ways' do
 
     it_should_behave_like 'a correct mapping'
   end
+
+  context 'when mapping address to multiple collections' do
+    let(:mapper) do
+      # This looks stupid, but I do not think users will have 
+      # to build this trees by hand. (DSL?)
+      Mapper::Mapper::Root.new(:address,
+        [
+          Mapper::Mapper::Repository.new(:default,
+            [
+              Mapper::Mapper::Resource.new(:address_a,
+                [
+                  Mapper::Mapper::Attribute.new(:line),
+                  Mapper::Mapper::Attribute.new(:postcode)
+                ]
+              ),
+              Mapper::Mapper::Resource.new(:address_b,
+                [
+                  Mapper::Mapper::Attribute.new(:city)
+                ]
+              )
+            ]
+          ),
+        ]
+      )
+    end
+
+    let(:object) { address }
+
+    let(:internal) do
+      {
+        :default => {
+          :address_a => {
+            :line => address.fetch(:line),
+            :postcode => address.fetch(:postcode),
+          },
+          :address_b => {
+            :city => address.fetch(:city)
+          }
+        }
+      }
+    end
+
+    it_should_behave_like 'a correct mapping'
+  end
+
 
  #context 'when mapping to repository' do
 
