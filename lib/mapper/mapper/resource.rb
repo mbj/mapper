@@ -23,18 +23,18 @@ module Mapper
         values
       end
 
-      def load_value(object)
+      def load_value(dump)
         attributes = {}
 
         @mappers.each do |mapper|
-          attributes.merge!(mapper.load(object))
+          attributes.merge!(mapper.load(dump))
         end
 
         attributes
       end
    
-      def load(object)
-        load_value(object.fetch(@name,{}))
+      def load(dump)
+        load_value(dump.fetch(@name,{}))
       end
     end
   end

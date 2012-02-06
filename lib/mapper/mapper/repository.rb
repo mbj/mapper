@@ -14,11 +14,11 @@ module Mapper
         data
       end
 
-      def load(object)
+      def load(dump)
         attributes = {}
 
         @mappers.each do |mapper|
-          attributes.merge!(mapper.load(object))
+          attributes.merge!(mapper.load(dump))
         end
 
         attributes

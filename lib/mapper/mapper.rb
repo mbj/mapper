@@ -12,7 +12,7 @@ module Mapper
       raise NotImplemented,'must be implemented in subclasses'
     end
    
-    def load(object)
+    def load(dump)
       raise NotImplemented,'must be implemented in subclasses'
     end
   end

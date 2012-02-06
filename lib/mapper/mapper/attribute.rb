@@ -10,8 +10,8 @@ module Mapper
         { @dump_name => dump_value(object) }
       end
    
-      def load(object)
-        { @name => load_value(object) }
+      def load(dump)
+        { @name => load_value(dump) }
       end
 
       def load_value(object)

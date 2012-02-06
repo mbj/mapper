@@ -10,8 +10,8 @@ module Mapper
         @mapper.dump(object)
       end
 
-      def load(object)
-        @mapper.load(object)
+      def load(dump)
+        @mapper.load(dump)
       end
     end
   end

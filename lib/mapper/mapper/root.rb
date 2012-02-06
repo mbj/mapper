@@ -15,10 +15,10 @@ module Mapper
         data
       end
 
-      def load(object)
+      def load(dump)
         attributes = {}
         @mappers.each do |repository|
-          repo = object[repository.name]
+          repo = dump[repository.name]
           if repo
             data = repository.load(repo)
             attributes.merge!(data)
