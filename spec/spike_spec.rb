@@ -262,29 +262,4 @@ describe 'building an attribute tree in differend ways' do
 
     it_should_behave_like 'a correct mapping'
   end
-
-
- #context 'when mapping to repository' do
-
- #  let(:repository_mapper) do
- #    Mapper::Mapper::Repository.new(:default,[driver_mapper])
- #  end
-
- #  let(:root_mapper) do
- #    Mapper::Mapper::Root.new(:default,[repository_mapper])
- #  end
-
- #  let(:internal) do
- #    {
- #      :default => {
- #        :drivers => driver_internal
- #      }
- #    }
- #  end
-
- #  let(:mapper) { root_mapper }
- #  let(:object) { driver }
-
- #  it_should_behave_like 'a correct mapping'
- #end
 end
