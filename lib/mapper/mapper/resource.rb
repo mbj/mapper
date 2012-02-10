@@ -7,7 +7,7 @@ module Mapper
         super(name)
         @mappers = mappers
       end
-   
+
       def dump(object)
         { @name => dump_value(object) }
       end
@@ -35,6 +35,36 @@ module Mapper
    
       def load(dump)
         load_value(dump.fetch(@name,{}))
+      end
+
+      def load_key(dump)
+        key = {}
+
+        key_mappers.each do |mapper|
+          key.merge!(mapper.load(dump))
+        end
+
+        key
+      end
+
+      def dump_key_value(object)
+        key = {}
+
+        key_mappers.each do |mapper|
+          key.merge!(mapper.dump(object))
+        end
+
+        key
+      end
+
+      def dump_key(object)
+        { @name => dump_key_value(object) }
+      end
+
+      def key_mappers
+        @mappers.select do |mapper|
+          mapper.respond_to?(:key?) && mapper.key?
+        end
       end
     end
   end
