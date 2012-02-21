@@ -5,6 +5,10 @@ This document is old already. Pls see
 [the spike speck](https://github.com/mbj/mapper/blob/master/spec/spike_spec.rb )
 for uptodate information.
 
+Also it is most likely I'll abandon this in flavor of 
+[solnics dm-mapper](https://github.com/solnic/dm-mapper) so do not waste your 
+time with this legacy spike!
+
 Pure Mapper
 ===========
 
