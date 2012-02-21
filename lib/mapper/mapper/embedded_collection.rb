@@ -12,15 +12,19 @@ module Mapper
    
       def dump_value(object)
         value = super(object)
-        value.map do |item|
-          @mapper.dump_value(item)
+        if value
+          value.map do |item|
+            @mapper.dump_value(item)
+          end
         end
       end
    
       def load_value(object)
         value = super(object)
-        value.map do |item|
-          @mapper.load_value(item)
+        if value
+          value.map do |item|
+            @mapper.load_value(item)
+          end
         end
       end
     end

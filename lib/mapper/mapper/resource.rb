@@ -38,13 +38,7 @@ module Mapper
       end
 
       def load_key(dump)
-        key = {}
-
-        key_mappers.each do |mapper|
-          key.merge!(mapper.load(dump))
-        end
-
-        key
+        dump_key(load(dump))
       end
 
       def dump_key_value(object)
