@@ -44,6 +44,26 @@ describe 'building an attribute tree in differend ways' do
     }
   end
 
+  context 'when mapping virtus' do
+    it 'should decouple attribute values from internal' do
+      virtus_mapper = Mapper::Mapper::Virtus.new(
+        :virtus,
+        address_mapper.mappers,
+        Examples::Virtus::Address
+      )
+      object = Examples::Virtus::Address.new(:line => "Test")
+      internal = virtus_mapper.dump(object)
+      internal.fetch(:virtus).fetch(:line).gsub!(/./,"")
+      object.line.should == "Test"
+
+      object = Examples::Virtus::Address.new(:line => "Test")
+      internal = virtus_mapper.dump(object)
+      object.line.gsub(/./,"")
+      internal.fetch(:virtus).fetch(:line).should == "Test"
+    end
+  end
+
+
   # A simple 1:1 mapper for address used later to build more complex ones.
   let(:address_mapper) do
     attributes = [

@@ -7,7 +7,17 @@ module Mapper
       end
 
       def load(dump)
-        @model.new(super(Marshal.load(Marshal.dump(dump))))
+        @model.new(deep_copy(dump))
+      end
+
+      def dump(object)
+        deep_copy(super(object))
+      end
+
+    private
+
+      def deep_copy(value)
+        Marshal.load(Marshal.dump(value))
       end
     end
   end
