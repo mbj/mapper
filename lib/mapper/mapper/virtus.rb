@@ -7,7 +7,7 @@ module Mapper
       end
 
       def load(dump)
-        @model.new(super(dump))
+        @model.new(super(Marshal.load(Marshal.dump(dump)))
       end
     end
   end
