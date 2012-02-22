@@ -7,7 +7,7 @@ module Mapper
       end
 
       def load(dump)
-        @model.new(deep_copy(dump))
+        @model.new(super(deep_copy(dump)))
       end
 
       def dump(object)
