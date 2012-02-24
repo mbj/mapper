@@ -1,6 +1,8 @@
 module Mapper
   class Mapper
     class Virtus < Resource
+      attr_reader :model
+
       def initialize(name,mappers,model)
         super(name,mappers)
         @model = model
