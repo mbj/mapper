@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'mapper/virtus'
-
 describe 'embedded value' do
 
   let(:person_mapper) do
