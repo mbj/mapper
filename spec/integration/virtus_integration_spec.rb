@@ -42,7 +42,7 @@ describe 'virtus integration' do
     resource.lastname.should == 'Schirp'
   end
 
-  specify 'decouples dump from attribute' do
+  specify 'allows to modify dump without affecting attribute' do
     dump = {
       :firstname => 'Markus',
       :lastname => 'Schirp'
@@ -56,17 +56,7 @@ describe 'virtus integration' do
     resource.firstname.should == 'Markus'
   end
 
-  specify 'allows to dump to other field name' do
-    mapper = Mapper::Mapper::Virtus.new(
-      Person,
-      [
-        Mapper::Mapper::Attribute.new(:firstname),
-        Mapper::Mapper::Attribute.new(:lastname,:as => :surname),
-      ]
-    )
-  end
-
-  specify 'decouples attribute from dump' do
+  specify 'allows to modify attribute without affecting dump' do
     person = Person.new(
       :firstname => 'Markus', 
       :lastname => 'Schirp'
@@ -77,5 +67,31 @@ describe 'virtus integration' do
     person.firstname.gsub!(/./,'')
 
     dump.fetch(:firstname).should == 'Markus'
+  end
+
+  specify 'allows to dump to other field name' do
+    mapper = Mapper::Mapper::Virtus.new(
+      Person,
+      [
+        Mapper::Mapper::Attribute.new(:firstname),
+        Mapper::Mapper::Attribute.new(:lastname,:as => :surname),
+      ]
+    )
+
+    dump = mapper.dump(
+      Person.new(
+       :firstname =>'Markus',
+       :lastname => 'Schirp'
+      )
+    )
+
+    dump.should == {
+      :firstname => 'Markus',
+      :surname => 'Schirp'
+    }
+
+    resource = mapper.load(dump)
+    resource.firstname.should == 'Markus'
+    resource.lastname.should == 'Schirp'
   end
 end
