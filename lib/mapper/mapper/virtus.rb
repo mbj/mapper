@@ -3,24 +3,19 @@ module Mapper
     class Virtus < Resource
       attr_reader :model
 
-      def initialize(attributes,model)
+      def initialize(model,attributes)
         super(attributes)
         @model = model
       end
 
       def load(dump)
-        @model.new(super(deep_copy(dump)))
+        @model.new(super(::Mapper.deep_copy(dump)))
       end
 
       def dump(object)
-        deep_copy(super(object))
+        ::Mapper.deep_copy(super(object))
       end
 
-    private
-
-      def deep_copy(value)
-        Marshal.load(Marshal.dump(value))
-      end
     end
   end
 end

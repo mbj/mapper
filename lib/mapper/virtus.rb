@@ -1,0 +1,1 @@
+require 'mapper/mapper/virtus'
