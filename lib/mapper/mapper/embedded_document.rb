@@ -9,12 +9,12 @@ module Mapper
 
         def dump_value(object)
           value = super(object)
-          @mapper.dump_value(value)
+          @mapper.dump(value)
         end
 
         def load_value(object)
           value = super(object)
-          @mapper.load_value(value)
+          @mapper.load(value)
         end
       end
     end

@@ -1,13 +1,5 @@
 module Mapper
   class Mapper
-    EMPTY_OPTIONS={}.freeze
-
-    attr_reader :name
-   
-    def initialize(name)
-      @name = name
-    end
-   
     def dump(object)
       raise NotImplemented,'must be implemented in subclasses'
     end

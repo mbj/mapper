@@ -1,11 +1,12 @@
 module Mapper
   class Mapper
     class Attribute < Mapper
-      attr_reader :key
+      attr_reader :key, :name
+
       alias :key? :key
 
-      def initialize(name,options=EMPTY_OPTIONS)
-        super(name)
+      def initialize(name,options={})
+        @name      = name
         @dump_name = options.fetch(:as,@name)
         @key       = !!options.fetch(:key,false)
       end

@@ -3,8 +3,8 @@ module Mapper
     class Virtus < Resource
       attr_reader :model
 
-      def initialize(name,mappers,model)
-        super(name,mappers)
+      def initialize(attributes,model)
+        super(attributes)
         @model = model
       end
 

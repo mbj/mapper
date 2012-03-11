@@ -12,7 +12,7 @@ module Mapper
         values = {}
         value = dump_value(object)
 
-        @mapper.dump_value(value).each do |key,value|
+        @mapper.dump(value).each do |key,value|
           values[attribute_name(key)]=value
         end
 
@@ -26,8 +26,8 @@ module Mapper
       def load_value(object)
         values = {}
 
-        @mapper.mappers.each do |mapper|
-          name = mapper.name
+        @mapper.attributes.each do |attribute|
+          name = attribute.name
           values[name]=object[attribute_name(name)]
         end
 

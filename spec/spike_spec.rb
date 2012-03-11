@@ -47,19 +47,18 @@ describe 'building an attribute tree in differend ways' do
   context 'when mapping virtus' do
     it 'should decouple attribute values from internal' do
       virtus_mapper = Mapper::Mapper::Virtus.new(
-        :virtus,
-        address_mapper.mappers,
+        address_mapper.attributes,
         Examples::Virtus::Address
       )
       object = Examples::Virtus::Address.new(:line => "Test")
       internal = virtus_mapper.dump(object)
-      internal.fetch(:virtus).fetch(:line).gsub!(/./,"")
+      internal.fetch(:line).gsub!(/./,"")
       object.line.should == "Test"
 
       object = Examples::Virtus::Address.new(:line => "Test")
       internal = virtus_mapper.dump(object)
       object.line.gsub(/./,"")
-      internal.fetch(:virtus).fetch(:line).should == "Test"
+      internal.fetch(:line).should == "Test"
     end
   end
 
@@ -72,7 +71,7 @@ describe 'building an attribute tree in differend ways' do
       Mapper::Mapper::Attribute.new(:city)
     ]
 
-    Mapper::Mapper::Resource.new(:address,attributes)
+    Mapper::Mapper::Resource.new(attributes)
   end
 
   # A simple mapper for ONE placement
@@ -82,7 +81,7 @@ describe 'building an attribute tree in differend ways' do
       Mapper::Mapper::Attribute.new(:name)
     ]
 
-    Mapper::Mapper::Resource.new(:placement,attributes)
+    Mapper::Mapper::Resource.new(attributes)
   end
 
   shared_examples_for 'a correct mapping' do
@@ -107,18 +106,16 @@ describe 'building an attribute tree in differend ways' do
         Mapper::Mapper::Attribute.new(:city,:as => :location)
       ]
 
-      Mapper::Mapper::Resource.new(:address,attributes)
+      Mapper::Mapper::Resource.new(attributes)
     end
 
     let(:object) { address }
 
     let(:internal) do
       { 
-        :address => {
-          :line=>'Zum verrückten Fahrradfahrer 1',
-          :postcode=>'0815', 
-          :location=>'Musterstadt'
-        }
+        :line=>'Zum verrückten Fahrradfahrer 1',
+        :postcode=>'0815', 
+        :location=>'Musterstadt'
       }
     end
 
@@ -128,14 +125,12 @@ describe 'building an attribute tree in differend ways' do
   context 'when mapping to embedded value' do
     let(:internal) do
       { 
-        :drivers => {
-          :greeting         => 'Mr',
-          :firstname        => 'John',
-          :lastname         => 'Doe',
-          :address_line     => 'Zum verrückten Fahrradfahrer 1',
-          :address_postcode => '0815',
-          :address_city     => 'Musterstadt'
-        }
+        :greeting         => 'Mr',
+        :firstname        => 'John',
+        :lastname         => 'Doe',
+        :address_line     => 'Zum verrückten Fahrradfahrer 1',
+        :address_postcode => '0815',
+        :address_city     => 'Musterstadt'
       }
     end
 
@@ -150,7 +145,7 @@ describe 'building an attribute tree in differend ways' do
         )
       ]
 
-      Mapper::Mapper::Resource.new(:drivers,attributes)
+      Mapper::Mapper::Resource.new(attributes)
     end
 
     let(:object) do 
@@ -165,12 +160,10 @@ describe 'building an attribute tree in differend ways' do
   context 'when mapping to embedded document' do
     let(:internal) do
       { 
-        :drivers => {
-          :greeting   => 'Mr',
-          :firstname  => 'John',
-          :lastname   => 'Doe',
-          :address    => address,
-        }
+        :greeting   => 'Mr',
+        :firstname  => 'John',
+        :lastname   => 'Doe',
+        :address    => address,
       }
     end
 
@@ -185,7 +178,7 @@ describe 'building an attribute tree in differend ways' do
         )
       ]
     
-      Mapper::Mapper::Resource.new(:drivers,attributes)
+      Mapper::Mapper::Resource.new(attributes)
     end
 
     let(:object) do 
@@ -213,70 +206,24 @@ describe 'building an attribute tree in differend ways' do
         )
       ]
     
-      Mapper::Mapper::Resource.new(:drivers,attributes)
+      Mapper::Mapper::Resource.new(attributes)
     end
 
     let(:internal) do
       { 
-        :drivers => {
-          :greeting   => 'Mr',
-          :firstname  => 'John',
-          :lastname   => 'Doe',
-          :placements=>[
-            {
-              :rank=>2, 
-              :name=>'Stadrrundfahrt Oberhausen', 
-            },
-            {
-              :rank=>20, 
-              :name=>'Rü Cup Essen'
-            }
-          ]
-        }
-      }
-    end
-
-    it_should_behave_like 'a correct mapping'
-  end
-
-  context 'when mapping address to multiple collections' do
-    let(:mapper) do
-      # This looks stupid, but I do not think users will have 
-      # to build this trees by hand. (DSL?)
-      Mapper::Mapper::Root.new(:address,
-        [
-          Mapper::Mapper::Repository.new(:default,
-            [
-              Mapper::Mapper::Resource.new(:address_a,
-                [
-                  Mapper::Mapper::Attribute.new(:line),
-                  Mapper::Mapper::Attribute.new(:postcode)
-                ]
-              ),
-              Mapper::Mapper::Resource.new(:address_b,
-                [
-                  Mapper::Mapper::Attribute.new(:city)
-                ]
-              )
-            ]
-          ),
-        ]
-      )
-    end
-
-    let(:object) { address }
-
-    let(:internal) do
-      {
-        :default => {
-          :address_a => {
-            :line => address.fetch(:line),
-            :postcode => address.fetch(:postcode),
+        :greeting   => 'Mr',
+        :firstname  => 'John',
+        :lastname   => 'Doe',
+        :placements=>[
+          {
+            :rank=>2, 
+            :name=>'Stadrrundfahrt Oberhausen', 
           },
-          :address_b => {
-            :city => address.fetch(:city)
+          {
+            :rank=>20, 
+            :name=>'Rü Cup Essen'
           }
-        }
+        ]
       }
     end
 

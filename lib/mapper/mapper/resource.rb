@@ -1,21 +1,16 @@
 module Mapper
   class Mapper
     class Resource < Mapper
-      attr_reader :mappers
+      attr_reader :attributes
 
-      def initialize(name,mappers)
-        super(name)
-        @mappers = mappers
+      def initialize(attributes)
+        @attributes = attributes
       end
 
       def dump(object)
-        { @name => dump_value(object) }
-      end
-
-      def dump_value(object)
         values = {}
 
-        @mappers.each do |mapper|
+        @attributes.each do |mapper|
           value = mapper.dump(object)
           values.merge!(value)
         end
@@ -23,41 +18,33 @@ module Mapper
         values
       end
 
-      def load_value(dump)
+      def load(dump)
         attributes = {}
 
-        @mappers.each do |mapper|
+        @attributes.each do |mapper|
           attributes.merge!(mapper.load(dump))
         end
 
         attributes
-      end
-   
-      def load(dump)
-        load_value(dump.fetch(@name,{}))
       end
 
       def load_key(dump)
         dump_key(load(dump))
       end
 
-      def dump_key_value(object)
+      def dump_key(object)
         key = {}
 
-        key_mappers.each do |mapper|
+        key_attributes.each do |mapper|
           key.merge!(mapper.dump(object))
         end
 
         key
       end
 
-      def dump_key(object)
-        { @name => dump_key_value(object) }
-      end
-
-      def key_mappers
-        @mappers.select do |mapper|
-          mapper.respond_to?(:key?) && mapper.key?
+      def key_attributes
+        @attributes.select do |attribute|
+          attribute.respond_to?(:key?) && attribute.key?
         end
       end
     end

@@ -14,7 +14,7 @@ module Mapper
         value = super(object)
         if value
           value.map do |item|
-            @mapper.dump_value(item)
+            @mapper.dump(item)
           end
         end
       end
@@ -23,7 +23,7 @@ module Mapper
         value = super(object)
         if value
           value.map do |item|
-            @mapper.load_value(item)
+            @mapper.load(item)
           end
         end
       end
