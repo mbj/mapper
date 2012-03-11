@@ -1,5 +1,6 @@
 require 'mapper/version'
 
+require 'mapper/registry'
 require 'mapper/mapper'
 require 'mapper/mapper/resource'
 require 'mapper/mapper/attribute'
