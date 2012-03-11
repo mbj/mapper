@@ -6,16 +6,16 @@ module Mapper
         @mapper = options.fetch(:mapper) do
           raise ArgumentError,'missing :mapper in +options+'
         end
+      end
 
-        def dump_value(object)
-          value = super(object)
-          @mapper.dump(value)
-        end
+    protected
 
-        def load_value(object)
-          value = super(object)
-          @mapper.load(value)
-        end
+      def dump_value(object)
+        @mapper.dump(super(object))
+      end
+
+      def load_value(dump)
+        @mapper.load(super(dump))
       end
     end
   end

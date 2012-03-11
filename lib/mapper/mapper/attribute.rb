@@ -1,15 +1,16 @@
 module Mapper
   class Mapper
     class Attribute < Mapper
-      attr_reader :key, :name
+      attr_reader :name
 
-      alias :key? :key
 
       def initialize(name,options={})
         @name      = name
         @dump_name = options.fetch(:as,@name)
         @key       = !!options.fetch(:key,false)
       end
+
+      def key?; @key; end
    
       def dump(object)
         { @dump_name => dump_value(object) }
@@ -18,6 +19,8 @@ module Mapper
       def load(dump)
         { @name => load_value(dump) }
       end
+
+    protected
 
       def load_value(dump)
         dump[@dump_name]
