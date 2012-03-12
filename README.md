@@ -178,4 +178,4 @@ The intermediate format could be saved when the business object had been loaded.
 On update the intermediate format could be compared with the saved one 
 resulting in a clear update set without any need to track state at the business 
 object level. Yes, this wastes memory. 
-This is done in my [session](git://github.com/mbj/session) project.
+This is done in my [session](http://github.com/mbj/session) project.
