@@ -66,10 +66,10 @@ module Mapper
           @collection.update(key,dump)
         else
           change = {}
-          dump.each do |key,value|
-            old_value = old_dump[key]
+          dump.each do |name,value|
+            old_value = old_dump[name]
             if value != old_value
-              change[key]=value
+              change[name]=value
             end
           end
           @collection.update(key,{ :$set => change })
