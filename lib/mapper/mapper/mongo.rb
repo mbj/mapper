@@ -16,6 +16,16 @@ module Mapper
         insert_dump(dump(object))
       end
 
+      def extract_key_from_query(query)
+        if query.keys.sort == @mapper.key_attributes.map(&:dump_name).sort
+          query
+        end
+      end
+
+      def first_dump(query)
+        @collection.find_one(query)
+      end
+
       def read_dumps(query_or_cursor)
         cursor = 
           if query_or_cursor.kind_of?(::Mongo::Cursor)

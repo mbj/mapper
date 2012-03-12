@@ -1,7 +1,7 @@
 module Mapper
   class Mapper
     class Attribute < Mapper
-      attr_reader :name
+      attr_reader :name, :dump_name
 
 
       def initialize(name,options={})
