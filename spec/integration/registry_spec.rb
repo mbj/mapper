@@ -3,7 +3,6 @@ require 'spec_helper'
 require 'mapper/virtus'
 
 describe 'mapper registry' do
-
   class Person
     include Virtus
     attribute :id,Integer
@@ -16,7 +15,7 @@ describe 'mapper registry' do
       [
         Mapper::Mapper::Attribute.new(:id,:key => true),
         Mapper::Mapper::Attribute.new(:firstname),
-        Mapper::Mapper::Attribute.new(:lastname),
+        Mapper::Mapper::Attribute.new(:lastname)
       ]
     )
   end
@@ -45,7 +44,7 @@ describe 'mapper registry' do
     registry.for(Person).should eql(person_mapper)
   end
 
-  specify 'allows do dump with objects' do
+  specify 'allows to dump with objects' do
     registry.dump(person).should == dump
   end
 
