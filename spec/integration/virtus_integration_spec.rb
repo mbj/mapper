@@ -21,6 +21,13 @@ describe 'virtus integration' do
     )
   end
 
+  let(:dump) do
+    {
+      :firstname => 'Markus',
+      :lastname => 'Schirp'
+    }
+  end
+
   let(:mapper) do
     Mapper::Mapper::Virtus.new(
       Person,
@@ -32,28 +39,16 @@ describe 'virtus integration' do
   end
 
   specify 'allows to dump from virtus model' do
-    mapper.dump(person).should == {
-      :firstname => 'Markus', 
-      :lastname => 'Schirp' 
-    }
+    mapper.dump(person).should == dump
   end
 
   specify 'allows to load from dump' do
-    dump = {
-      :firstname => 'Markus',
-      :lastname => 'Schirp'
-    }
     resource = mapper.load(dump)
     resource.firstname.should == 'Markus'
     resource.lastname.should == 'Schirp'
   end
 
   specify 'allows to modify dump without affecting attribute' do
-    dump = {
-      :firstname => 'Markus',
-      :lastname => 'Schirp'
-    }
-
     resource = mapper.load(dump)
 
     # inplace modification of dump
