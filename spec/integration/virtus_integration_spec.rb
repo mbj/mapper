@@ -8,6 +8,17 @@ describe 'virtus integration' do
     include Virtus
     attribute :firstname,String
     attribute :lastname,String
+
+    def full_name
+      "#{firstname} #{lastname}"
+    end
+  end
+
+  let(:person) do
+    Person.new(
+      :firstname => 'Markus',
+      :lastname => 'Schirp'
+    )
   end
 
 
@@ -22,10 +33,6 @@ describe 'virtus integration' do
   end
 
   specify 'allows to dump from virtus model' do
-    person = Person.new(
-      :firstname => 'Markus', 
-      :lastname => 'Schirp'
-    )
     mapper.dump(person).should == {
       :firstname => 'Markus', 
       :lastname => 'Schirp' 
@@ -57,10 +64,6 @@ describe 'virtus integration' do
   end
 
   specify 'allows to modify attribute without affecting dump' do
-    person = Person.new(
-      :firstname => 'Markus', 
-      :lastname => 'Schirp'
-    )
     dump = mapper.dump(person)
 
     # inplace modification of attribute
@@ -78,12 +81,7 @@ describe 'virtus integration' do
       ]
     )
 
-    dump = mapper.dump(
-      Person.new(
-       :firstname =>'Markus',
-       :lastname => 'Schirp'
-      )
-    )
+    dump = mapper.dump(person)
 
     dump.should == {
       :firstname => 'Markus',
@@ -93,5 +91,22 @@ describe 'virtus integration' do
     resource = mapper.load(dump)
     resource.firstname.should == 'Markus'
     resource.lastname.should == 'Schirp'
+  end
+
+  specify 'allows to dump "virtual" attributes' do
+    mapper = Mapper::Mapper::Virtus.new(
+      Person,
+      [
+        Mapper::Mapper::Attribute.new(:firstname),
+        Mapper::Mapper::Attribute.new(:lastname),
+        Mapper::Mapper::Attribute.new(:full_name)
+      ]
+    )
+
+    mapper.dump(person).should == {
+      :firstname => 'Markus',
+      :lastname => 'Schirp',
+      :full_name => 'Markus Schirp'
+    }
   end
 end
