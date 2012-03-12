@@ -57,4 +57,8 @@ describe 'mapper registry' do
   specify 'allows to dump keys with object' do
     registry.dump_key(person).should == key
   end
+
+  specify 'allows to load keys from dump' do
+    registry.load_key(Person,dump).should == key
+  end
 end

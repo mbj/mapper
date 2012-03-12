@@ -25,5 +25,9 @@ module Mapper
     def load(model,dump)
       self.for(model).load(dump)
     end
+
+    def load_key(model,dump)
+      self.for(model).load_key(dump)
+    end
   end
 end
