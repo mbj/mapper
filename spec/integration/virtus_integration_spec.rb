@@ -21,7 +21,6 @@ describe 'virtus integration' do
     )
   end
 
-
   let(:mapper) do
     Mapper::Mapper::Virtus.new(
       Person,
