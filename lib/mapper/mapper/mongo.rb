@@ -36,7 +36,7 @@ module Mapper
 
         Enumerator.new do |yielder|
           dump = ::Mapper.symbolize_keys(cursor.next)
-          yielder.yield dump
+          yielder.yield(dump)
         end
       end
 
@@ -44,7 +44,7 @@ module Mapper
         dumps = read_dumps(query_or_cursor)
         Enumerator.new do |yielder|
           resource = load(dumps.next)
-          yielder.yield resource
+          yielder.yield(resource)
         end
       end
 
