@@ -28,6 +28,13 @@ describe 'mongo integration' do
     )
   end
 
+  let(:other_person) do
+    Person.new(
+      :firstname => 'John',
+      :lastname => 'Doe'
+    )
+  end
+
   let(:person_mapper) do
     Mapper::Mapper::Virtus.new(
       Person,
@@ -104,38 +111,53 @@ describe 'mongo integration' do
 
   specify 'allows to read dumps via query' do
     mapper.insert_object(person)
+    mapper.insert_object(other_person)
 
-    enumerator = mapper.read_dumps({})
-
-    enumerator.to_a.should == [mapper.dump(person)]
+    dumps = mapper.read_dumps({}).to_a
+    dumps.should == [
+      mapper.dump(person),
+      mapper.dump(other_person)
+    ]
   end
 
   specify 'allows to read dumps via cursor' do
     mapper.insert_object(person)
+    mapper.insert_object(other_person)
 
     cursor = people_collection.find({})
 
     enumerator = mapper.read_dumps(cursor)
 
-    enumerator.to_a.should == [mapper.dump(person)]
+    enumerator.to_a.should == [
+      mapper.dump(person),
+      mapper.dump(other_person)
+    ]
   end
 
   specify 'allows to read objects via query' do
     mapper.insert_object(person)
+    mapper.insert_object(other_person)
 
     enumerator = mapper.read_objects({})
 
-    enumerator.to_a.should == [person]
+    enumerator.to_a.should == [
+      person,
+      other_person
+    ]
   end
 
   specify 'allows to read objects via cursor' do
     mapper.insert_object(person)
+    mapper.insert_object(other_person)
 
     cursor = people_collection.find({})
 
     enumerator = mapper.read_objects(cursor)
 
-    enumerator.to_a.should == [person]
+    enumerator.to_a.should == [
+      person,
+      other_person
+    ]
   end
 
   specify 'allows to update via object' do

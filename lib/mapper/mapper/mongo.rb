@@ -38,16 +38,20 @@ module Mapper
           end
 
         Enumerator.new do |yielder|
-          dump = ::Mapper.symbolize_keys(cursor.next)
-          yielder.yield(dump)
+          cursor.each do |dump|
+            dump = ::Mapper.symbolize_keys(dump)
+            yielder.yield(dump)
+          end
         end
       end
 
       def read_objects(query_or_cursor)
         dumps = read_dumps(query_or_cursor)
         Enumerator.new do |yielder|
-          resource = load(dumps.next)
-          yielder.yield(resource)
+          dumps.each do |dump|
+            resource = load(dump)
+            yielder.yield(resource)
+          end
         end
       end
 
