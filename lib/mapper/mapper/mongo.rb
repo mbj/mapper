@@ -23,7 +23,10 @@ module Mapper
       end
 
       def first_dump(query)
-        @collection.find_one(query)
+        dump = @collection.find_one(query)
+        if dump
+          ::MApper.symbolize_keys(dump)
+        end
       end
 
       def read_dumps(query_or_cursor)
