@@ -25,7 +25,7 @@ module Mapper
       def first_dump(query)
         dump = @collection.find_one(query)
         if dump
-          ::MApper.symbolize_keys(dump)
+          ::Mapper.symbolize_keys(dump)
         end
       end
 
