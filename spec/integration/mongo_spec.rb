@@ -52,7 +52,11 @@ describe 'mongo integration' do
       :safe => true,
       :logger => Logger.new($stdout,Logger::DEBUG)
     )
-    connection.add_auth('mapper_development','mapper_development','TIdXLOHf9isf83PHzdu3wohk')
+    connection.add_auth(
+      'mapper_development',
+      'mapper_development',
+      'TIdXLOHf9isf83PHzdu3wohk'
+    )
     connection.db('mapper_development')
   end
 
