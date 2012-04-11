@@ -11,8 +11,9 @@ module Mapper
     protected
 
       def dump_value(object)
-        if object
-          @mapper.dump(super(object))
+        value = super(object)
+        if value
+          @mapper.dump(value)
         end
       end
 

@@ -43,8 +43,9 @@ describe Mapper::Mapper::EmbeddedDocument,'#dump' do
 
   end
 
-  context 'when value is nil' do
-    let(:value) { nil }
+  context 'when field value is nil' do
+    let(:value) { { :a => nil } }
+
     it 'should dump to nil value' do
       should == { :a => nil }
     end
