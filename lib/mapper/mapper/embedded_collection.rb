@@ -12,8 +12,7 @@ module Mapper
 
     protected
    
-      def dump_value(object)
-        value = super(object)
+      def to_dump(value)
         if value
           value.map do |item|
             @mapper.dump(item)
@@ -21,8 +20,7 @@ module Mapper
         end
       end
    
-      def load_value(dump)
-        value = super(dump)
+      def from_dump(value)
         if value
           value.map do |item|
             @mapper.load(item)
