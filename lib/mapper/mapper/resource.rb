@@ -29,7 +29,12 @@ module Mapper
       end
 
       def load_key(dump)
-        dump_key(load(dump))
+        attributes = {}
+        key_attributes.each do |mapper|
+          attributes.merge!(mapper.load(dump))
+        end
+
+        attributes
       end
 
       def dump_key(object)
@@ -43,9 +48,10 @@ module Mapper
       end
 
       def key_attributes
-        @attributes.select do |attribute|
-          attribute.respond_to?(:key?) && attribute.key?
-        end
+        @key_attributes ||= 
+          @attributes.select do |attribute|
+            attribute.respond_to?(:key?) && attribute.key?
+          end
       end
     end
   end
