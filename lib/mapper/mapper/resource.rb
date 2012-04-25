@@ -30,8 +30,9 @@ module Mapper
 
       def load_key(dump)
         attributes = {}
+
         key_attributes.each do |mapper|
-          attributes.merge!(mapper.load(dump))
+          attributes.merge!(mapper.dump_load(dump))
         end
 
         attributes

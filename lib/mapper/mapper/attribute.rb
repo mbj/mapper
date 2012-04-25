@@ -20,6 +20,10 @@ module Mapper
         { @name => load_value(dump) }
       end
 
+      def dump_load(dump)
+        { @dump_name => load_value(dump) }
+      end
+
     protected
 
       def load_value(dump)
