@@ -1,7 +1,7 @@
 module Mapper
   class Mapper
     class Attribute < Mapper
-      attr_reader :name
+      attr_reader :name, :dump_name
 
 
       def initialize(name,options={})
@@ -23,12 +23,15 @@ module Mapper
     protected
 
       def load_value(dump)
-        dump[@dump_name]
+        from_dump(dump[@dump_name])
       end
 
       def dump_value(object)
-        object[@name]
+        to_dump(object[@name])
       end
+
+      def from_dump(value); value; end
+      def to_dump(value); value; end
     end
   end
 end

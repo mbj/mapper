@@ -1,0 +1,2 @@
+* Assert database root documents have a key
+* Add specs for load_key and dump_key

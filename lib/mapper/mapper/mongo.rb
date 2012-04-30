@@ -14,6 +14,19 @@ module Mapper
         insert_dump(dump(object))
       end
 
+      def extract_key_from_query(query)
+        if query.keys.sort == @mapper.key_attributes.map(&:dump_name).sort
+          query
+        end
+      end
+
+      def first_dump(query)
+        dump = @collection.find_one(query)
+        if dump
+          ::Mapper.symbolize_keys(dump)
+        end
+      end
+
       def read_dumps(query_or_cursor)
         cursor = 
           if query_or_cursor.kind_of?(::Mongo::Cursor)
@@ -23,16 +36,20 @@ module Mapper
           end
 
         Enumerator.new do |yielder|
-          dump = ::Mapper.symbolize_keys(cursor.next)
-          yielder.yield dump
+          cursor.each do |dump|
+            dump = ::Mapper.symbolize_keys(dump)
+            yielder.yield(dump)
+          end
         end
       end
 
       def read_objects(query_or_cursor)
         dumps = read_dumps(query_or_cursor)
         Enumerator.new do |yielder|
-          resource = load(dumps.next)
-          yielder.yield resource
+          dumps.each do |dump|
+            resource = load(dump)
+            yielder.yield(resource)
+          end
         end
       end
 
@@ -54,10 +71,10 @@ module Mapper
           @collection.update(key,dump)
         else
           change = {}
-          dump.each do |key,value|
-            old_value = old_dump[key]
+          dump.each do |name,value|
+            old_value = old_dump[name]
             if value != old_value
-              change[key]=value
+              change[name]=value
             end
           end
           @collection.update(key,{ :$set => change })

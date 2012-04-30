@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Mapper::Mapper::EmbeddedDocument,'#load' do
+describe Mapper::Mapper::EmbeddedDocument,'#dump' do
   let(:embedded_mapper) do
     object = Object.new
     class << object
-      def load(dump)
-        dump
+      def dump(value)
+        value
       end
     end
     object
@@ -17,53 +17,50 @@ describe Mapper::Mapper::EmbeddedDocument,'#load' do
 
   let(:options) { { :mapper => embedded_mapper } }
 
-  let(:field_name) { :a }
-
-  let(:dump) do
+  let(:value) do
     {
-      field_name => { :some => :random_document },
+      :a => { :some => :random_document },
       :b => :value_b
     }
   end
 
-  subject { object.load(dump) }
+  subject { object.dump(value) }
 
   context 'with default options' do
 
-    it 'should load embedded document' do
+    it 'should dump to name' do
       should == { :a => { :some => :random_document } }
     end
 
   end
 
   context 'with :as => :field_name' do
-    let(:field_name) { :field_name }
     let(:options) {{ :mapper => embedded_mapper, :as => :field_name }}
 
-    it 'should load embedded document' do
-      should == { :a => { :some => :random_document } }
+    it 'should dump to :field_name' do
+      should == { :field_name => { :some => :random_document } }
     end
 
   end
 
-  context 'when dump does not include field with name' do
-    let(:field_name) { :foo }
+  context 'when field value is nil' do
+    let(:value) { { :a => nil } }
 
-    it 'should load nil' do
+    it 'should dump to nil value' do
       should == { :a => nil }
     end
 
-    it 'should not pass nil to embedded_mapper#load' do
-      embedded_mapper.should_not_receive(:load)
+    it 'should not pass nil to embedded_mapper#dump' do
+      embedded_mapper.should_not_receive(:dump)
       subject
     end
   end
 
-  context 'when embedded mapper modifies inner object on load' do
+  context 'when embedded mapper modifies inner object' do
     let(:embedded_mapper) do
       object = Object.new
       class << object
-        def load(dump)
+        def dump(value)
           :modification
         end
       end

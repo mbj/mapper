@@ -10,12 +10,16 @@ module Mapper
 
     protected
 
-      def dump_value(object)
-        @mapper.dump(super(object))
+      def to_dump(value)
+        if value
+          @mapper.dump(value)
+        end
       end
 
-      def load_value(dump)
-        @mapper.load(super(dump))
+      def from_dump(value)
+        if value
+          @mapper.load(value)
+        end
       end
     end
   end
