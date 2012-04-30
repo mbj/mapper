@@ -1,5 +1,3 @@
-# Todo get a rid on the db argument!
-
 module Mapper
   class Mapper
     class Mongo < Mapper
