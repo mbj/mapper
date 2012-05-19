@@ -1,2 +1,6 @@
+* Remove ::Mapper::Mapper namespacing uglyness
 * Assert database root documents have a key
 * Add specs for load_key and dump_key
+* Create a mapper level identity map to allow 
+  loading an object tree where an object appears twice.
+* Create Loader and Dumper classes, to allow mapper level identity map.
