@@ -23,12 +23,12 @@ module Mapper
       klass.instance_variable_set(:@mapper,mapper)
     end
 
-    def dump_name(name,instance)
-      attributes.dump_map.fetch(name).dump(instance)
+    def load_name(name,object)
+      attributes.load_name(name,object)
     end
 
-    def load_name(name,dump)
-      attributes.dump_map.fetch(name).load(dump)
+    def dump_name(name,object)
+      attributes.dump_name(name,object)
     end
 
     def dumper_klass
@@ -39,8 +39,8 @@ module Mapper
       const_get(:Loader)
     end
 
-    def dumper(instance)
-      dumper_klass.new(self,instance)
+    def dumper(object)
+      dumper_klass.new(self,object)
     end
 
     def loader(dump)
@@ -76,7 +76,6 @@ module Mapper
         add_attribute(attribute)
       end
     end
-
 
     def attributes
       @attributes ||= AttributeSet.new

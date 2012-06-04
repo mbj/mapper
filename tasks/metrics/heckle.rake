@@ -19,7 +19,10 @@ begin
       name = if map
         map[constant] || map[:default]
       else
-        method.gsub(/[?!=]\z/, '')
+        method.
+          gsub('?','_ques').
+          gsub('!','_bang').
+          gsub('=','_assign')
       end
       "#{name}_spec.rb"
     end
@@ -31,11 +34,9 @@ begin
       raise "ruby2ruby version #{Ruby2Ruby::VERSION} may not work properly, 1.2.2 *only* is recommended for use with heckle"
     end
 
-    require 'virtus'
+    require 'session'
 
-    root_module_regexp = Regexp.union(
-      'Virtus'
-    )
+    root_module_regexp = Regexp.union('Session')
 
     spec_dir = Pathname('spec/unit')
 
@@ -45,6 +46,7 @@ begin
     end
 
     aliases = Hash.new { |h,mod| h[mod] = Hash.new { |h,method| h[method] = method } }
+
     map     = NameMap.new
 
     heckle_caught_modules = Hash.new { |hash, key| hash[key] = [] }
@@ -52,6 +54,7 @@ begin
 
     ObjectSpace.each_object(Module) do |mod|
       next unless mod.name =~ /\A#{root_module_regexp}(?::|\z)/
+
 
       spec_prefix = spec_dir.join(mod.name.underscore)
 
@@ -110,7 +113,7 @@ begin
         spec_file = spec_prefix.join('class_methods').join(map.file_name(method, mod.name))
 
         unless spec_file.file?
-          warn "No spec file #{spec_file} for #{mod}.#{method}"
+          raise "No spec file #{spec_file} for #{mod}.#{method}"
           next
         end
 
@@ -125,7 +128,7 @@ begin
         spec_file = spec_prefix.join(map.file_name(method, mod.name))
 
         unless spec_file.file?
-          warn "No spec file #{spec_file} for #{mod}##{method}"
+          raise "No spec file #{spec_file} for #{mod}##{method}"
           next
         end
 

@@ -1,8 +1,6 @@
 module Mapper
+  # A set of mapping attributes
   class AttributeSet
-    extend Forwardable
-    def_delegators :@set,:each,:map
-
     def initialize()
       @set = Set.new
     end
@@ -15,14 +13,11 @@ module Mapper
     end
 
     def dump_map
-      @dump_map ||= 
-        begin
-          map = {}
-          each do |attribute|
-            attribute.add_to_dump_map(map)
-          end
-          map
-        end
+      @dump_map ||= collect(:add_to_dump_map)
+    end
+
+    def load_map 
+      @load_map ||= collect(:add_to_load_map)
     end
 
     def dump_names
@@ -33,18 +28,26 @@ module Mapper
       load_map.keys
     end
 
-    def load_map 
-      @load_map ||=
-        begin
-          map = {}
-          each do |attribute|
-            attribute.add_to_load_map(map)
-          end
-          map
-        end
+    def load_name(name,dump)
+      fetch(name).load(dump)
     end
 
-  protected
+    def dump_name(name,object)
+      fetch(name).dump(object)
+    end
+
+  private
+
+    def fetch(name)
+      dump_map.fetch(name)
+    end
+
+    def collect(method)
+      @set.each_with_object({}) do |attribute,map|
+        attribute.send(method,map)
+      end
+    end
+
 
     def reset
       @dump_map = @load_map = nil

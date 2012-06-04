@@ -5,6 +5,12 @@ module Mapper
       @mapper || raise("mapper setup missing")
     end
 
+    def self.transfer(names,transformator)
+      names.each_with_object({}) do |name,hash|
+        hash[name]=transformator.send(name)
+      end
+    end
+
     def mapper
       self.class.mapper
     end
@@ -15,70 +21,59 @@ module Mapper
 
   private
 
-    def __memonized__
-      @__memonized__ ||= {}
-    end
-
-    def __memonize__(name)
-      memonized = __memonized__
-      memonized.fetch(name) do
-        memonized[name]=yield
+    def memonize(name)
+      @memonized ||= {}
+      @memonized.fetch(name) do
+        @memonized[name]=yield
       end
     end
 
+    # Loader base class
     class Loader < Transformer
       def initialize(dump)
         @dump = dump
         super()
       end
 
-    protected
+    private
 
-      def __load__(name)
-        __memonize__(name) do
+      def load(name)
+        memonize(name) do
           mapper.load_name(name,@dump)
         end
       end
 
       def self.load(dump)
+        mapper = self.mapper
+
         loader = self.new(dump)
 
-        attributes = {}
-
-        self.attributes.load_names.each do |name|
-          attributes[name]=loader.send(name)
-        end
+        attributes = transfer(mapper.dump_names,loader)
 
         mapper.model.new(attributes)
       end
     end
 
+    # Dumper base class
     class Dumper < Transformer
-      attr_reader :instance
+      attr_reader :object
 
-      def initialize(instance)
-        @instance = instance
-        super()
+      def initialize(object)
+        @object = object
       end
 
-    protected
+    private
 
-      def __dump__(name)
-        __memonize__(name) do
-          mapper.dump_name(name,@instance)
+      def dump(name)
+        memonize(name) do
+          mapper.dump_name(name,@object)
         end
       end
 
-      def self.dump(instance)
-        dumper = self.new(instance)
+      def self.dump(object)
+        dumper = self.new(object)
 
-        dump = {}
-
-        attributes.dump_names.each do |name|
-          dump[name]=dumper.send(name)
-        end
-
-        dump
+        transfer(mapper.dump_names,dumper)
       end
     end
   end

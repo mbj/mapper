@@ -2,6 +2,10 @@ source :rubyforge
 
 gemspec
 
+group :development do
+  gem 'rake'
+end
+
 group :metrics do
   gem 'fattr',       '~> 2.2.0'
   gem 'arrayfields', '~> 4.7.4'
@@ -11,7 +15,6 @@ group :metrics do
   gem 'reek',        '~> 1.2.8', :git => 'git://github.com/dkubb/reek.git'
   gem 'roodi',       '~> 2.1.0'
   gem 'yardstick',   '~> 0.4.0'
-  gem 'rake'
 
   platforms :mri_18 do
     gem 'heckle',    '~> 1.4.3'
