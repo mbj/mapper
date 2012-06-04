@@ -30,7 +30,7 @@ module Mapper
       def loader_method_source
         <<-RUBY
           def #{@load_name}
-            __load__(:#{@dump_name})
+            load(:#{@dump_name})
           end
         RUBY
       end
@@ -42,7 +42,7 @@ module Mapper
       def dumper_method_source
         <<-RUBY
           def #{@dump_name}
-            __dump__(:#{@dump_name})
+            dump(:#{@dump_name})
           end
         RUBY
       end

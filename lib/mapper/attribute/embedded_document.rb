@@ -14,7 +14,7 @@ module Mapper
 
       def execute(value,method)
         unless value.nil?
-          @mappe.send(method,value)
+          @mapper.send(method,value)
         end
       end
     end

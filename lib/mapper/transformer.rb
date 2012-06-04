@@ -48,7 +48,7 @@ module Mapper
 
         loader = self.new(dump)
 
-        attributes = transfer(mapper.dump_names,loader)
+        attributes = transfer(mapper.load_names,loader)
 
         mapper.model.new(attributes)
       end

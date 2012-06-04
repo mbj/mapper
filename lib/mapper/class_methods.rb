@@ -31,6 +31,14 @@ module Mapper
       attributes.dump_name(name,object)
     end
 
+    def dump_names
+      attributes.dump_names
+    end
+
+    def load_names
+      attributes.load_names
+    end
+
     def dumper_klass
       const_get(:Dumper)
     end

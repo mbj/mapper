@@ -16,10 +16,12 @@ Gem::Specification.new do |s|
   s.require_paths    = %w(lib)
 
   s.rubygems_version = '1.8.10'
+
   if RUBY_VERSION < '1.9'
     s.add_dependency('backports')
   end
+
   s.add_development_dependency('rspec',     '~> 2.9.0.rc2')
-  s.add_development_dependency('virtus',    '~> 0.3.0')
+  s.add_development_dependency('virtus',    '~> 0.4.0')
   s.add_development_dependency('mongo',     '~> 1.6.1')
 end
