@@ -47,14 +47,6 @@ module Mapper
       const_get(:Loader)
     end
 
-    def dumper(object)
-      dumper_klass.new(self,object)
-    end
-
-    def loader(dump)
-      loader_klass.new(self,dump)
-    end
-
     def instanciate_model(attributes)
       model.new(attributes)
     end

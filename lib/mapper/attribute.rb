@@ -14,7 +14,7 @@ module Mapper
       end
 
       unless type
-        raise "cannot determine type from: #{class_or_name.inspect}"
+        raise ArgumentError,"unable to determine type from: #{class_or_name.inspect}"
       end
 
       type

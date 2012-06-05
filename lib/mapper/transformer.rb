@@ -11,15 +11,12 @@ module Mapper
       end
     end
 
+
+  private
+
     def mapper
       self.class.mapper
     end
-
-    def self.attributes
-      mapper.attributes
-    end
-
-  private
 
     def memonize(name)
       @memonized ||= {}
@@ -50,7 +47,7 @@ module Mapper
 
         attributes = transfer(mapper.load_names,loader)
 
-        mapper.model.new(attributes)
+        mapper.instanciate_model(attributes)
       end
     end
 
@@ -73,7 +70,7 @@ module Mapper
       def self.dump(object)
         dumper = self.new(object)
 
-        transfer(mapper.dump_names,dumper)
+        transfer(self.mapper.dump_names,dumper)
       end
     end
   end
