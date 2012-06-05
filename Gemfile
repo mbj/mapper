@@ -15,6 +15,7 @@ group :metrics do
   gem 'reek',        '~> 1.2.8', :git => 'git://github.com/dkubb/reek.git'
   gem 'roodi',       '~> 2.1.0'
   gem 'yardstick',   '~> 0.4.0'
+  gem 'rspec',       '~> 1.3.2'
 
   platforms :mri_18 do
     gem 'heckle',    '~> 1.4.3'

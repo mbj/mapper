@@ -34,9 +34,9 @@ begin
       raise "ruby2ruby version #{Ruby2Ruby::VERSION} may not work properly, 1.2.2 *only* is recommended for use with heckle"
     end
 
-    require 'session'
+    require 'mapper'
 
-    root_module_regexp = Regexp.union('Session')
+    root_module_regexp = Regexp.union('Mapper')
 
     spec_dir = Pathname('spec/unit')
 
