@@ -12,6 +12,22 @@ module Mapper
       self
     end
 
+    def dump_names
+      dump_map.keys
+    end
+
+    def load_names
+      load_map.keys
+    end
+    
+    def fetch_dump_name(name)
+      dump_map.fetch(name) do
+        raise ArgumentError,"no attribute with dump name of #{name.inspect} does exist"
+      end
+    end
+
+  private
+
     def dump_map
       @dump_map ||= collect(:add_to_dump_map)
     end
@@ -20,34 +36,11 @@ module Mapper
       @load_map ||= collect(:add_to_load_map)
     end
 
-    def dump_names
-      dump_map.keys
-    end
-
-    def load_names
-      load_map.keys
-    end
-
-    def load_name(name,dump)
-      fetch(name).load(dump)
-    end
-
-    def dump_name(name,object)
-      fetch(name).dump(object)
-    end
-
-  private
-
-    def fetch(name)
-      dump_map.fetch(name)
-    end
-
     def collect(method)
       @set.each_with_object({}) do |attribute,map|
         attribute.send(method,map)
       end
     end
-
 
     def reset
       @dump_map = @load_map = nil

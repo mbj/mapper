@@ -11,7 +11,6 @@ module Mapper
       end
     end
 
-
   private
 
     def mapper
@@ -25,6 +24,10 @@ module Mapper
       end
     end
 
+    def attribute(name)
+      mapper.attribute_for_dump_name(name)
+    end
+
     # Loader base class
     class Loader < Transformer
       def initialize(dump)
@@ -36,7 +39,7 @@ module Mapper
 
       def load(name)
         memonize(name) do
-          mapper.load_name(name,@dump)
+          attribute(name).load(@dump)
         end
       end
 
@@ -63,7 +66,7 @@ module Mapper
 
       def dump(name)
         memonize(name) do
-          mapper.dump_name(name,@object)
+          attribute(name).dump(@object)
         end
       end
 

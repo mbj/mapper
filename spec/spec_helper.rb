@@ -9,4 +9,20 @@ $LOAD_PATH << File.expand_path('../lib', __FILE__)
 
 Dir.glob('spec/**/*_shared.rb').each { |file| require File.expand_path(file) }
 
+
+module SpecHelper
+  def compress_prefix(lines)
+    lines = lines.split("\n")
+    match = lines.first.match(/^[ ]*/)
+    length = match.to_s.length
+    lines.map do |line|
+      line[length..-1]
+    end.join("\n")
+  end
+end
+
+RSpec.configure do |config|
+  config.include SpecHelper
+end
+
 require 'mapper'

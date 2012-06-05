@@ -12,13 +12,17 @@ module Mapper
 
       def add_to_dump_map(dump_map)
         dump_map[@dump_name]=self
+
+        self
       end
 
       def add_to_load_map(load_map)
         load_map[@load_name]=self
+
+        self
       end
 
-      def initialize(load_name,options)
+      def initialize(load_name,options={})
         @load_name = load_name
         @dump_name = options.fetch(:to,load_name)
       end
@@ -47,20 +51,12 @@ module Mapper
         RUBY
       end
 
-      def dump_value(object)
+      def dump(object)
         object.send(@load_name)
       end
 
-      def load_value(dump)
-        dump.fetch(@dump_name)
-      end
-
-      def dump(instance)
-        dump_value(instance)
-      end
-
       def load(dump)
-        load_value(dump)
+        dump.fetch(@dump_name)
       end
     end
   end

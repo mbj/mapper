@@ -6,6 +6,27 @@ module Mapper
 
   def self.included(descendant)
     descendant.extend(ClassMethods)
+    create_dumper(descendant)
+    create_loader(descendant)
+  end
+
+private
+
+  def self.create_dumper(descendant)
+    klass = Class.new(Transformer::Dumper)
+    set_mapper(klass,descendant)
+    klass.instance_variable_set(:@mapper,descendant)
+    descendant.const_set(:Dumper,klass)
+  end
+
+  def self.create_loader(descendant)
+    klass = Class.new(Transformer::Loader)
+    set_mapper(klass,descendant)
+    descendant.const_set(:Loader,klass)
+  end
+
+  def self.set_mapper(klass,mapper)
+    klass.instance_variable_set(:@mapper,mapper)
   end
 end
 
