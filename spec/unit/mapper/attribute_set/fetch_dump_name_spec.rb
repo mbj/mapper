@@ -6,15 +6,7 @@ describe Mapper::AttributeSet,'#fetch_dump_name' do
   subject { object.fetch_dump_name(dump_name) }
 
   let(:attribute) do
-    Object.new.extend(Module.new do
-      def add_to_load_map(load_map)
-        load_map[:load_name]=self
-      end
-
-      def add_to_dump_map(dump_map)
-        dump_map[:dump_name]=self
-      end
-    end)
+    Mapper::Attribute::Object.new(:load_name,:to => :dump_name)
   end
 
   before do

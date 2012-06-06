@@ -3,13 +3,7 @@ module Mapper
   class Attribute
     # A mapper attribute with custom behaviour
     class Custom < Object
-      def add_to_dump_map(dump_map)
-        @dump_names.each do |name|
-          dump_map[name]=self
-        end
-
-        self
-      end
+      attr_reader :dump_names
 
       def define_loader(klass)
         self

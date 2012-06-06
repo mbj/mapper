@@ -5,16 +5,16 @@ module Mapper
       @mapper || raise("mapper setup missing")
     end
 
-    def self.transfer(names,transformator)
-      names.each_with_object({}) do |name,hash|
-        hash[name]=transformator.send(name)
-      end
+    def mapper
+      self.class.mapper
     end
 
   private
 
-    def mapper
-      self.class.mapper
+    def transform(names)
+      names.each_with_object({}) do |name,hash|
+        hash[name]=send(name)
+      end
     end
 
     def memonize(name)
@@ -30,12 +30,19 @@ module Mapper
 
     # Loader base class
     class Loader < Transformer
-      def initialize(dump)
-        @dump = dump
-        super()
+
+      def loaded
+        mapper = self.mapper
+        attributes = transform(mapper.load_names)
+
+        mapper.instanciate_model(attributes)
       end
 
     private
+
+      def initialize(dump)
+        @dump = dump
+      end
 
       def load(name)
         memonize(name) do
@@ -43,37 +50,26 @@ module Mapper
         end
       end
 
-      def self.load(dump)
-        mapper = self.mapper
-
-        loader = self.new(dump)
-
-        attributes = transfer(mapper.load_names,loader)
-
-        mapper.instanciate_model(attributes)
-      end
     end
 
     # Dumper base class
     class Dumper < Transformer
       attr_reader :object
 
-      def initialize(object)
-        @object = object
+      def dumped
+        transform(mapper.dump_names)
       end
 
     private
+
+      def initialize(object)
+        @object = object
+      end
 
       def dump(name)
         memonize(name) do
           attribute(name).dump(@object)
         end
-      end
-
-      def self.dump(object)
-        dumper = self.new(object)
-
-        transfer(self.mapper.dump_names,dumper)
       end
     end
   end

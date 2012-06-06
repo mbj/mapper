@@ -5,6 +5,10 @@ module Mapper
       @set = Set.new
     end
 
+    def empty?
+      @set.empty?
+    end
+
     def add(attribute)
       @set << attribute
       reset
@@ -17,7 +21,10 @@ module Mapper
     end
 
     def load_names
-      load_map.keys
+      @load_names ||=
+        @set.each_with_object([]) do |attribute,names|
+          names.concat(attribute.load_names)
+        end
     end
     
     def fetch_dump_name(name)
@@ -29,21 +36,16 @@ module Mapper
   private
 
     def dump_map
-      @dump_map ||= collect(:add_to_dump_map)
-    end
-
-    def load_map 
-      @load_map ||= collect(:add_to_load_map)
-    end
-
-    def collect(method)
-      @set.each_with_object({}) do |attribute,map|
-        attribute.send(method,map)
-      end
+      @dump_map ||= 
+        Hash[
+          @set.each_with_object([]) do |attribute,entries|
+            entries.concat(attribute.dump_names.product([attribute]))
+          end
+        ]
     end
 
     def reset
-      @dump_map = @load_map = nil
+      @dump_map = @load_names = nil
       self
     end
   end

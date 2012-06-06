@@ -18,11 +18,15 @@ module Mapper
     private
 
       def coerce_dump(value)
-        raise NotImplementedError,"#{self.class.inspect}#coerce_dump must be implemented"
+        raise_error("#coerce_dump")
       end
 
       def coerce_load(value)
-        raise NotImplementedError,"#{self.class.inspect}#coerce_load must be implemented"
+        raise_error("#coerce_load")
+      end
+
+      def raise_error(method)
+        raise NotImplementedError,"#{self.class.inspect}#{method} must be implemented"
       end
     end
   end

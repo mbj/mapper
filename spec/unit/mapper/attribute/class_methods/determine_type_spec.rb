@@ -15,7 +15,7 @@ describe Mapper::Attribute, '.determine_type' do
     let(:class_or_name) { Object.new }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,"unable to determine type from: #{class_or_name.inspect}")
+      expect { subject }.to raise_error(ArgumentError,"Unable to determine mapping from: #{class_or_name.inspect}")
     end
   end
 

@@ -13,24 +13,16 @@ module Mapper
       attributes.load_names
     end
 
-    def dumper_klass
-      const_get(:Dumper)
-    end
-
-    def loader_klass
-      const_get(:Loader)
-    end
-
     def instanciate_model(attributes)
       model.new(attributes)
     end
 
     def load(dump)
-      loader_klass.load(dump)
+      loader_klass.new(dump).loaded
     end
 
     def dump(instance)
-      dumper_klass.dump(instance)
+      dumper_klass.new(instance).dumped
     end
 
     def model(model = Undefined)
@@ -41,18 +33,21 @@ module Mapper
       end
     end
 
-    def read_model
-      @model || raise("no model set for: #{self.class}")
-    end
-
     def map(*args)
-      Attribute.build(*args).tap do |attribute|
-        add_attribute(attribute)
-      end
+      attribute = Attribute.build(*args)
+      add_attribute(attribute)
+
+      self
     end
 
     def attributes
       @attributes ||= AttributeSet.new
+    end
+
+  private
+
+    def const_missing(name)
+      Attribute.determine_type(name) || super
     end
 
     def add_attribute(attribute)
@@ -63,8 +58,31 @@ module Mapper
       self
     end
 
-    def const_missing(name)
-      Attribute.determine_type(name) || super
+    def dumper_klass
+      const_get(:Dumper)
+    end
+
+    def loader_klass
+      const_get(:Loader)
+    end
+
+    def read_model
+      @model || raise("no model set for: #{self.class}")
+    end
+
+    def setup
+      create(Transformer::Dumper,:Dumper)
+      create(Transformer::Loader,:Loader)
+
+      self
+    end
+
+    def create(klass,name)
+      klass = Class.new(klass)
+      klass.instance_variable_set(:@mapper,self)
+      const_set(name,klass)
+
+      self
     end
   end
 end
