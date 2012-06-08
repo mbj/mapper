@@ -25,6 +25,12 @@ module Mapper
       dumper_klass.new(instance).dumped
     end
 
+    def attributes
+      @attributes ||= AttributeSet.new
+    end
+
+  private
+
     def model(model = Undefined)
       if model == Undefined
         read_model
@@ -38,10 +44,6 @@ module Mapper
       add_attribute(attribute)
 
       self
-    end
-
-    def attributes
-      @attributes ||= AttributeSet.new
     end
 
   private
