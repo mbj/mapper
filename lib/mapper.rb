@@ -4,6 +4,12 @@ require 'virtus'
 module Mapper
   Undefined = Object.new.freeze
 
+  # Callback when ::Mapper is included into namespace
+  #
+  # @return [undefined]
+  #
+  # @api private
+  #
   def self.included(descendant)
     descendant.extend(ClassMethods)
     descendant.send(:setup)
@@ -11,13 +17,25 @@ module Mapper
     super
   end
 
+  # Construct a mapper
+  #
+  # @return [Class<Mapper>]
+  #
+  # @api private
+  #
   def self.new(&block)
-    klass = new_mapper_class
+    klass = new_mapper
     klass.send(:class_eval,&block) if block
     klass
   end
 
-  def self.new_mapper_class
+  # Constrinct an empty mapper
+  #
+  # @return [Class<Mapper>]
+  #
+  # @api private
+  #
+  def self.new_mapper
     Class.new do
       include ::Mapper
     end
@@ -26,6 +44,8 @@ end
 
 require 'mapper/class_methods'
 require 'mapper/transformer'
+require 'mapper/transformer/loader'
+require 'mapper/transformer/dumper'
 require 'mapper/attribute'
 require 'mapper/attribute/object'
 require 'mapper/attribute/embedded'

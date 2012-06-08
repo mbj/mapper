@@ -17,4 +17,4 @@ MethodNameCheck:
 ModuleLineCountCheck:            { line_count: 260 }
 ModuleNameCheck:                 
   pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/
-ParameterNumberCheck:            { parameter_count: 2 }
+ParameterNumberCheck:            { parameter_count: 3 }

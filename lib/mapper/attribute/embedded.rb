@@ -3,6 +3,10 @@ module Mapper
     # A base class for embedded attribute mappings
     class Embedded < Object
     private
+      # Initialize attribute
+      #
+      # @api private
+      #
       def initialize(name,options)
         @mapper ||= options.fetch(:mapper)
         super

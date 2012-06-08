@@ -7,7 +7,7 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LargeClass:
-  max_methods: 9
+  max_methods: 10
   enabled: true
   exclude: []
   max_instance_variables: 3
@@ -21,7 +21,9 @@ UncommunicativeMethodName:
   - !ruby/regexp /[A-Z]/
 LongParameterList:
   max_params: 2
-  exclude: [ "Mapper::Attribute#self.build" ]
+  exclude: 
+  - "Mapper::Attribute#self.build"
+  - "Mapper::ClassMethods#map"
   enabled: true
   overrides: {}
 FeatureEnvy:
