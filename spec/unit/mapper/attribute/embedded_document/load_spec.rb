@@ -1,18 +1,20 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::EmbeddedDocument,'#coerce_dump' do
+describe Mapper::Attribute::EmbeddedDocument,'#load' do
   let(:object) { described_class.new(:name,:mapper => mapper) }
   let(:mapper) { Mapper::Attribute::Object.new(:other_name)   }
 
-  subject { object.coerce_dump(value) }
+  subject { object.load(dump) }
 
   let(:coerced) { mock }
-
-  let(:value) { mock }
+  let(:dump)    { { :name => value } }
 
   context 'when value is NOT nil' do
-    it 'should delegate each value to inner mapper' do
-      mapper.should_receive(:dump).with(value).and_return(coerced)
+    let(:value)    { mock }
+
+    it 'should delegate value to inner mapper' do
+      mapper.should_receive(:load).with(value).and_return(coerced)
+
       subject.should be(coerced)
     end
   end

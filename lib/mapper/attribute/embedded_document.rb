@@ -2,12 +2,13 @@ module Mapper
   class Attribute
     # A mapper for embedded document pattern
     class EmbeddedDocument < Embedded
-      def coerce_load(value)
-        execute(value,:load)
+
+      def load(value)
+        execute(super(value),:load)
       end
 
-      def coerce_dump(value)
-        execute(value,:dump)
+      def dump(value)
+        execute(super(value),:dump)
       end
 
     private

@@ -3,12 +3,13 @@ module Mapper
   class Attribute
     # An attribute mapped to embedded collection
     class EmbeddedCollection < Embedded
-      def coerce_load(value)
-        collect(value,:load)
+
+      def load(value)
+        collect(super(value),:load)
       end
 
-      def coerce_dump(value)
-        collect(value,:dump)
+      def dump(value)
+        collect(super(value),:dump)
       end
 
     private
