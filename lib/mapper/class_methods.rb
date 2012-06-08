@@ -46,8 +46,6 @@ module Mapper
       self
     end
 
-  private
-
     def const_missing(name)
       Attribute.determine_type(name) || super
     end

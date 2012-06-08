@@ -3,6 +3,14 @@ module Mapper
   class Attribute
     # A mapper for a plain primitive object
     class Object < Attribute
+    private
+      def initialize(load_name,options={})
+        @load_name = load_name
+        @dump_name = options.fetch(:to,load_name)
+      end
+
+    public
+
       def loader_method_source
         <<-RUBY
           def #{@load_name}
@@ -25,11 +33,6 @@ module Mapper
 
       def dump_names
         [@dump_name]
-      end
-
-      def initialize(load_name,options={})
-        @load_name = load_name
-        @dump_name = options.fetch(:to,load_name)
       end
 
       def define_loader(klass)
