@@ -1,9 +1,8 @@
 require 'spec_helper'
 
-describe Mapper::ClassMethods,'#load' do
+describe Mapper::ClassMethods,'#loader' do
   let(:described_class) do
     ::Mapper.new do
-      model(DomainObject)
       map :foo, Object
     end
   end
@@ -12,8 +11,8 @@ describe Mapper::ClassMethods,'#load' do
 
   let(:dump)   { { :foo => :bar } }
 
-  subject { object.load(dump) }
+  subject { object.loader(dump) }
 
-  its(:class) { should == DomainObject }
-  its(:foo)   { should == :bar }
+  its(:class) { should == described_class::Loader }
+  its(:dump)  { should == dump }
 end

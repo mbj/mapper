@@ -15,7 +15,7 @@ module Mapper
       # @api private
       #
       def load(value)
-        collect(super(value),:load)
+        map(super(value),:load)
       end
 
       # Dump attribute from domain object
@@ -28,12 +28,12 @@ module Mapper
       #
       # @api private
       def dump(value)
-        collect(super(value),:dump)
+        map(super(value),:dump)
       end
 
-      private
+    private
 
-      # Collect values after transforming via wrapped mapper
+      # Map values via wrapped mapper
       #
       # @param [Array] value
       # @param [Symbol] method
@@ -42,7 +42,7 @@ module Mapper
       #
       # @api private
       #
-      def collect(value,method)
+      def map(value,method)
         value.map do |item|
           @mapper.send(method,item)
         end

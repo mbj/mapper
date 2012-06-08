@@ -12,7 +12,7 @@ describe Mapper::Attribute::Object,'#loader_method_source' do
     it 'should create correct ruby' do
       compress_prefix(subject).should == compress_prefix(<<-RUBY)
         def name
-          load(:name)
+          memonized(:name)
         end
       RUBY
     end
@@ -23,7 +23,7 @@ describe Mapper::Attribute::Object,'#loader_method_source' do
     it 'should create correct ruby' do
       compress_prefix(subject).should == compress_prefix(<<-RUBY)
         def name
-          load(:other)
+          memonized(:name)
         end
       RUBY
     end

@@ -3,7 +3,7 @@ module Mapper
   class Attribute
     # A mapper for a plain primitive object
     class Object < Attribute
-      private
+    private
       # Initialize attribute
       #
       # @return [undefined]
@@ -16,7 +16,25 @@ module Mapper
         @key       = !!options.fetch(:key,false)
       end
 
-      public
+      # Define reader on transformer
+      #
+      # @param [Class] klass 
+      #   the loader or dumper class to define the reader on
+      #
+      # @param [String] source
+      #   the source of the method to define
+      #
+      # @api private
+      #
+      # @return [self]
+      #
+      def define_reader(klass,source)
+        klass.class_eval(source,__FILE__,__LINE__+1)
+
+        self
+      end
+
+    public
 
       # Return wheather this attribute is a key
       #
@@ -28,32 +46,23 @@ module Mapper
         @key
       end
 
-      # Return source of method to be defined on loader
+      # Return loader method source
       #
       # @return [String]
       #
       # @api private
       #
       def loader_method_source
-        <<-RUBY
-          def #{@load_name}
-            load(:#{@dump_name})
-          end
-        RUBY
+        Transformer.reader_method_source(@load_name)
       end
 
-      # Return source of method to be defined on dumper
+      # Return dumper method source
       #
       # @return [String]
       #
       # @api private
-      #
       def dumper_method_source
-        <<-RUBY
-          def #{@dump_name}
-            dump(:#{@dump_name})
-          end
-        RUBY
+        Transformer.reader_method_source(@dump_name)
       end
 
       # Return names of domain object attributes this attribute loads
@@ -85,7 +94,7 @@ module Mapper
       # @api private
       #
       def define_loader(klass)
-        klass.class_eval(loader_method_source,__FILE__,__LINE__+1)
+        define_reader(klass,loader_method_source)
 
         self
       end
@@ -99,7 +108,7 @@ module Mapper
       # @api private
       #
       def define_dumper(klass)
-        klass.class_eval(dumper_method_source,__FILE__,__LINE__+1)
+        define_reader(klass,dumper_method_source)
 
         self
       end
@@ -124,6 +133,7 @@ module Mapper
       #
       # @api private
       #
+      # TODO: Introduce dump accessor object.
       def load(dump)
         dump.fetch(@dump_name)
       end

@@ -2,20 +2,35 @@ module Mapper
   class Transformer
     # Loader base class
     class Loader < Transformer
-      # Return loaded domain object
+      # Return input dump
       #
-      # @return [DomainObject]
+      # @return [Object]
       #
       # @api private
       #
-      def loaded
-        mapper = self.mapper
-        attributes = collect(mapper.load_names)
+      attr_reader :dump
 
+      # Return loaded domain object
+      #
+      # @return [Object]
+      #
+      # @api private
+      #
+      def object
         mapper.instanciate_model(attributes)
       end
 
-      private
+      # Return loaded attributes
+      #
+      # @return [Hash]
+      #
+      # @api private
+      #
+      def attributes
+        map(attribute_set.load_names)
+      end
+
+    private
 
       # Initialize loader with dumped representation
       #
@@ -37,10 +52,19 @@ module Mapper
       #
       # @api private
       #
-      def load(name)
-        memonize(name) do
-          attribute(name).load(@dump)
-        end
+      def access(name)
+        attribute(name).load(@dump)
+      end
+
+      # Resolve attribute via load name
+      #
+      # @param [Symbol] name
+      #
+      # @return [Attribute]
+      #
+      # @api private
+      def attribute(name)
+        attribute_set.fetch_load_name(name)
       end
     end
   end

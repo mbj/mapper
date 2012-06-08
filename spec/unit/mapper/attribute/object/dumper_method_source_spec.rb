@@ -12,7 +12,7 @@ describe Mapper::Attribute::Object,'#dumper_method_source' do
     it 'should create correct ruby' do
       compress_prefix(subject).should == compress_prefix(<<-RUBY)
         def name
-          dump(:name)
+          memonized(:name)
         end
       RUBY
     end
@@ -23,7 +23,7 @@ describe Mapper::Attribute::Object,'#dumper_method_source' do
     it 'should create correct ruby' do
       compress_prefix(subject).should == compress_prefix(<<-RUBY)
         def other
-          dump(:other)
+          memonized(:other)
         end
       RUBY
     end

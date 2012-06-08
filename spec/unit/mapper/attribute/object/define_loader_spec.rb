@@ -13,7 +13,7 @@ describe Mapper::Attribute::Object,'#define_loader' do
   it 'should define method on dumper klass with correct ruby' do
     dumper_klass.
       should_receive(:class_eval).
-      with(object.loader_method_source,"/home/mbj/devel/mapper/lib/mapper/attribute/object.rb",89)
+      with(object.loader_method_source,"/home/mbj/devel/mapper/lib/mapper/attribute/object.rb",33)
 
     subject
   end

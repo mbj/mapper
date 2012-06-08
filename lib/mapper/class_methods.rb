@@ -1,35 +1,5 @@
 module Mapper
   module ClassMethods
-    # Return names of fields in dump
-    #
-    # @return [Array]
-    #
-    # @api private
-    #
-    def dump_names
-      attributes.dump_names
-    end
-
-    # Return names of attributes in loaded objects
-    #
-    # @return [Array]
-    #
-    # @api private
-    #
-    def load_names
-      attributes.load_names
-    end
-
-    # Return attribute that handles dump name
-    #
-    # @return [Attribute]
-    #
-    # @api private
-    #
-    def attribute_for_dump_name(name)
-      attributes.fetch_dump_name(name)
-    end
-
     # Instanciates a mapped model from attribues
     #
     # @param [Objec] attributes
@@ -51,7 +21,19 @@ module Mapper
     # @api private
     #
     def load(dump)
-      loader_klass.new(dump).loaded
+      loader(dump).object
+    end
+
+    # Create a loader instance for dump
+    #
+    # @param [Object] dump
+    #   the dump to load
+    #
+    # @return [Mapper::Transformer::Loader]
+    #
+    # @api private
+    def loader(dump)
+      loader_klass.new(dump)
     end
 
     # Transform domain object into dump
@@ -64,7 +46,20 @@ module Mapper
     # @api private
     #
     def dump(object)
-      dumper_klass.new(object).dumped
+      dumper(object).dump
+    end
+
+    # Create a dumper instance for domain object
+    #
+    # @param [Object] object
+    #   the domain object to dump
+    #
+    # @return [Mapper::Transformer::Dumper]
+    #
+    # @api private
+    #
+    def dumper(object)
+      dumper_klass.new(object)
     end
 
     # Return attributes mapper is handling

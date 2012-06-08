@@ -14,6 +14,25 @@ module Mapper
       @mapper || raise("mapper setup missing")
     end
 
+    # Create reader method source
+    #
+    # @param [Symbol] name
+    #   the named value to read
+    #
+    # @return [String]
+    #   the ruby source calling memonized_access(:name)
+    #
+    # @api private
+    #
+    def self.reader_method_source(name)
+      # comment to keep vim syntax happy
+      <<-RUBY
+        def #{name}
+          memonized(:#{name})
+        end
+      RUBY
+    end
+
     # Access transformers mapper
     #
     # @return [Mapper]
@@ -26,16 +45,26 @@ module Mapper
 
   private
 
-    # Collect hash from executing methods on transformer
+    # Access mappers attribute set
+    #
+    # @return [Mapper::AttributeSet]
+    #
+    # @api private
+    #
+    def attribute_set
+      mapper.attributes
+    end
+
+    # Create hash from executing methods on transformer
     #
     # @param [Array] names 
-    #   the methods to execute and collect
+    #   the methods to execute and map
     #
     # @return [Hash]
     #
     # @api private
     #
-    def collect(names)
+    def map(names)
       names.each_with_object({}) do |name,hash|
         hash[name]=send(name)
       end
@@ -49,22 +78,11 @@ module Mapper
     #
     # @api private
     #
-    def memonize(name)
+    def memonized(name)
       @memonized ||= {}
       @memonized.fetch(name) do
-        @memonized[name]=yield
+        @memonized[name]=access(name)
       end
-    end
-
-    # Resolve attribute via dump name
-    #
-    # @param [Symbol] name
-    #
-    # @return [Attribute]
-    #
-    # @api private
-    def attribute(name)
-      mapper.attribute_for_dump_name(name)
     end
   end
 end

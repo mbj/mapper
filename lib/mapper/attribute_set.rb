@@ -1,16 +1,6 @@
 module Mapper
   # A set of mapping attributes
   class AttributeSet
-    # Return wheather this attribute set is empty
-    #
-    # @return [True|False]
-    #
-    # @api private
-    #
-    def empty?
-      @set.empty?
-    end
-
     # Add attribute to set
     #
     # @param [Attribute] attribute
@@ -24,6 +14,16 @@ module Mapper
       reset
 
       self
+    end
+
+    # Return if attribute set is empty
+    #
+    # @return [true|false]
+    #
+    # @api  private
+    #
+    def empty?
+      @set.empty?
     end
 
     # Return all dump names of attributes in set
@@ -43,10 +43,7 @@ module Mapper
     # @api private
     #
     def load_names
-      @load_names ||=
-        @set.each_with_object([]) do |attribute,names|
-          names.concat(attribute.load_names)
-        end
+      load_map.keys
     end
     
     # Return attribute selected by dump name
@@ -55,18 +52,31 @@ module Mapper
     #
     # @return [Attribute]
     #
-    # @raise [ArgumentError]
+    # @raise [IndexError]
     #   when not found
     #
     # @api private
     #
     def fetch_dump_name(name)
-      dump_map.fetch(name) do
-        raise ArgumentError,"no attribute with dump name of #{name.inspect} does exist"
-      end
+      dump_map.fetch(name) 
     end
 
-    private
+    # Return attribute selected by load name
+    #
+    # @param [Symbol] name
+    #
+    # @return [Attribute]
+    #
+    # @raise [IndexError]
+    #   when not found
+    #
+    # @api private
+    #
+    def fetch_load_name(name)
+      load_map.fetch(name)
+    end
+
+  private
 
     # Initialize attribute set
     #
@@ -78,6 +88,16 @@ module Mapper
       @set = Set.new
     end
 
+    # Return map of load names to attribute
+    #
+    # @return [Hash<Symbol,Attribute>]
+    #
+    # @api private
+    #
+    def load_map
+      @load_map ||= map(:load_names)
+    end
+
     # Return map of dump names to attribute
     #
     # @return [Hash<Symbol,Attribute>]
@@ -85,12 +105,59 @@ module Mapper
     # @api private
     #
     def dump_map
-      @dump_map ||= 
-        Hash[
-          @set.each_with_object([]) do |attribute,entries|
-            entries.concat(attribute.dump_names.product([attribute]))
-          end
-        ]
+      @dump_map ||= map(:dump_names)
+    end
+
+    # Create a map from attributes
+    #
+    # Map building decomposition part to keep flog happy...
+    #
+    # @param [Symbol] method
+    #   the method to invoke on attribute
+    #
+    # @return [Hash<Symbol,Attribute]
+    #
+    # @api private
+    def map(method)
+      Hash[map_entries(method)]
+    end
+
+    # Return arrays names to be mapped
+    #
+    # Map building decomposition part to keep flog happy...
+    #
+    # @param [Symbol] method
+    #   the method to invoke on attribute
+    #
+    # @return [Enumerable]
+    #
+    # @api private
+    #
+    def map_names(method)
+      @set.map do |attribute|
+        [attribute,attribute.send(method)]
+      end
+    end
+
+    # Return entries to map
+    #
+    # Map building decomposition part to keep flog happy...
+    #
+    # @param [Symbol] method
+    #   the method to invoke on attribute
+    #
+    # @return [Enumerable]
+    #
+    # @api private
+    #
+    def map_entries(method)
+      entries = []
+
+      map_names(method).each do |attribute,names|
+        entries.concat(names.product([attribute]))
+      end
+
+      entries
     end
 
     # Reset caches
@@ -100,7 +167,7 @@ module Mapper
     # @api private
     #
     def reset
-      @dump_map = @load_names = nil
+      @dump_map = @load_map = nil
       self
     end
   end

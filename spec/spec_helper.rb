@@ -9,6 +9,14 @@ $LOAD_PATH << File.expand_path('../lib', __FILE__)
 
 Dir.glob('spec/**/*_shared.rb').each { |file| require File.expand_path(file) }
 
+# simple domain object used in specs
+class DomainObject
+  attr_reader :foo
+  def initialize(attributes)
+    @foo = attributes.fetch(:foo)
+  end
+end
+
 
 module SpecHelper
   def compress_prefix(lines)

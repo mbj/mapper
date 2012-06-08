@@ -16,8 +16,8 @@ module Mapper
       #
       # @api private
       #
-      def dumped
-        collect(mapper.dump_names)
+      def dump
+        map(attribute_set.dump_names)
       end
 
     private
@@ -35,18 +35,32 @@ module Mapper
         @object = object
       end
 
-      # Access dumped value
+      # Access dumped representation of domain object attribute with name
       #
-      # @param [Symbol] name of field to access
+      # This method takes aliasing into account.
+      #
+      # @param [Symbol] name
+      #   the name of the attribute
       #
       # @return [Object]
+      #   the transformed object
       #
       # @api private
       #
-      def dump(name)
-        memonize(name) do
-          attribute(name).dump(@object)
-        end
+      def access(name)
+        attribute(name).dump(@object)
+      end
+
+      # Resolve attribute via dump name
+      #
+      # @param [Symbol] name
+      #
+      # @return [Attribute]
+      #
+      # @api private
+      #
+      def attribute(name)
+        attribute_set.fetch_dump_name(name)
       end
     end
   end

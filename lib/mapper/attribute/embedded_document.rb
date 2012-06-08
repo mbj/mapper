@@ -12,7 +12,7 @@ module Mapper
       # @api private
       #
       def load(value)
-        execute(super(value),:load)
+        map(super(value),:load)
       end
 
       # Dump from domain object and transform via wrapped mapper
@@ -23,14 +23,14 @@ module Mapper
       # @api private
       #
       def dump(value)
-        execute(super(value),:dump)
+        map(super(value),:dump)
       end
 
     private
 
-      # Execute transformation via inner wrapper
+      # Map values via wrapped mapper
       #
-      # Is only executed when value is not nil.
+      # Inner mapper is only called whan value is not nil
       #
       # @param [Object] value
       #   the value to transform
@@ -42,7 +42,7 @@ module Mapper
       #
       # @api private
       #
-      def execute(value,method)
+      def map(value,method)
         unless value.nil?
           @mapper.send(method,value)
         end
