@@ -29,6 +29,10 @@ module Mapper
       @attributes ||= AttributeSet.new
     end
 
+    def wrap_query(*)
+      raise NotImplementedError,'::Mapper does not implement queries. See DB/query-system specific mappers'
+    end
+
   private
 
     def model(model = Undefined)
