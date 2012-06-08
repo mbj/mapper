@@ -7,13 +7,17 @@ describe Mapper::Transformer,'#mapper' do
     end
   end
 
-  let(:mapper) { mock }
+  let(:source)    { mock }
+  let(:operation) { mock }
+  let(:mapper)    { mock }
 
-  let(:object) { described_class.new }
+  let(:object) { described_class.new(source,operation) }
 
   subject { object.mapper }
 
   it 'should return class mapper' do
     should be(mapper)
   end
+
+  it_should_behave_like 'an idempotent method'
 end

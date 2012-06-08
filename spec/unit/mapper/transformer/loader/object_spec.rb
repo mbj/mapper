@@ -21,4 +21,6 @@ describe Mapper::Transformer::Loader,'#object' do
 
   its(:class) { should == DomainObject }
   its(:foo)   { should == :bar }
+
+  it_should_behave_like 'an idempotent method'
 end

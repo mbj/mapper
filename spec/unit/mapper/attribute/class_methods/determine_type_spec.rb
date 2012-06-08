@@ -9,6 +9,8 @@ describe Mapper::Attribute, '.determine_type' do
     let(:class_or_name) { ::Object }
 
     it { should be(Mapper::Attribute::Object) }
+
+    it_should_behave_like 'an idempotent method'
   end
 
   context 'with undeterminable type' do 
@@ -21,6 +23,8 @@ describe Mapper::Attribute, '.determine_type' do
 
   context 'with :EmbeddedCollection' do
     let(:class_or_name) { :EmbeddedCollection }
+
+    it_should_behave_like 'an idempotent method'
 
     it { should be(Mapper::Attribute::EmbeddedCollection) }
   end

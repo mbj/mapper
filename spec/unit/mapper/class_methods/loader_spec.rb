@@ -14,5 +14,5 @@ describe Mapper::ClassMethods,'#loader' do
   subject { object.loader(dump) }
 
   its(:class) { should == described_class::Loader }
-  its(:dump)  { should == dump }
+  its(:source)  { should be_kind_of(described_class::DumpWrapper) }
 end

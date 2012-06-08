@@ -36,6 +36,16 @@ module Mapper
       dump_map.keys
     end
 
+    # Return all dump names of attributes that are keys
+    #
+    # @return [Array<Symbol>]
+    #
+    # @api private
+    #
+    def dump_key_names
+      @dump_key_names ||= key_attributes.map(&:dump_names).flatten
+    end
+
     # Return all names of domain object attributes in set
     #
     # @return [Array<Symbol>]
@@ -87,6 +97,17 @@ module Mapper
     def initialize()
       @set = Set.new
     end
+
+    # Return all attributes that hold part of key
+    #
+    # @return [Enumerable]
+    #
+    # @api private
+    #
+    def key_attributes
+      @set.select(&:key?)
+    end
+
 
     # Return map of load names to attribute
     #
@@ -167,7 +188,7 @@ module Mapper
     # @api private
     #
     def reset
-      @dump_map = @load_map = nil
+      @dump_map = @load_map = @dump_key_names = nil
       self
     end
   end

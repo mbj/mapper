@@ -14,5 +14,5 @@ describe Mapper::ClassMethods,'#dumper' do
   subject { object.dumper(domain_object) }
 
   its(:class) { should == described_class::Dumper }
-  its(:object)  { should == domain_object }
+  its(:source)  { should == domain_object }
 end

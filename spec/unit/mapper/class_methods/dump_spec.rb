@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe Mapper::ClassMethods,'#dump' do
   let(:domain_object) do 
-    Object.new.extend(Module.new do
-      def foo
-        :bar
-      end
-    end)
+    DomainObject.new(:foo => :bar)
   end
 
   let(:described_class) do

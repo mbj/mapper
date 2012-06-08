@@ -7,10 +7,12 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LargeClass:
-  max_methods: 13
+# AttributeSet will be broken than this can be lowered
+  max_methods: 15
   enabled: true
   exclude: []
-  max_instance_variables: 3
+# AttributeSet will be broken than this can be lowered
+  max_instance_variables: 5
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -51,7 +53,7 @@ NestedIterators:
   enabled: true
   max_allowed_nesting: 1
 LongMethod:
-  max_statements: 4
+  max_statements: 5
   exclude: []
   enabled: true
 Duplication:

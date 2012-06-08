@@ -7,14 +7,23 @@ end
 
 $LOAD_PATH << File.expand_path('../lib', __FILE__)
 
-Dir.glob('spec/**/*_shared.rb').each { |file| require File.expand_path(file) }
+Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each { |f| require f }
 
 # simple domain object used in specs
 class DomainObject
-  attr_reader :foo
-  def initialize(attributes)
-    @foo = attributes.fetch(:foo)
+  attr_reader :foo,:id
+  def initialize(attributes={})
+    @id = attributes.fetch(:id,1)
+    @foo = attributes.fetch(:foo,:bar)
   end
+end
+
+require 'mapper'
+
+module DomainObjectMapper
+  include ::Mapper
+  map :id, Object, :key => true
+  map :foo, Object
 end
 
 

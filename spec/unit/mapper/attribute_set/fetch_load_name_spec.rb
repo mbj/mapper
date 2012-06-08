@@ -19,6 +19,8 @@ describe Mapper::AttributeSet,'#fetch_load_name' do
     it 'should return attribute' do
       should be(attribute)
     end
+
+    it_should_behave_like 'an idempotent method'
   end
   
   context 'when load name does NOT exist' do

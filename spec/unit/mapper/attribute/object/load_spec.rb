@@ -7,7 +7,7 @@ describe Mapper::Attribute::Object,'#load' do
   let(:options) { {} }
 
   let(:value)   { mock }
-  let(:dump)    { { :name => value } }
+  let(:dump)    { mock(:name => value) }
 
   subject { object.load(dump) }
 
@@ -19,7 +19,7 @@ describe Mapper::Attribute::Object,'#load' do
 
   context 'with aliased dump name' do
     let(:options) { { :to => :other } }
-    let(:dump)    { { :other => value } }
+    let(:dump)    { mock(:other => value) }
     it 'should load value' do
       should be(value)
     end

@@ -10,7 +10,7 @@ describe Mapper::Transformer,'.reader_method_source' do
   it 'should return correct ruby' do
     compress_prefix(subject).should == compress_prefix(<<-RUBY)
       def foo
-        memonized(:foo)
+        read(:foo)
       end
     RUBY
   end

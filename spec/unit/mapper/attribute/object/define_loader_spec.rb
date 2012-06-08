@@ -6,15 +6,15 @@ describe Mapper::Attribute::Object,'#define_loader' do
   let(:name)    { :name }
   let(:options) { {} }
 
-  let(:dumper_klass) { mock }
+  let(:dumper_class) { Mapper::Transformer }
 
-  subject { object.define_loader(dumper_klass) }
+  subject { object.define_loader(dumper_class) }
 
-  it 'should define method on dumper klass with correct ruby' do
-    dumper_klass.
-      should_receive(:class_eval).
-      with(object.loader_method_source,"/home/mbj/devel/mapper/lib/mapper/attribute/object.rb",33)
+  it 'should define reader method on name' do
+    dumper_class.should_receive(:define_reader).with(:name)
 
     subject
   end
+
+  it_should_behave_like 'a command method'
 end

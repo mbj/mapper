@@ -7,7 +7,7 @@ describe Mapper::Attribute::EmbeddedDocument,'#load' do
   subject { object.load(dump) }
 
   let(:coerced) { mock }
-  let(:dump)    { { :name => value } }
+  let(:dump)    { mock(:name => value) }
 
   context 'when value is NOT nil' do
     let(:value)    { mock }

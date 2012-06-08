@@ -73,7 +73,7 @@ module Mapper
     # @api private
     #
     def self.handles
-      [self,const_name]
+      @handles ||= [self,const_name]
     end
   end
 end

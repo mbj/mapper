@@ -1,6 +1,14 @@
 module Mapper
   # Base class for loader and dumper classes
   class Transformer
+    # Return source of transformation
+    #
+    # @return [Object]
+    #
+    # @api private
+    #
+    attr_reader :source
+
     # Access transformers class mapper
     #
     # @raise [RuntimeError] 
@@ -25,12 +33,28 @@ module Mapper
     # @api private
     #
     def self.reader_method_source(name)
-      # comment to keep vim syntax happy
+      # comment to keep vim ruby syntax happy
       <<-RUBY
         def #{name}
-          memonized(:#{name})
+          read(:#{name})
         end
       RUBY
+    end
+
+    # Define reader on class
+    #
+    # @param [Symbol] name
+    #   the name of the reader to define
+    #
+    # @return [self]
+    #
+    # @api private
+    #
+    def self.define_reader(name)
+      source = reader_method_source(name)
+      class_eval(source,__FILE__,__LINE__)
+
+      self
     end
 
     # Access transformers mapper
@@ -43,7 +67,20 @@ module Mapper
       self.class.mapper
     end
 
+
   private
+
+    # Initialize transformer with source
+    #
+    # @param [Object] source
+    #
+    # @return [undefined]
+    #
+    # @api private
+    #
+    def initialize(source,operation)
+      @source,@operation = source,operation
+    end
 
     # Access mappers attribute set
     #
@@ -70,19 +107,45 @@ module Mapper
       end
     end
 
-    # Access transformer value via memonization guard
+    # Return transformed value via memonization guard
     #
-    # @param [Symbol] name of value to access
+    # @param [Symbol] name of value to return
     #
     # @return [Object]
     #
     # @api private
     #
-    def memonized(name)
+    def read(name)
       @memonized ||= {}
       @memonized.fetch(name) do
-        @memonized[name]=access(name)
+        @memonized[name]=read_nocache(name)
       end
+    end
+
+    # Return transformed value
+    #
+    # @param [Symbol] name of value to return
+    #
+    # @return [Object]
+    #
+    # @api private
+    #
+    def read_nocache(name)
+      transformation(name).send(@operation,@source)
+    end
+
+    # Return transformation
+    #
+    # (Currently an Attribute)
+    #
+    # @return [Transformation]
+    #
+    # @api private
+    #
+    # TODO: Will be replaced by real transformation
+    #
+    def transformation(name)
+      attribute_set.send("fetch_#{@operation}_name",name)
     end
   end
 end

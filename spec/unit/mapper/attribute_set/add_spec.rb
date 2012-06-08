@@ -6,6 +6,8 @@ describe Mapper::AttributeSet,'#add' do
 
   subject { object.add(attribute) }
 
+  it_should_behave_like 'a command method'
+
   it 'should add attribute to load names' do
     subject
     object.load_names.should == [:load_name]
@@ -23,6 +25,8 @@ describe Mapper::AttributeSet,'#add' do
       object.load_names
       object.dump_names
     end
+
+    it_should_behave_like 'a command method'
 
     it 'should add attribute to load names' do
       subject

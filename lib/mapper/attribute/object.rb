@@ -16,24 +16,6 @@ module Mapper
         @key       = !!options.fetch(:key,false)
       end
 
-      # Define reader on transformer
-      #
-      # @param [Class] klass 
-      #   the loader or dumper class to define the reader on
-      #
-      # @param [String] source
-      #   the source of the method to define
-      #
-      # @api private
-      #
-      # @return [self]
-      #
-      def define_reader(klass,source)
-        klass.class_eval(source,__FILE__,__LINE__+1)
-
-        self
-      end
-
     public
 
       # Return wheather this attribute is a key
@@ -44,25 +26,6 @@ module Mapper
       # 
       def key?
         @key
-      end
-
-      # Return loader method source
-      #
-      # @return [String]
-      #
-      # @api private
-      #
-      def loader_method_source
-        Transformer.reader_method_source(@load_name)
-      end
-
-      # Return dumper method source
-      #
-      # @return [String]
-      #
-      # @api private
-      def dumper_method_source
-        Transformer.reader_method_source(@dump_name)
       end
 
       # Return names of domain object attributes this attribute loads
@@ -94,7 +57,7 @@ module Mapper
       # @api private
       #
       def define_loader(klass)
-        define_reader(klass,loader_method_source)
+        klass.define_reader(@load_name)
 
         self
       end
@@ -108,7 +71,23 @@ module Mapper
       # @api private
       #
       def define_dumper(klass)
-        define_reader(klass,dumper_method_source)
+        klass.define_reader(@dump_name)
+
+        self
+      end
+
+      # Define reader method on dump wrapper class
+      #
+      # @param [Class] klass
+      #
+      # @return [self]
+      #
+      # @api private
+      #
+      def define_dump_reader(klass)
+        dump_names.each do |name|
+          klass.define_reader(name)
+        end
 
         self
       end
@@ -133,9 +112,8 @@ module Mapper
       #
       # @api private
       #
-      # TODO: Introduce dump accessor object.
       def load(dump)
-        dump.fetch(@dump_name)
+        dump.send(@dump_name)
       end
     end
   end

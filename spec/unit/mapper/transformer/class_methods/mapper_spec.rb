@@ -9,6 +9,7 @@ describe Mapper::Transformer, '.mapper' do
 
   subject { object.mapper }
 
+
   context 'when mapper setup was done' do
     before do
       object.instance_variable_set(:@mapper,mapper)
@@ -17,6 +18,8 @@ describe Mapper::Transformer, '.mapper' do
     it 'should return mapper' do
       should be(mapper)
     end
+
+    it_should_behave_like 'an idempotent method'
   end
 
   context 'when mapper setup was NOT done' do

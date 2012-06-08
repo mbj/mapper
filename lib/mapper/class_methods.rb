@@ -33,7 +33,7 @@ module Mapper
     #
     # @api private
     def loader(dump)
-      loader_klass.new(dump)
+      self::Loader.new(dump)
     end
 
     # Transform domain object into dump
@@ -59,7 +59,7 @@ module Mapper
     # @api private
     #
     def dumper(object)
-      dumper_klass.new(object)
+      self::Dumper.new(object)
     end
 
     # Return attributes mapper is handling
@@ -160,30 +160,11 @@ module Mapper
     #
     def add_attribute(attribute)
       attributes.add(attribute)
-      attribute.define_loader(loader_klass)
-      attribute.define_dumper(dumper_klass)
+      attribute.define_loader(self::Loader)
+      attribute.define_dumper(self::Dumper)
+      attribute.define_dump_reader(self::DumpWrapper)
 
       self
-    end
-
-    # Return mappers dumper class
-    #
-    # @return [Class<Dumper>]
-    #
-    # @api private
-    #
-    def dumper_klass
-      const_get(:Dumper)
-    end
-
-    # Return mappers dumper class
-    #
-    # @return [Class<Loader>]
-    #
-    # @api private
-    #
-    def loader_klass
-      const_get(:Loader)
     end
 
     # Read mappers model or raise
@@ -205,6 +186,7 @@ module Mapper
     def setup
       create(Transformer::Dumper,:Dumper)
       create(Transformer::Loader,:Loader)
+      create(Transformer::DumpWrapper,:DumpWrapper)
 
       self
     end

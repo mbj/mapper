@@ -6,7 +6,7 @@ describe Mapper::Attribute::EmbeddedCollection,'#load' do
   let(:item)    { mock }
   let(:coerced) { mock }
   let(:value)   { [item] }
-  let(:dump)    { { :name => value } }
+  let(:dump)    { mock(:name => value) }
 
   subject { object.load(dump) }
 

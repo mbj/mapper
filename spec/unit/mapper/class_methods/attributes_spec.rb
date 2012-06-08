@@ -9,6 +9,8 @@ describe Mapper::ClassMethods,'#attributes' do
       Mapper.new
     end
 
+    it_should_behave_like 'an idempotent method'
+
     it { should be_kind_of(Mapper::AttributeSet) }
     it { should be_empty }
   end

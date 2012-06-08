@@ -19,4 +19,6 @@ describe Mapper::Transformer::Loader,'#attributes' do
   end
 
   it { should == { :foo => :bar } }
+
+  it_should_behave_like 'an idempotent method'
 end

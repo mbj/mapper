@@ -94,7 +94,7 @@ describe 'spike spec' do
 
       class Dumper
         def preferred_phone_idx
-          object.phones.index(object.preferred_phone)
+          source.phones.index(source.preferred_phone)
         end
 
         def vat_rate_numerator
@@ -110,18 +110,18 @@ describe 'spike spec' do
         end
 
         def with_vat_rate
-          vat_rate = object.vat_rate
+          vat_rate = source.vat_rate
           yield vat_rate if vat_rate
         end
       end
 
       class Loader
         def vat_rate
-          Rational(@dump[:vat_rate_numerator],@dump[:vat_rate_denominator])
+          Rational(source.vat_rate_numerator,source.vat_rate_denominator)
         end
 
         def preferred_phone
-          prefered_phone_idx = @dump[:preferred_phone_idx]
+          prefered_phone_idx = source.preferred_phone_idx
           if prefered_phone_idx
             phones.fetch(prefered_phone_idx)
           end
