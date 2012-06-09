@@ -15,6 +15,8 @@ describe Mapper::Attribute::Object,'#dump' do
     it 'should load value' do
       should be(value)
     end
+
+    it_should_behave_like 'an idempotent method'
   end
 
   context 'with aliased dump name' do
@@ -23,5 +25,7 @@ describe Mapper::Attribute::Object,'#dump' do
     it 'should load value' do
       should be(value)
     end
+
+    it_should_behave_like 'an idempotent method'
   end
 end

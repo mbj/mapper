@@ -19,7 +19,7 @@ module Mapper
       # @api private
       #
       def attributes
-        @attributes ||= map(attribute_set.load_names)
+        @attributes ||= map(@operations.names)
       end
 
     private
@@ -31,7 +31,12 @@ module Mapper
       # @api private
       #
       def initialize(dump)
-        super(mapper::DumpWrapper.new(dump),:load)
+        mapper = self.mapper
+
+        super(
+          mapper::DumpWrapper.new(dump),
+          mapper.attributes.load_operations
+        )
       end
     end
   end

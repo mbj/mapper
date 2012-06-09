@@ -2,9 +2,14 @@
 
 require 'spec_helper'
 
-describe Mapper::Transformer, '#define_reader' do
+describe Mapper::ReaderDefiner, '#define_reader' do
+
   let(:object) do
-    Class.new(described_class) do
+    Class.new do
+      extend Mapper::ReaderDefiner
+
+    private
+
       def read(name)
         name
       end
@@ -12,7 +17,7 @@ describe Mapper::Transformer, '#define_reader' do
   end
 
   let(:instance) do
-    object.new(mock,mock)
+    object.new
   end
 
   let(:name) { :foo }
@@ -43,8 +48,8 @@ describe Mapper::Transformer, '#define_reader' do
 
     file, line = instance.foo.first.split(':')[0, 2]
 
-    File.expand_path(file).should eql(File.expand_path('../../../../../../lib/mapper/transformer.rb', __FILE__))
-    line.to_i.should eql(56)
+    File.expand_path(file).should eql(File.expand_path('../../../../../lib/mapper/reader_definer.rb', __FILE__))
+    line.to_i.should eql(17)
   end
 
   it 'sets the file and line number properly' do

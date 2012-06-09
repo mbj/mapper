@@ -42,11 +42,12 @@ module Mapper
   end
 end
 
+require 'mapper/reader_definer'
+require 'mapper/dump_wrapper'
 require 'mapper/class_methods'
 require 'mapper/transformer'
 require 'mapper/transformer/loader'
 require 'mapper/transformer/dumper'
-require 'mapper/transformer/dump_wrapper'
 require 'mapper/attribute'
 require 'mapper/attribute/object'
 require 'mapper/attribute/embedded'
@@ -54,3 +55,4 @@ require 'mapper/attribute/embedded_document'
 require 'mapper/attribute/embedded_collection'
 require 'mapper/attribute/custom'
 require 'mapper/attribute_set'
+require 'mapper/attribute_set/operations'

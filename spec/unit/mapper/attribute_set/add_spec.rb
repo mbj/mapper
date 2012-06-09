@@ -6,36 +6,40 @@ describe Mapper::AttributeSet,'#add' do
 
   subject { object.add(attribute) }
 
+  # not using let here to make sure values is not memonized
+  def load_names; object.load_operations.names; end
+  def dump_names; object.dump_operations.names; end
+
   it_should_behave_like 'a command method'
 
   it 'should add attribute to load names' do
     subject
-    object.load_names.should == [:load_name]
+    load_names.should == [:load_name].to_set
   end
 
   it 'should add attribute to dump names' do
     subject
-    object.dump_names.should == [:dump_name]
+    dump_names.should == [:dump_name].to_set
   end
 
   context 'when attribute set is not empty' do
     before do
       object.add(Mapper::Attribute::Object.new(:something))
-      # make sure we have a cache
-      object.load_names
-      object.dump_names
+      # make sure we have a memonized operations in attribute set
+      load_names
+      dump_names
     end
 
     it_should_behave_like 'a command method'
 
-    it 'should add attribute to load names' do
+    it 'should still add attribute to load names' do
       subject
-      object.load_names.to_set.should == [:something,:load_name].to_set
+      load_names.should == [:something,:load_name].to_set
     end
 
-    it 'should add attribute to dump names' do
+    it 'should still add attribute to dump names' do
       subject
-      object.dump_names.to_set.should == [:something,:dump_name].to_set
+      dump_names.should == [:something,:dump_name].to_set
     end
   end
 end

@@ -9,7 +9,7 @@ module Mapper
       # @api private
       #
       def dump
-        @dump ||= map(attribute_set.dump_names)
+        @dump ||= map(@operations.names)
       end
 
       # Return key
@@ -19,7 +19,7 @@ module Mapper
       # @api private
       #
       def key
-        @key ||= map(attribute_set.dump_key_names)
+        @key ||= map(@operations.keys)
       end
 
     private
@@ -34,7 +34,7 @@ module Mapper
       # @return [undefined]
       #
       def initialize(object)
-        super(object,:dump)
+        super(object,mapper.attributes.dump_operations)
       end
     end
   end

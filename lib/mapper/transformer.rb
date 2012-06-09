@@ -1,6 +1,8 @@
 module Mapper
   # Base class for loader and dumper classes
   class Transformer
+    extend ReaderDefiner
+
     # Return source of transformation
     #
     # @return [Object]
@@ -22,41 +24,6 @@ module Mapper
       @mapper || raise("mapper setup missing")
     end
 
-    # Create reader method source
-    #
-    # @param [Symbol] name
-    #   the named value to read
-    #
-    # @return [String]
-    #   the ruby source calling memonized_access(:name)
-    #
-    # @api private
-    #
-    def self.reader_method_source(name)
-      # comment to keep vim ruby syntax happy
-      <<-RUBY
-        def #{name}
-          read(:#{name})
-        end
-      RUBY
-    end
-
-    # Define reader on class
-    #
-    # @param [Symbol] name
-    #   the name of the reader to define
-    #
-    # @return [self]
-    #
-    # @api private
-    #
-    def self.define_reader(name)
-      source = reader_method_source(name)
-      class_eval(source,__FILE__,__LINE__)
-
-      self
-    end
-
     # Access transformers mapper
     #
     # @return [Mapper]
@@ -66,7 +33,6 @@ module Mapper
     def mapper
       self.class.mapper
     end
-
 
   private
 
@@ -78,18 +44,8 @@ module Mapper
     #
     # @api private
     #
-    def initialize(source,operation)
-      @source,@operation = source,operation
-    end
-
-    # Access mappers attribute set
-    #
-    # @return [Mapper::AttributeSet]
-    #
-    # @api private
-    #
-    def attribute_set
-      mapper.attributes
+    def initialize(source,operations)
+      @source,@operations = source,operations
     end
 
     # Create hash from executing methods on transformer
@@ -131,21 +87,7 @@ module Mapper
     # @api private
     #
     def read_nocache(name)
-      transformation(name).send(@operation,@source)
-    end
-
-    # Return transformation
-    #
-    # (Currently an Attribute)
-    #
-    # @return [Transformation]
-    #
-    # @api private
-    #
-    # TODO: Will be replaced by real transformation
-    #
-    def transformation(name)
-      attribute_set.send("fetch_#{@operation}_name",name)
+      @operations.execute(name,@source)
     end
   end
 end

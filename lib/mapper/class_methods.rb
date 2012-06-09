@@ -186,7 +186,7 @@ module Mapper
     def setup
       create(Transformer::Dumper,:Dumper)
       create(Transformer::Loader,:Loader)
-      create(Transformer::DumpWrapper,:DumpWrapper)
+      create(Mapper::DumpWrapper,:DumpWrapper)
 
       self
     end
