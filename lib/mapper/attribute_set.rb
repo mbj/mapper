@@ -16,9 +16,9 @@ module Mapper
       self
     end
 
-    # Return loading view on attribute set
+    # Return operations for loading
     #
-    # @return [Mapper::AttributeSet::View]
+    # @return [Mapper::AttributeSet::Oparations]
     #
     # @api private
     #
@@ -26,9 +26,9 @@ module Mapper
       @load_operations ||= Operations.new(@set,:load)
     end
 
-    # Return dumping view on attribute set
+    # Return operations for dumping
     #
-    # @return [Mapper::AttributeSet::View]
+    # @return [Mapper::AttributeSet::Operations]
     #
     # @api private
     #
