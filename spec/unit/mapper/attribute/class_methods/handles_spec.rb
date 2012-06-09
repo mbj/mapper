@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Mapper::Attribute,'.handles' do
-  let(:object) { Class.new(described_class) }
+  let(:object) { described_class }
 
   subject { object.handles }
 
