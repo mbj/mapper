@@ -7,12 +7,10 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LargeClass:
-# AttributeSet will be broken than this can be lowered
-  max_methods: 15
+  max_methods: 10
   enabled: true
-  exclude: []
-# AttributeSet will be broken than this can be lowered
-  max_instance_variables: 5
+  exclude: [ "Mapper::AttributeSet::Operations" ]
+  max_instance_variables: 3
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -66,8 +64,8 @@ UtilityFunction:
   exclude: []
   enabled: true
 Attribute:
-  exclude: []
-  enabled: false
+  exclude: [ "Mapper::Attribute::Custom" ]
+  enabled: true
 UncommunicativeVariableName:
   accept: []
   exclude: []
@@ -82,7 +80,7 @@ SimulatedPolymorphism:
 DataClump:
   exclude: []
   enabled: true
-  max_copies: 2
+  max_copies: 1
   min_clump_size: 2
 ControlCouple:
   exclude: []

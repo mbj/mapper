@@ -9,7 +9,9 @@ module Mapper
     #
     # @api private
     #
-    attr_reader :source
+    def source
+      @source
+    end
 
     # Access transformers class mapper
     #

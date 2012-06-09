@@ -133,8 +133,8 @@ module Mapper
     #
     # @api private
     #
-    def map(name,klass,options={})
-      attribute = Attribute.build(name,klass,options)
+    def map(name,attribute_class,options={})
+      attribute = Attribute.build(name,attribute_class,options)
       add_attribute(attribute)
 
       self
