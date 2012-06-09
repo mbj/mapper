@@ -1,5 +1,4 @@
 * Prevent Transformer::Loader#{key,attributes,object} to be overriden by mapping definitions
 * Prevent Transformer::Dumper#{key,dump} to be overriden by mapping definitions
-* Expose Transformations generated from AttributeSet to Transformator
-* Finalize the state of DumpWrapper in inheritance tree
 * Fix send(:setup) in mapper.rb
+* Add primitive based attribute lookup. (Remove Attribute.handles stuff)
