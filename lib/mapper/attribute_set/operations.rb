@@ -3,20 +3,6 @@ module Mapper
   class AttributeSet
     # An attribute set scoped to specific operation (dump or load)
     class Operations
-      # Initialize attribute set view
-      #
-      # @param [Set] set
-      #
-      # @param [Symbol] operation
-      #
-      # @return [undefined]
-      #
-      # @api private
-      # 
-      def initialize(set,operation)
-        @set,@operation = set,operation
-      end
-
       # Return names of attributes
       #
       # @return [Array]
@@ -51,6 +37,20 @@ module Mapper
       end
 
     private
+
+      # Initialize attribute set view
+      #
+      # @param [Set] set
+      #
+      # @param [Symbol] operation
+      #
+      # @return [undefined]
+      #
+      # @api private
+      # 
+      def initialize(set,operation)
+        @set,@operation = set,operation
+      end
 
       # Return map of name to attributes 
       #
