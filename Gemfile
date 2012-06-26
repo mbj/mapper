@@ -4,9 +4,10 @@ gemspec
 
 group :development do
   gem 'rake'
-  gem 'mongo'
   gem 'rspec', '~> 1.3.2'
-
+  gem 'veritas',                       :git => 'https://github.com/dkubb/veritas'
+  gem 'veritas-optimizer',             :git => 'https://github.com/dkubb/veritas-optimizer'
+  gem 'veritas-elasticsearch-adapter', :git => 'https://github.com/mbj/veritas-elasticsearch-adapter'
 end
 
 group :metrics do

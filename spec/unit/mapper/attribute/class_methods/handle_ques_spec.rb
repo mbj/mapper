@@ -5,14 +5,14 @@ describe Mapper::Attribute,'.handle?' do
   # attribute I'm not using veritas style unit specs here.
   #
   it 'should return true when attribute subclass can handle class or name' do
-    Mapper::Attribute::Object.handle?(:Object).should be_true
+    Mapper::Attribute::Object.handle?(:Object).should be(true)
   end
 
   it 'should return false when attribute subclass can handle class or name' do
-    Mapper::Attribute::Object.handle?(:EmbeddedValue).should be_false
+    Mapper::Attribute::Object.handle?(:EmbeddedValue).should be(false)
   end
 
   it 'should return false when called on attribute' do
-    described_class.handle?(:Object).should be_false
+    described_class.handle?(:Object).should be(false)
   end
 end

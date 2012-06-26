@@ -6,7 +6,7 @@ describe Mapper::AttributeSet,'#empty?' do
   subject { object.empty? }
 
   context 'when empty' do
-    it { should be_true }
+    it { should be(true) }
     it_should_behave_like 'an idempotent method'
   end
 
@@ -16,6 +16,6 @@ describe Mapper::AttributeSet,'#empty?' do
     end
 
     it_should_behave_like 'an idempotent method'
-    it { should be_false }
+    it { should be(false) }
   end
 end

@@ -17,7 +17,7 @@ module Mapper
     super
   end
 
-  # Construct a mapper
+  # Construct a new mapper
   #
   # @return [Class<Mapper>]
   #
@@ -29,18 +29,20 @@ module Mapper
     klass
   end
 
-  # Constrinct an empty mapper
+  # Construct an empty mapper
   #
-  # @return [Class<Mapper>]
+  # @return [Class]
   #
   # @api private
   #
   def self.new_mapper
-    Class.new do
+    Module.new do
       include ::Mapper
     end
   end
 end
+
+# Base
 
 require 'mapper/reader_definer'
 require 'mapper/dump_wrapper'
@@ -56,3 +58,7 @@ require 'mapper/attribute/embedded_collection'
 require 'mapper/attribute/custom'
 require 'mapper/attribute_set'
 require 'mapper/attribute_set/operations'
+
+# Integrations
+
+require 'mapper/veritas'

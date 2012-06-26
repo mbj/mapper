@@ -6,6 +6,5 @@ describe Mapper,'.new_mapper' do
 
   subject { object.new_mapper }
 
-  its(:superclass) { should be(Object) }
   its(:ancestors) { should include(::Mapper) }
 end

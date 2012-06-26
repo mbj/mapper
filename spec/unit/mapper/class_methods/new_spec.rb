@@ -12,9 +12,9 @@ describe Mapper,'.new' do
     end
   end
 
-  context 'with block' do
+  context 'with block defining attributes' do
     let(:block) do
-      lambda do
+      proc do 
         map :foo,Object
       end
     end
