@@ -17,5 +17,6 @@ Gem::Specification.new do |s|
 
   s.rubygems_version = '1.8.10'
 
-  s.add_dependency('backports')
+  s.add_dependency 'backports' 
+  s.add_dependency 'virtus', '~> 0.5'
 end
