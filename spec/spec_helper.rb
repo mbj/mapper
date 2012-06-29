@@ -12,6 +12,7 @@ Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each { |f| requir
 # simple domain object used in specs
 class DomainObject
   attr_reader :foo,:id
+
   def initialize(attributes={})
     @id = attributes.fetch(:id,1)
     @foo = attributes.fetch(:foo,:bar)
@@ -20,12 +21,10 @@ end
 
 require 'mapper'
 
-module DomainObjectMapper
-  include ::Mapper
+DomainObjectMapper = Mapper::Document.build(DomainObject) do
   map :id, Object, :key => true
   map :foo, Object
 end
-
 
 module SpecHelper
   def compress_prefix(lines)
@@ -41,5 +40,3 @@ end
 RSpec.configure do |config|
   config.include SpecHelper
 end
-
-require 'mapper'

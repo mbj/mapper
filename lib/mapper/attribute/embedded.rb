@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   class Attribute
     # A base class for embedded attribute mappings
     class Embedded < Object

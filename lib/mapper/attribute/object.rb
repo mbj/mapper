@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # A mapped attribute
   class Attribute
     # A mapper for a plain primitive object

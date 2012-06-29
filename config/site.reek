@@ -9,8 +9,9 @@ UncommunicativeParameterName:
 LargeClass:
   max_methods: 10
   enabled: true
-  exclude: [ "Mapper::AttributeSet::Operations" ]
-  max_instance_variables: 3
+  exclude: 
+    - "Mapper::AttributeSet::Operations" # 5 ivars
+  max_instance_variables: 4
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -23,7 +24,7 @@ LongParameterList:
   max_params: 2
   exclude: 
   - "Mapper::Attribute#self.build"
-  - "Mapper::ClassMethods#map"
+  - "Mapper::Builder#map"
   enabled: true
   overrides: {}
 FeatureEnvy:

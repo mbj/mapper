@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # A mapped attribute
   class Attribute
     # An attribute mapped to embedded collection

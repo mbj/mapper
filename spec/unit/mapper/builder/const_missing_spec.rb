@@ -1,7 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::ClassMethods,'#const_missing' do
-  let(:object) { Mapper.new }
+describe Mapper::Builder,'#const_missing' do
+  let(:object) { described_class.new(mapper_class,model) }
+
+  let(:mapper_class) { mock('Mapper Class') }
+  let(:model)        { mock('Model') }
 
   subject { object.send(:const_missing,value) }
 

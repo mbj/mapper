@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # Base class for loader and dumper classes
   class Transformer
     extend ReaderDefiner
@@ -13,41 +13,29 @@ module Mapper
       @source
     end
 
-    # Access transformers class mapper
+    # Return key
     #
-    # @raise [RuntimeError] 
-    #   when no mapper was set
-    #
-    # @return [Mapper]
+    # @return [Object]
     #
     # @api private
     #
-    def self.mapper
-      @mapper || raise("mapper setup missing")
-    end
-
-    # Access transformers mapper
-    #
-    # @return [Mapper]
-    #
-    # @api private
-    #
-    def mapper
-      self.class.mapper
+    def key
+      @key ||= map(operations.keys)
     end
 
   private
 
-    # Initialize transformer with source
+    # Initialize transformer
     #
+    # @param [Mapper] mapper
     # @param [Object] source
     #
     # @return [undefined]
     #
     # @api private
     #
-    def initialize(source,operations)
-      @source,@operations = source,operations
+    def initialize(mapper,source)
+      @mapper,@source = mapper,source
     end
 
     # Create hash from executing methods on transformer
@@ -89,7 +77,26 @@ module Mapper
     # @api private
     #
     def read_nocache(name)
-      @operations.execute(name,@source)
+      operations.execute(name,@source)
+    end
+
+    # Return attributes
+    #
+    # @return [AttributeSet]
+    #
+    # @api private
+    #
+    def mapper_attributes
+      @mapper.attributes
+    end
+
+    # Return operations
+    #
+    # @return [AttributeSet::Operations]
+    #
+    # @api private
+    def operations
+      raise NotImplementedError,"#{self.class}#operations must be implemented"
     end
   end
 end

@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   class Attribute
     # A mapper for embedded document pattern
     class EmbeddedDocument < Embedded

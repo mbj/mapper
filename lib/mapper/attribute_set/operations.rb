@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # A set of mapping attributes
   class AttributeSet
     # An attribute set scoped to specific operation (dump or load)

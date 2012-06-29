@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe Mapper::Transformer,'#source' do
-  let(:object) { described_class.new(source,:operation) }
-  let(:source) { mock                                   }
+  let(:object) { described_class.new(mapper,source) }
+
+  let(:mapper)     { mock('Mapper')     }
+  let(:source)     { mock('Source')     }
 
   subject { object.source }
 

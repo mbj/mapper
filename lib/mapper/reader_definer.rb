@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # A mixin to define public reader methods.
   # Internally #read(:name) is called.
   module ReaderDefiner

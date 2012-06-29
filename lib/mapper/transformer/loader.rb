@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   class Transformer
     # Loader base class
     class Loader < Transformer
@@ -9,7 +9,7 @@ module Mapper
       # @api private
       #
       def object
-        @object ||= mapper.instanciate_model(attributes)
+        @object ||= instantiate(attributes)
       end
 
       # Return loaded attributes
@@ -19,24 +19,40 @@ module Mapper
       # @api private
       #
       def attributes
-        @attributes ||= map(@operations.names)
+        @attributes ||= map(operations.names)
       end
 
     private
 
-      # Initalize Loader
+      # Instantiate model from attributes
       #
-      # @param [Object] dump
-      # @return [undefined]
+      # @param [Object] attributes
+      #
+      # @return [Object]
+      #
+      # @api private
+      def instantiate(attributes)
+        model.new(attributes)
+      end
+
+      # Return model to load
+      #
+      # @return [Object]
+      #
       # @api private
       #
-      def initialize(dump)
-        mapper = self.mapper
+      def model
+        @mapper.model
+      end
 
-        super(
-          mapper::DumpWrapper.new(dump),
-          mapper.attributes.load_operations
-        )
+      # Return load operations
+      #
+      # @return [AttributeSet::Operations]
+      #
+      # @api private
+      #
+      def operations
+        mapper_attributes.dump_operations
       end
     end
   end

@@ -4,10 +4,10 @@ gemspec
 
 group :development do
   gem 'rake'
-  gem 'guard',         '~> 1.1.1'
-  gem 'guard-bundler', '~> 0.1.3'
-  gem 'guard-rspec',   '~> 0.7.3'
-  gem 'rspec', '~> 1.3.2'
+  gem 'guard',          '~> 1.1.1'
+  gem 'guard-bundler',  '~> 0.1.3'
+  gem 'guard-rspec',    '~> 0.7.3'
+  gem 'rspec',          '~> 1.3.2'
   gem 'veritas',                       :git => 'https://github.com/dkubb/veritas'
   gem 'veritas-optimizer',             :git => 'https://github.com/dkubb/veritas-optimizer'
   gem 'veritas-elasticsearch-adapter', :git => 'https://github.com/mbj/veritas-elasticsearch-adapter'

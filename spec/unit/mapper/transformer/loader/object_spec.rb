@@ -1,26 +1,26 @@
 require 'spec_helper'
 
 describe Mapper::Transformer::Loader,'#object' do
-
-  let(:mapper) do 
-    ::Mapper.new do
-      model(DomainObject)
-      map :foo, Object, :to => :other
-    end
-  end
-
-  let(:described_class) { mapper::Loader            }
-  let(:object)          { described_class.new(dump) }
-  let(:dump)            { { :other => :bar }        }
-
   subject { object.object }
 
+  let(:object)        { described_class.new(mapper,mock)                  }
+  let(:mapper)        { mock('Mapper', :loaders => mock, :model => model) } 
+  let(:model)         { mock('Model', :new => domain_object)              }
+  let(:domain_object) { mock('Domain Object')                             }
+  let(:attributes)    { mock('Attributes')                                }
+
   before do
-    object.stub(:mapper => mapper)
+    object.stub(:attributes => attributes)
   end
 
-  its(:class) { should == DomainObject }
-  its(:foo)   { should == :bar }
+  it 'should instantiate model with attributes' do
+    model.should_receive(:new).with(attributes)
+    subject
+  end
+
+  it 'should return domain object' do
+    should be(domain_object)
+  end
 
   it_should_behave_like 'an idempotent method'
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::DumpWrapper,'#read' do
+describe Mapper::Document::DumpWrapper,'#read' do
 
   let(:object) { described_class.new(data) }
 

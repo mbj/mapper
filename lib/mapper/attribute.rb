@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   # mapped attribute base class
   class Attribute
     extend ::Virtus::DescendantsTracker

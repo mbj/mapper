@@ -1,4 +1,4 @@
-module Mapper
+class Mapper
   class Transformer
     # Dumper base class
     class Dumper < Transformer
@@ -9,32 +9,19 @@ module Mapper
       # @api private
       #
       def dump
-        @dump ||= map(@operations.names)
-      end
-
-      # Return key
-      #
-      # @return [Object]
-      #
-      # @api private
-      #
-      def key
-        @key ||= map(@operations.keys)
+        @dump ||= map(operations.names)
       end
 
     private
 
-      # Initialize dumper
-      #
-      # @param [Object] object
-      #   the domain object to dump
+      # Return dumper operations
+      # 
+      # @return [AttributeSet::Operations]
       #
       # @api private
       #
-      # @return [undefined]
-      #
-      def initialize(object)
-        super(object,mapper.attributes.dump_operations)
+      def operations
+        mapper_attributes.load_operations
       end
     end
   end

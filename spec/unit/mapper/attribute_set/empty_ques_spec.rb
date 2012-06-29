@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Mapper::AttributeSet,'#empty?' do
-  let(:object) { described_class.new }
-
   subject { object.empty? }
+
+  let(:object) { described_class.new }
 
   context 'when empty' do
     it { should be(true) }
+
     it_should_behave_like 'an idempotent method'
   end
 
@@ -16,6 +17,7 @@ describe Mapper::AttributeSet,'#empty?' do
     end
 
     it_should_behave_like 'an idempotent method'
+
     it { should be(false) }
   end
 end
