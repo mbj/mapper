@@ -35,6 +35,7 @@ begin
     end
 
     require 'mapper'
+    require 'mapper/veritas'
 
     root_module_regexp = Regexp.union('Mapper')
 

@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'mapper/veritas'
-
 describe Mapper::Veritas::DumpWrapper,'#read' do
   subject { object.send(:read,name) }
 

@@ -20,6 +20,7 @@ class DomainObject
 end
 
 require 'mapper'
+require 'mapper/veritas'
 
 module SpecHelper
   def compress_prefix(lines)

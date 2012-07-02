@@ -115,10 +115,23 @@ class Mapper
   # @api private
   #
   def self.build(model,&block)
-    self::Builder.run(self,model,&block)
+    builder_class.run(self,model,&block)
   end
 
+  # Return builder class
+  #
+  # @return [Class]
+  #
+  # @api private
+  #
+  def self.builder_class
+    ::Mapper::Builder
+  end
+
+  private_class_method :builder_class
+
 private
+
 
   # Initialize mapper
   #
