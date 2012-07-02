@@ -1,5 +1,7 @@
 * Prevent Transformer::Loader#{key,attributes,object} to be overriden by mapping definitions
 * Prevent Transformer::Dumper#{key,dump} to be overriden by mapping definitions
-* Add primitive based attribute lookup. (Remove Attribute.handles stuff)
+* Add primitive based attribute lookup. (Remove Attribute.handles stuff)?
 * Rename Attribute into Mapping
 * Rename AttributeSet into MappingSet
+* Merge this project with session?
+* Bring features, especially transformators into dm-mapper and do not waste time with duplicated efford?
