@@ -115,7 +115,7 @@ class Mapper
   # @api private
   #
   def self.build(model,&block)
-    Builder.run(self,model,&block)
+    self::Builder.run(self,model,&block)
   end
 
 private
@@ -169,3 +169,4 @@ require 'mapper/attribute/embedded_collection'
 require 'mapper/attribute/custom'
 require 'mapper/attribute_set'
 require 'mapper/attribute_set/operations'
+
