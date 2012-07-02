@@ -16,7 +16,7 @@ describe Mapper,'.build' do
   context 'with block defining attributes' do
     let(:block) do
       lambda do |mod|
-        map :foo,Object
+        map :foo
       end
     end
 

@@ -37,9 +37,6 @@ class Mapper
     # @param [Symbol] name
     #   the name of the attribute
     #
-    # @param [Class] attribute_class
-    #   the klass of the mapping
-    #
     # @param [Options] options
     #   the options for this mapping
     #
@@ -47,14 +44,58 @@ class Mapper
     #
     # @api private
     #
-    def map(name,attribute_class,options={})
-      attribute = Attribute.build(name,attribute_class,options)
+    def map(name,options={})
+      attribute = Attribute.build(name,options)
       attributes.add(attribute)
 
       self
     end
 
+    # Customize dumper via block
+    #
+    # @return [self]
+    #
+    # @api private
+    #
+    def dumper(&block)
+      dumper_class.class_eval(&block)
+
+      self
+    end
+
+    # Customize dumper via block
+    #
+    # @return [self]
+    #
+    # @api private
+    #
+    def loader(&block)
+      loader_class.class_eval(&block)
+
+      self
+    end
+
   private
+
+    # Return dumper class
+    #
+    # @api private
+    #
+    # @return [Class]
+    #
+    def dumper_class
+      attributes.dumper_class
+    end
+
+    # Return loader class
+    #
+    # @api private
+    #
+    # @return [Class]
+    #
+    def loader_class
+      attributes.loader_class
+    end
 
     # Initialize mapper builder
     #
@@ -77,16 +118,6 @@ class Mapper
     #
     def attributes
       @attributes ||= AttributeSet.new
-    end
-
-    # Lookup a missing constant
-    #
-    # @return [Class]
-    #
-    # @api private
-    #
-    def const_missing(name)
-      Attribute.determine_type(name) || super
     end
   end
 end

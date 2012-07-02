@@ -49,7 +49,7 @@ class Mapper
     #
     def map(names)
       names.each_with_object({}) do |name,hash|
-        hash[name]=send(name)
+        hash[name]=public_send(name)
       end
     end
 

@@ -13,6 +13,8 @@ class Mapper
     #
     def add(attribute)
       @set << attribute
+      attribute.define_loader(loader_class)
+      attribute.define_dumper(dumper_class)
       reset
 
       self
@@ -84,24 +86,24 @@ class Mapper
       klass
     end
 
-    # Build loader class
+    # Return loader class
     #
-    # @return [Class] 
+    # @return [Class]
     #
     # @api private
     #
-    def build_loader
-      populate(Transformer::Loader,:define_loader)
+    def loader_class
+      @loader_class ||= Class.new(Transformer::Loader)
     end
 
-    # Build dumper class
-    #
-    # @return [Class] 
+    # Return dumper class
     #
     # @api private
     #
-    def build_dumper
-      populate(Transformer::Dumper,:define_dumper)
+    # @return [Class]
+    #
+    def dumper_class
+      @dumper_class ||= Class.new(Transformer::Dumper)
     end
 
   private

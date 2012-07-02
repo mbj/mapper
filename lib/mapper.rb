@@ -140,7 +140,7 @@ private
   # @api private
   #
   def loader_class
-    @loader_class ||= attributes.build_loader
+    attributes.loader_class
   end
 
   # Return the dumper class
@@ -150,7 +150,7 @@ private
   # @api private
   #
   def dumper_class
-    @dumper_class ||= attributes.build_dumper
+    attributes.dumper_class
   end
 end
 

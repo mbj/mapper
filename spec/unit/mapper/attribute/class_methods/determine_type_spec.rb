@@ -3,26 +3,19 @@ require 'spec_helper'
 describe Mapper::Attribute, '.determine_type' do
   let(:object) { described_class }
 
-  subject { object.determine_type(class_or_name) }
+  subject { object.determine_type(symbol) }
 
-  context 'with ::Object' do
-    let(:class_or_name) { ::Object }
-
-    it { should be(Mapper::Attribute::Object) }
-
-    it_should_behave_like 'an idempotent method'
-  end
 
   context 'with undeterminable type' do 
-    let(:class_or_name) { Object.new }
+    let(:symbol) { :unkown }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,"Unable to determine mapping from: #{class_or_name.inspect}")
+      expect { subject }.to raise_error(ArgumentError,'Unable to determine mapping from :unkown')
     end
   end
 
-  context 'with :EmbeddedCollection' do
-    let(:class_or_name) { :EmbeddedCollection }
+  context 'with :embedded_collection' do
+    let(:symbol) { :embedded_collection }
 
     it_should_behave_like 'an idempotent method'
 

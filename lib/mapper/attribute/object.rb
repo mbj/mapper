@@ -4,6 +4,7 @@ class Mapper
     # A mapper for a plain primitive object
     class Object < Attribute
     private
+
       # Initialize attribute
       #
       # @return [undefined]

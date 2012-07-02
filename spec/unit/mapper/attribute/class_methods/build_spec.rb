@@ -4,11 +4,10 @@ describe Mapper::Attribute,'.build' do
   let(:object) { described_class }
   subject { object.build(*arguments) }
 
-  let(:name)          { :name    }
-  let(:class_or_name) { ::Object }
+  let(:name)    { :name    }
 
   context 'without options' do
-    let(:arguments) { [name,class_or_name] }
+    let(:arguments) { [name] }
 
     it { should be_instance_of(Mapper::Attribute::Object) }
 
@@ -17,9 +16,9 @@ describe Mapper::Attribute,'.build' do
   end
 
   context 'with options' do
-    let(:arguments) { [name,class_or_name,{:to => :foo}] }
+    let(:arguments) { [name,{:type => :custom,:to => :foo}] }
 
-    it { should be_instance_of(Mapper::Attribute::Object) }
+    it { should be_instance_of(Mapper::Attribute::Custom) }
 
     its(:load_names) { should == [:name] }
     its(:dump_names) { should == [:foo] }

@@ -5,8 +5,8 @@ describe Mapper::Document,'#loader' do
 
   let(:object) do
     described_class.build(DomainObject) do 
-      map :id,  Object, :key => true
-      map :foo, Object
+      map :id,  :key => true
+      map :foo
     end
   end
 

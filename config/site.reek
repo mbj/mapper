@@ -11,6 +11,7 @@ LargeClass:
   enabled: true
   exclude: 
     - "Mapper::AttributeSet::Operations" # 5 ivars
+    - "Mapper::AttributeSet" # 5 ivars
   max_instance_variables: 4
 UncommunicativeMethodName:
   accept: []
@@ -22,9 +23,6 @@ UncommunicativeMethodName:
   - !ruby/regexp /[A-Z]/
 LongParameterList:
   max_params: 2
-  exclude: 
-  - "Mapper::Attribute#self.build"
-  - "Mapper::Builder#map"
   enabled: true
   overrides: {}
 FeatureEnvy:

@@ -21,11 +21,6 @@ end
 
 require 'mapper'
 
-DomainObjectMapper = Mapper::Document.build(DomainObject) do
-  map :id, Object, :key => true
-  map :foo, Object
-end
-
 module SpecHelper
   def compress_prefix(lines)
     lines = lines.split("\n")

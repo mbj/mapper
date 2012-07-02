@@ -9,7 +9,7 @@ describe Mapper::Transformer::Loader,'#attributes' do
 
   let(:mapper) do 
     ::Mapper.build(DomainObject) do
-      map :foo, Object
+      map :foo
     end
   end
 

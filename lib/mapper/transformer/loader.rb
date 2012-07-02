@@ -52,7 +52,7 @@ class Mapper
       # @api private
       #
       def operations
-        mapper_attributes.dump_operations
+        mapper_attributes.load_operations
       end
     end
   end
