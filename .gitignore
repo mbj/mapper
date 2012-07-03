@@ -1,4 +1,5 @@
-Gemfile.lock
-profiling
-coverage
-tmp
+/Gemfile.lock
+/profiling
+/coverage
+/tmp
+/.rbx
