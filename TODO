@@ -4,4 +4,4 @@
 * Rename Attribute into Mapping
 * Rename AttributeSet into MappingSet
 * Merge this project with session?
-* Bring features, especially transformators into dm-mapper and do not waste time with duplicated efford?
+* Remove runtme dep on veritas, and virtus once support gem is born.
