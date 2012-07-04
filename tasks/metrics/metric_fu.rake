@@ -1,4 +1,7 @@
 begin
+  # This require is needed since metric foo pulls 
+  # activesupport core extensions that will badly inference with veritas....
+  require 'veritas'
   require 'metric_fu'
   require 'json'
 
