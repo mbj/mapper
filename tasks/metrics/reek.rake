@@ -1,7 +1,7 @@
 begin
   require 'reek/rake/task'
 
-  if defined?(RUBY_ENGINE) and RUBY_ENGINE == 'rbx'
+  if defined?(RUBY_ENGINE) and (RUBY_ENGINE == 'rbx' or RUBY_ENGINE == 'jruby')
     task :reek do
       $stderr.puts 'Reek fails under rubinius, fix rubinius and remove guard'
     end
