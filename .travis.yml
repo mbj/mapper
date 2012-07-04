@@ -1,5 +1,5 @@
 before_install:
-  - gem install bundler
+  - gem install bundler 
 language: ruby
 script: 'bundle exec rake ci --trace'
 rvm:
