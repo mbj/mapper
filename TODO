@@ -5,3 +5,4 @@
 * Merge this project with session?
 * Remove runtme dep on veritas, and virtus once support gem is born.
 * Make AttributeSet also Immutable
+* Add class_method/new_spec be_frouen for all frozen objects 
