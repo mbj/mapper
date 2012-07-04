@@ -3,8 +3,6 @@ require 'veritas'
 class Mapper
   # A mapper for veritas relations
   class Veritas < Mapper
-    include ::Veritas::Immutable
-
     # Initialize loader from dump
     #
     # @param [Veritas::Tuple] tuple

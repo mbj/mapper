@@ -1,8 +1,11 @@
 require 'backports'
 require 'virtus'
+require 'veritas'
 
 # Library namespace and abstract root mapper class
 class Mapper
+  include Veritas::Immutable
+
   # Load domain object from dump
   #
   # @param [Object] dump

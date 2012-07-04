@@ -8,7 +8,7 @@ class Mapper
       # @api private
       #
       def initialize(name,options)
-        @mapper ||= options.fetch(:mapper)
+        @mapper = options.fetch(:mapper)
         super
       end
     end

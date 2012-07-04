@@ -3,6 +3,8 @@ class Mapper
   class AttributeSet
     # An attribute set scoped to specific operation (dump or load)
     class Operations
+      include ::Veritas::Immutable
+
       # Return names of attributes
       #
       # @return [Array]
@@ -10,7 +12,7 @@ class Mapper
       # @api private
       # 
       def names
-        @names ||= map.keys.to_set
+        map.keys.to_set
       end
 
       # Return names of keys
@@ -20,7 +22,7 @@ class Mapper
       # @api private
       # 
       def keys
-        @keys ||= names.select { |name| key?(name) }.to_set
+        names.select { |name| key?(name) }.to_set
       end
 
       # Execute operation on value
@@ -58,7 +60,7 @@ class Mapper
       #
       # @api private
       def map
-        @map ||= Hash[map_entries]
+        Hash[map_entries]
       end
 
       # Return attribute from set
@@ -128,6 +130,8 @@ class Mapper
       def key?(name)
         attribute(name).key?
       end
+
+      memoize :keys, :names, :map
     end
   end
 end

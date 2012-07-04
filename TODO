@@ -1,7 +1,7 @@
 * Prevent Transformer::Loader#{key,attributes,object} to be overriden by mapping definitions
 * Prevent Transformer::Dumper#{key,dump} to be overriden by mapping definitions
-* Add primitive based attribute lookup. (Remove Attribute.handles stuff)?
 * Rename Attribute into Mapping
 * Rename AttributeSet into MappingSet
 * Merge this project with session?
 * Remove runtme dep on veritas, and virtus once support gem is born.
+* Make AttributeSet also Immutable
