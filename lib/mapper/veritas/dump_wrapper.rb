@@ -6,7 +6,7 @@ class Mapper
 
       # Initialize dump wrapper
       #
-      # @param [Veritas::Tuple]
+      # @param [Veritas::Tuple] tuple
       #
       # @return [undefined]
       #
@@ -21,6 +21,8 @@ class Mapper
       # Read attribute with name
       #
       # @param [Symbol] name
+      #
+      # @return [Object]
       #
       # @api private
       #

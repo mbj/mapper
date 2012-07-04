@@ -1,6 +1,9 @@
 class Mapper
   # A builder object that creates mappers
   class Builder
+    # Error raised when builder attemts to build incomplete mappers
+    class IncompleteMapperError < RuntimeError; end
+
     # Run mapper builder
     #
     # @param [Class<Mapper>] mapper_class

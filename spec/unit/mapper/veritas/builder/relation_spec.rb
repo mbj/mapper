@@ -9,4 +9,9 @@ describe Mapper::Veritas::Builder,'#relation' do
   let(:relation)     { mock('Relation')                        }
 
   it_should_behave_like 'a command method'
+
+  it 'should set relation' do
+    subject
+    object.instance_variable_get(:@relation).should be(relation)
+  end
 end

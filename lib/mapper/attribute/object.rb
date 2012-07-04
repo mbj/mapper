@@ -31,6 +31,8 @@ class Mapper
 
       # Return names of domain object attributes this attribute loads
       #
+      # This method only exists to simplify building of AttributeSet::Operation
+      #
       # @return [Array<Symbol>]
       #
       # @api private

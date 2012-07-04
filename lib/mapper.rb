@@ -3,8 +3,6 @@ require 'virtus'
 
 # Library namespace and abstract root mapper class
 class Mapper
-  Undefined = Object.new.freeze
-
   # Load domain object from dump
   #
   # @param [Object] dump
@@ -182,4 +180,3 @@ require 'mapper/attribute/embedded_collection'
 require 'mapper/attribute/custom'
 require 'mapper/attribute_set'
 require 'mapper/attribute_set/operations'
-

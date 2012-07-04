@@ -1,5 +1,6 @@
 class Mapper
   class Veritas < Mapper
+    # Builder for veritas mappers
     class Builder < ::Mapper::Builder
 
       # Set relation
@@ -16,7 +17,7 @@ class Mapper
         self
       end
 
-      # Mapper
+      # Return Mapper
       #
       # @return [self]
       #
@@ -26,7 +27,46 @@ class Mapper
         @mapper_class.new(@model,attributes,read_relation)
       end
 
-    private
+      # Build relation header array
+      #
+      # @return [Array]
+      #
+      # @api private
+      #
+      def build_header
+        attributes.each_with_object([]) do |attribute,header|
+          header.concat(self.class.to_veritas_header_component(attribute))
+        end
+      end
+
+      # Return veritas attribute class for attribute
+      #
+      # @param [Mapper::Attribute] attribute
+      #
+      # @return [Veritas::Attribute]
+      #
+      # @api private
+      #
+      def self.to_veritas_attribute_class(attribute)
+        Object
+      end
+      private_class_method :to_veritas_attribute_class
+
+      # Return veritas header components for attribute 
+      #
+      # @param [Mapper::Attribute] attribute
+      #
+      # @return [veritas::Attribute]
+      #
+      # @api private
+      #
+      def self.to_veritas_header_component(attribute)
+        attribute.dump_names.map do |name|
+          [name,to_veritas_attribute_class(attribute)]
+        end
+      end
+
+    private 
 
       # Read relation
       #
@@ -35,7 +75,7 @@ class Mapper
       # @api private
       #
       def read_relation
-        @relation || raise(RuntimeError,'need a relation to instancitate vertias mapper') 
+        @relation || raise(IncompleteMapperError,'no relation is set')
       end
     end
   end

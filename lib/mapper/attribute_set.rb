@@ -115,7 +115,7 @@ class Mapper
     # @api private
     #
     def initialize
-      @set = Set.new
+      @set = Array.new
     end
 
     # Reset caches

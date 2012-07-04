@@ -1,7 +1,9 @@
 require 'veritas'
 
 class Mapper
+  # A mapper for veritas relations
   class Veritas < Mapper
+    include ::Veritas::Immutable
 
     # Initialize loader from dump
     #
@@ -54,6 +56,8 @@ class Mapper
     #
     # @api private
     #
+    # @return [Mapper::Veritas::DumpWrapper]
+    #
     def wrap_tuple(tuple)
       dump_wrapper_class.new(tuple)
     end
@@ -65,7 +69,7 @@ class Mapper
     # @api private
     #
     def dump_wrapper_class
-      @dump_wrapper_class ||= attributes.populate(DumpWrapper,:define_dump_reader)
+      attributes.populate(DumpWrapper,:define_dump_reader)
     end
 
     # Initialize veritas mapper
@@ -80,8 +84,11 @@ class Mapper
       super(model,attributes)
       @relation = relation
     end
+
+    memoize :dump_wrapper_class
   end
 end
 
 require 'mapper/veritas/dump_wrapper'
+require 'mapper/veritas/reader'
 require 'mapper/veritas/builder'
