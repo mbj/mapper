@@ -34,6 +34,7 @@ begin
       raise "ruby2ruby version #{Ruby2Ruby::VERSION} may not work properly, 1.2.2 *only* is recommended for use with heckle"
     end
 
+
     require 'mapper'
     require 'mapper/veritas'
 
@@ -169,6 +170,7 @@ begin
         puts "Heckling #{mod}#{method}"
         IO.popen("spec #{spec_files.join(' ')} --heckle '#{mod}#{method}'") do |pipe|
           while line = pipe.gets
+            puts line
             case line = line.chomp
               when "The following mutations didn't cause test failures:"
                 heckle_caught_modules[mod.name] << method
