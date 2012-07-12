@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Object,'#key?' do
+describe Mapper::Attribute::Object, '#key?' do
   let(:object) { described_class.new(:name, options) }
 
   subject { object.key? }

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::Transformer::Loader,'#attributes' do
+describe Mapper::Transformer::Loader, '#attributes' do
   subject { object.attributes }
 
-  let(:object)          { described_class.new(mapper,dump) }
-  let(:dump)            { mock('Dump',:foo => value)       }
+  let(:object)          { described_class.new(mapper, dump) }
+  let(:dump)            { mock('Dump', :foo => value)       }
   let(:value)           { mock('Value')                    }
 
   let(:mapper) do 

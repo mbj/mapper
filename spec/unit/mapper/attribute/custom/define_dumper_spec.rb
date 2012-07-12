@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Custom,'#define_dumper' do
+describe Mapper::Attribute::Custom, '#define_dumper' do
   let(:object) { described_class.new(:name) }
   let(:dumper_class) { Class.new.freeze }
 

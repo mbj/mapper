@@ -12,9 +12,9 @@ class Mapper
     #
     # @api private
     #
-    def self.build(name,options={})
-      type = determine_type(options.fetch(:type,:object))
-      type.new(name,options)
+    def self.build(name, options={})
+      type = determine_type(options.fetch(:type, :object))
+      type.new(name, options)
     end
 
     # Resolving class or name
@@ -35,7 +35,7 @@ class Mapper
     #
     # TODO: This has be replaced with inflector use
     #
-    # @return [Hash<Symbol,Class>]
+    # @return [Hash<Symbol, Class>]
     #
     # @api private
     #

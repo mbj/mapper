@@ -11,11 +11,11 @@ Dir[File.expand_path('../{support,shared}/**/*.rb', __FILE__)].each { |f| requir
 
 # simple domain object used in specs
 class DomainObject
-  attr_reader :foo,:id
+  attr_reader :foo, :id
 
   def initialize(attributes={})
-    @id = attributes.fetch(:id,1)
-    @foo = attributes.fetch(:foo,:bar)
+    @id = attributes.fetch(:id, 1)
+    @foo = attributes.fetch(:foo, :bar)
   end
 end
 

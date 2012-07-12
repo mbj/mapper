@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper::Builder,'.run' do
-  subject { object.run(mapper_base_class,model,&block) }
+describe Mapper::Builder, '.run' do
+  subject { object.run(mapper_base_class, model, &block) }
 
   let(:object)            { described_class                    }
   let(:model)             { mock('Model')                      }
@@ -13,7 +13,7 @@ describe Mapper::Builder,'.run' do
     let(:block) { nil }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,'Need a block to build mapper')
+      expect { subject }.to raise_error(ArgumentError, 'Need a block to build mapper')
     end
   end
 

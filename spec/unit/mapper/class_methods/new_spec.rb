@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper,'.new' do
-  subject { object.new(model,attributes) }
+describe Mapper, '.new' do
+  subject { object.new(model, attributes) }
 
   let(:object)     { described_class }
 

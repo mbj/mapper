@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Mapper::Transformer::Dumper,'#dump' do
+describe Mapper::Transformer::Dumper, '#dump' do
   let(:domain_object) { DomainObject.new }
 
   let(:mapper)     { mock('Mapper', :attributes => attributes)          }
   let(:attributes) { mock('Attributes', :dump_operations => operations) }
-  let(:operations) { mock('Operations', :names => [:id,:foo])           }
+  let(:operations) { mock('Operations', :names => [:id, :foo])           }
 
-  let(:object)     { Mapper::Transformer::Dumper.new(mapper,domain_object) }
+  let(:object)     { Mapper::Transformer::Dumper.new(mapper, domain_object) }
 
   subject { object.dump }
 

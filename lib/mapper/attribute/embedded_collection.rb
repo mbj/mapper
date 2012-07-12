@@ -15,7 +15,7 @@ class Mapper
       # @api private
       #
       def load(value)
-        map(super(value),:load)
+        map(super(value), :load)
       end
 
       # Dump attribute from domain object
@@ -28,7 +28,7 @@ class Mapper
       #
       # @api private
       def dump(value)
-        map(super(value),:dump)
+        map(super(value), :dump)
       end
 
     private
@@ -42,9 +42,9 @@ class Mapper
       #
       # @api private
       #
-      def map(value,method)
+      def map(value, method)
         value.map do |item|
-          @mapper.send(method,item)
+          @mapper.send(method, item)
         end
       end
     end

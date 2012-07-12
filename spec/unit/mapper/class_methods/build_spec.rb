@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper,'.build' do
-  subject { object.build(model,&block) }
+describe Mapper, '.build' do
+  subject { object.build(model, &block) }
 
   let(:object) { described_class }
   let(:model)  { mock            }
@@ -9,7 +9,7 @@ describe Mapper,'.build' do
 
   context 'without block' do
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,'Need a block to build mapper')
+      expect { subject }.to raise_error(ArgumentError, 'Need a block to build mapper')
     end
   end
 

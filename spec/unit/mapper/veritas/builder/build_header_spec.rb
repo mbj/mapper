@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::Veritas::Builder,'#build_header' do
+describe Mapper::Veritas::Builder, '#build_header' do
 
   subject { object.build_header }
 
-  let(:object) { described_class.new(model,mapper_class) }
+  let(:object) { described_class.new(model, mapper_class) }
 
   let(:mapper_class) { mock('Mapper Class') }
   let(:model)        { mock('Model') }
@@ -15,6 +15,6 @@ describe Mapper::Veritas::Builder,'#build_header' do
   end
 
   it 'should build a simple relation header' do
-    should == [[:foo,Object],[:bar,Object]]
+    should == [[:foo, Object], [:bar, Object]]
   end
 end

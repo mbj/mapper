@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::Veritas,'#reader' do
+describe Mapper::Veritas, '#reader' do
 
   subject { object.reader }
 
-  let(:object) { described_class.new(model,attributes,relation) }
+  let(:object) { described_class.new(model, attributes, relation) }
 
   let(:model)      { mock('Model')      }
   let(:attributes) { mock('Attributes') }
@@ -19,7 +19,7 @@ describe Mapper::Veritas,'#reader' do
   it { should be(reader) }
   
   it 'should create a new reader' do
-    Mapper::Veritas::Reader.should_receive(:new).with(object,relation).and_return(reader)
+    Mapper::Veritas::Reader.should_receive(:new).with(object, relation).and_return(reader)
     subject
   end
 end

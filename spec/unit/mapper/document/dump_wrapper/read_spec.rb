@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::Document::DumpWrapper,'#read' do
+describe Mapper::Document::DumpWrapper, '#read' do
 
   let(:object) { described_class.new(data) }
 
-  subject { object.send(:read,name) }
+  subject { object.send(:read, name) }
 
   let(:data) { { :foo => :bar } }
 

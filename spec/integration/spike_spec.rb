@@ -4,8 +4,8 @@ describe 'spike spec' do
   class Phone
     include Virtus::ValueObject
 
-    attribute :number,String
-    attribute :type,String
+    attribute :number, String
+    attribute :type, String
 
     Mapper = ::Mapper::Document.build(self) do
       map :number
@@ -17,8 +17,8 @@ describe 'spike spec' do
   class Address
     include Virtus::ValueObject
 
-    attribute :lines,String
-    attribute :postcode,String
+    attribute :lines, String
+    attribute :postcode, String
 
     Mapper = ::Mapper::Document.build(self) do
       map :lines
@@ -29,19 +29,19 @@ describe 'spike spec' do
   class User
     include Virtus::ValueObject
 
-    attribute :firstname,String
-    attribute :lastname,String
-    attribute :address,Address
-    attribute :phones,Array[Phone]
-    attribute :preferred_phone,Phone
-    attribute :vat_rate,Rational
+    attribute :firstname, String
+    attribute :lastname, String
+    attribute :address, Address
+    attribute :phones, Array[Phone]
+    attribute :preferred_phone, Phone
+    attribute :vat_rate, Rational
 
     Mapper = ::Mapper::Document.build(self) do
       map :firstname,       :to => :surname
       map :lastname
       map :address,         :type => :embedded_document,   :mapper => Address::Mapper
       map :phones,          :type => :embedded_collection, :mapper => Phone::Mapper
-      map :vat_rate,        :type => :custom, :to => [:vat_rate_numerator,:vat_rate_denominator,:vat_rate]
+      map :vat_rate,        :type => :custom, :to => [:vat_rate_numerator, :vat_rate_denominator, :vat_rate]
       map :preferred_phone, :type => :custom, :to => :preferred_phone_idx
 
       dumper do
@@ -71,7 +71,7 @@ describe 'spike spec' do
 
       loader do
         def vat_rate
-          Rational(source.vat_rate_numerator,source.vat_rate_denominator)
+          Rational(source.vat_rate_numerator, source.vat_rate_denominator)
         end
 
         def preferred_phone
@@ -86,7 +86,7 @@ describe 'spike spec' do
 
   it 'should work' do
     phone_a = Phone.new(:type => :home, :number => '0815 - 1')
-    phone_b = Phone.new(:type => :mobile,:number => '0815 - 2')
+    phone_b = Phone.new(:type => :mobile, :number => '0815 - 2')
 
     address = Address.new(
       :lines => "Snake Oil Ink\nPostbox foo bar",
@@ -97,9 +97,9 @@ describe 'spike spec' do
       :firstname => 'John',
       :lastname => 'Doe',
       :address => address,
-      :phones => [phone_a,phone_b],
+      :phones => [phone_a, phone_b],
       :preferred_phone => phone_b,
-      :vat_rate => Rational(21,100)
+      :vat_rate => Rational(21, 100)
     )
 
     dump = User::Mapper.dump(user)

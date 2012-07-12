@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::AttributeSet,'#loader_class' do
+describe Mapper::AttributeSet, '#loader_class' do
   subject { object.loader_class }
 
   it_should_behave_like 'an idempotent method'

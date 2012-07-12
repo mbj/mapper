@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Veritas,'#loader' do
+describe Mapper::Veritas, '#loader' do
   subject { object.loader(tuple) }
 
   let(:object) do
@@ -16,11 +16,11 @@ describe Mapper::Veritas,'#loader' do
 
 
   let(:tuple) do 
-    Veritas::Tuple.new(header,[1,:bar])
+    Veritas::Tuple.new(header, [1, :bar])
   end
 
   let(:relation) do
-    Veritas::Relation.new(header,data)
+    Veritas::Relation.new(header, data)
   end
 
   let(:header) do

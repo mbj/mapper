@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper::AttributeSet,'#populate' do
-  subject { object.populate(klass,name) }
+describe Mapper::AttributeSet, '#populate' do
+  subject { object.populate(klass, name) }
 
   let(:object)    { described_class.new }
   let(:klass)     { mock('Klass')       }

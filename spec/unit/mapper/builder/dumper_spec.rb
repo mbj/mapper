@@ -1,19 +1,19 @@
 require 'spec_helper'
 
-describe Mapper::Builder,'#dumper' do
+describe Mapper::Builder, '#dumper' do
   subject { object.dumper(&block) }
 
   let(:mapper_class) { mock('Mapper Class') }
   let(:model)        { mock('Model')        }
 
-  let(:object) { described_class.new(mapper_class,model) }
+  let(:object) { described_class.new(mapper_class, model) }
 
 
   context 'without block' do
     let(:block) { nil }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,'block not supplied')
+      expect { subject }.to raise_error(ArgumentError, 'block not supplied')
     end
   end
 

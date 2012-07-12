@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Mapper::Veritas::DumpWrapper,'#read' do
-  subject { object.send(:read,name) }
+describe Mapper::Veritas::DumpWrapper, '#read' do
+  subject { object.send(:read, name) }
 
   let(:object) { described_class.new(tuple) }
 
-  let(:header) { Veritas::Relation::Header.new([[:foo,Integer]]) }
-  let(:tuple)  { Veritas::Tuple.new(header,data)                 }
+  let(:header) { Veritas::Relation::Header.new([[:foo, Integer]]) }
+  let(:tuple)  { Veritas::Tuple.new(header, data)                 }
   let(:data)   { [ 1 ]                                           }
 
 

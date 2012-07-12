@@ -1,7 +1,7 @@
 require 'spec_helper' 
 
-describe Mapper::AttributeSet::Operations,'#names' do
-  let(:object) { described_class.new(set,operation) }
+describe Mapper::AttributeSet::Operations, '#names' do
+  let(:object) { described_class.new(set, operation) }
 
   let(:set) { Set.new }
 
@@ -26,7 +26,7 @@ describe Mapper::AttributeSet::Operations,'#names' do
       end
 
       it 'should return attribute load names' do
-        should == [:foo,:bar].to_set
+        should == [:foo, :bar].to_set
       end
 
       it_should_behave_like 'an idempotent method'
@@ -47,11 +47,11 @@ describe Mapper::AttributeSet::Operations,'#names' do
     context 'and attributes are present' do
       before do
         set << Mapper::Attribute::Object.new(:foo)
-        set << Mapper::Attribute::Object.new(:bar,:to => :baz)
+        set << Mapper::Attribute::Object.new(:bar, :to => :baz)
       end
 
       it 'should return attribute load names' do
-        should == [:foo,:baz].to_set
+        should == [:foo, :baz].to_set
       end
 
       it_should_behave_like 'an idempotent method'

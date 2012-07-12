@@ -7,7 +7,7 @@ class Mapper
       #
       # @api private
       #
-      def initialize(name,options)
+      def initialize(name, options)
         @mapper = options.fetch(:mapper)
         super
       end

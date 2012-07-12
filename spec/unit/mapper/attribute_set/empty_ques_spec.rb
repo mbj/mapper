@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::AttributeSet,'#empty?' do
+describe Mapper::AttributeSet, '#empty?' do
   subject { object.empty? }
 
   let(:object) { described_class.new }

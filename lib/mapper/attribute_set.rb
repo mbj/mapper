@@ -45,7 +45,7 @@ class Mapper
     # @api private
     #
     def load_operations
-      @load_operations ||= Operations.new(@set,:load)
+      @load_operations ||= Operations.new(@set, :load)
     end
 
     # Return operations for dumping
@@ -55,7 +55,7 @@ class Mapper
     # @api private
     #
     def dump_operations
-      @dump_operations ||= Operations.new(@set,:dump)
+      @dump_operations ||= Operations.new(@set, :dump)
     end
 
     # Return if attribute set is empty
@@ -80,7 +80,7 @@ class Mapper
     def populate(superclass, method)
       klass = Class.new(superclass)
       each do |attribute|
-        attribute.send(method,klass)
+        attribute.send(method, klass)
       end
 
       klass

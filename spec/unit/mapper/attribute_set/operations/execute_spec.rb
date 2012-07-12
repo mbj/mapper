@@ -1,14 +1,14 @@
 require 'spec_helper' 
 
-describe Mapper::AttributeSet::Operations,'#execute' do
-  let(:object)    { described_class.new(set,operation) }
+describe Mapper::AttributeSet::Operations, '#execute' do
+  let(:object)    { described_class.new(set, operation) }
                  
   let(:set)       { Set.new }
   let(:name)      { :foo }
   let(:result)    { mock }
-  let(:attribute) { Mapper::Attribute::Object.new(:load_name,:to => :dump_name) }
+  let(:attribute) { Mapper::Attribute::Object.new(:load_name, :to => :dump_name) }
 
-  subject { object.execute(name,value) }
+  subject { object.execute(name, value) }
 
   context 'when loading' do
     let(:operation) { :load }

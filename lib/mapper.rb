@@ -27,7 +27,7 @@ class Mapper
   #
   # @api private
   def loader(dump)
-    loader_class.new(self,dump)
+    loader_class.new(self, dump)
   end
 
   # Transform domain object into dump
@@ -53,7 +53,7 @@ class Mapper
   # @api private
   #
   def dumper(object)
-    dumper_class.new(self,object)
+    dumper_class.new(self, object)
   end
 
   # Return attributes of this mapper 
@@ -89,7 +89,7 @@ class Mapper
   # @return [Reader]
   #
   def reader(*)
-    raise NotImplementedError,"#{self.class}#reader must be implemented"
+    raise NotImplementedError, "#{self.class}#reader must be implemented"
   end
 
   # Build a new mapper using the dsl
@@ -115,8 +115,8 @@ class Mapper
   #
   # @api private
   #
-  def self.build(model,&block)
-    builder_class.run(self,model,&block)
+  def self.build(model, &block)
+    builder_class.run(self, model, &block)
   end
 
   # Return builder class
@@ -143,8 +143,8 @@ private
   #
   # @api private
   #
-  def initialize(model,attributes)
-    @model,@attributes = model, attributes
+  def initialize(model, attributes)
+    @model, @attributes = model, attributes
   end
 
   # Return the loader class

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Mapper,'#attributes' do
+describe Mapper, '#attributes' do
   subject { object.attributes }
 
-  let(:object)     { described_class.new(model,attributes) }
+  let(:object)     { described_class.new(model, attributes) }
   let(:model)      { mock('Model')                         }
   let(:attributes) { mock('Attributes')                    }
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Object,'#define_dump_reader' do
-  let(:object)  { described_class.new(name,options) }
+describe Mapper::Attribute::Object, '#define_dump_reader' do
+  let(:object)  { described_class.new(name, options) }
                
   let(:name)    { :name }
   let(:options) { {} }

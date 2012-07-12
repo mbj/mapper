@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::AttributeSet,'#dump_operations' do
+describe Mapper::AttributeSet, '#dump_operations' do
   subject { object.dump_operations }
 
   let(:object)       { described_class.new                        }

@@ -44,9 +44,9 @@ class Mapper
       # Initialize attribute
       #
       # @api private
-      def initialize(name,options={})
+      def initialize(name, options={})
         @load_name = name 
-        @dump_names = Array(options.fetch(:to,name))
+        @dump_names = Array(options.fetch(:to, name))
       end
     end
   end

@@ -24,7 +24,7 @@ class Mapper
       # @api private
       #
       def mapper
-        @mapper_class.new(@model,attributes,read_relation)
+        @mapper_class.new(@model, attributes, read_relation)
       end
 
       # Build relation header array
@@ -34,7 +34,7 @@ class Mapper
       # @api private
       #
       def build_header
-        attributes.each_with_object([]) do |attribute,header|
+        attributes.each_with_object([]) do |attribute, header|
           header.concat(self.class.to_veritas_header_component(attribute))
         end
       end
@@ -62,7 +62,7 @@ class Mapper
       #
       def self.to_veritas_header_component(attribute)
         attribute.dump_names.map do |name|
-          [name,to_veritas_attribute_class(attribute)]
+          [name, to_veritas_attribute_class(attribute)]
         end
       end
 
@@ -75,7 +75,7 @@ class Mapper
       # @api private
       #
       def read_relation
-        @relation || raise(IncompleteMapperError,'no relation is set')
+        @relation || raise(IncompleteMapperError, 'no relation is set')
       end
     end
   end

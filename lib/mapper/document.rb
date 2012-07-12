@@ -37,7 +37,7 @@ class Mapper
     # @api private
     #
     def dump_wrapper_class
-      attributes.populate(DumpWrapper,:define_dump_reader)
+      attributes.populate(DumpWrapper, :define_dump_reader)
     end
 
     memoize :dump_wrapper_class

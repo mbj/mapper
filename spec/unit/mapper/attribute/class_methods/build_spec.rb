@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Attribute,'.build' do
+describe Mapper::Attribute, '.build' do
   let(:object) { described_class }
   subject { object.build(*arguments) }
 
@@ -16,7 +16,7 @@ describe Mapper::Attribute,'.build' do
   end
 
   context 'with options' do
-    let(:arguments) { [name,{:type => :custom,:to => :foo}] }
+    let(:arguments) { [name, {:type => :custom, :to => :foo}] }
 
     it { should be_instance_of(Mapper::Attribute::Custom) }
 

@@ -34,8 +34,8 @@ class Mapper
       #
       # @api private
       #
-      def execute(name,value)
-        attribute(name).send(@operation,value)
+      def execute(name, value)
+        attribute(name).send(@operation, value)
       end
 
     private
@@ -50,13 +50,13 @@ class Mapper
       #
       # @api private
       # 
-      def initialize(set,operation)
-        @set,@operation = set,operation
+      def initialize(set, operation)
+        @set, @operation = set, operation
       end
 
       # Return map of name to attributes 
       #
-      # @return [Hash<Symbol,Attribute>]
+      # @return [Hash<Symbol, Attribute>]
       #
       # @api private
       def map
@@ -85,7 +85,7 @@ class Mapper
       #
       def map_entries
         entries = []
-        attributes_with_names.each do |attribute,names|
+        attributes_with_names.each do |attribute, names|
           entries.concat(names.product([attribute]))
         end
 
@@ -103,7 +103,7 @@ class Mapper
       def attributes_with_names
         entries = []
         @set.each do |attribute|
-          entries << [attribute,attribute_names(attribute)]
+          entries << [attribute, attribute_names(attribute)]
         end
 
         entries

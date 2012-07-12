@@ -12,7 +12,7 @@ class Mapper
       # @api private
       #
       def load(value)
-        map(super(value),:load)
+        map(super(value), :load)
       end
 
       # Dump from domain object and transform via wrapped mapper
@@ -23,7 +23,7 @@ class Mapper
       # @api private
       #
       def dump(value)
-        map(super(value),:dump)
+        map(super(value), :dump)
       end
 
     private
@@ -42,9 +42,9 @@ class Mapper
       #
       # @api private
       #
-      def map(value,method)
+      def map(value, method)
         unless value.nil?
-          @mapper.send(method,value)
+          @mapper.send(method, value)
         end
       end
     end

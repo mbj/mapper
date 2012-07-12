@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Custom,'#dump_names' do
-  let(:object)  { described_class.new(name,options) }
+describe Mapper::Attribute::Custom, '#dump_names' do
+  let(:object)  { described_class.new(name, options) }
   let(:name)    { :name }
   let(:options) { {} }
 
@@ -14,10 +14,10 @@ describe Mapper::Attribute::Custom,'#dump_names' do
   end
 
   context 'with multiple names in :to option' do
-    let(:options) { { :to => [:foo,:bar] } }
+    let(:options) { { :to => [:foo, :bar] } }
 
     it 'should return dump_names' do
-      should == [:foo,:bar]
+      should == [:foo, :bar]
     end
   end
 end

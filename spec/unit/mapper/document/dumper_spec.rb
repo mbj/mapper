@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Mapper::Document,'#dumper' do
+describe Mapper::Document, '#dumper' do
   subject { object.dumper(domain_object) }
 
   let(:object) do
     described_class.build(DomainObject) do 
-      map :id,  :key => true
+      map :id, :key => true
       map :foo
     end
   end

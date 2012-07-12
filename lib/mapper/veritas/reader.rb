@@ -31,8 +31,8 @@ class Mapper
       #
       # @api private
       #
-      def initialize(mapper,relation)
-        @mapper, @relation = mapper,relation
+      def initialize(mapper, relation)
+        @mapper, @relation = mapper, relation
       end
 
       # Handle method missing messages
@@ -43,8 +43,8 @@ class Mapper
       #
       # @api private
       #
-      def method_missing(method,*args,&block)
-        forwardable?(method) ? forward(method,args,&block) : super
+      def method_missing(method, *args, &block)
+        forwardable?(method) ? forward(method, args, &block) : super
       end
 
       # Forward message to relation
@@ -56,14 +56,14 @@ class Mapper
       #
       # @api private
       #
-      def forward(method,args,&block)
-        result = @relation.send(method,*args,&block)
+      def forward(method, args, &block)
+        result = @relation.send(method, *args, &block)
 
         unless result.kind_of?(::Veritas::Relation)
           return result
         end
 
-        self.class.new(@mapper,result)
+        self.class.new(@mapper, result)
       end
 
       # Check if method is forwardable

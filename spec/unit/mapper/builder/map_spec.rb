@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Mapper::Builder,'#map' do
-  subject { object.map(name,options) }
+describe Mapper::Builder, '#map' do
+  subject { object.map(name, options) }
 
-  let(:object) { described_class.new(mapper_base_class,model) }
+  let(:object) { described_class.new(mapper_base_class, model) }
 
   let(:model)             { mock('Model')             }
   let(:mapper_base_class) { mock('Mapper Base Class') }
@@ -25,7 +25,7 @@ describe Mapper::Builder,'#map' do
   end
 
   it 'should create attribute' do
-    Mapper::Attribute.should_receive(:build).with(name,options).and_return(attribute)
+    Mapper::Attribute.should_receive(:build).with(name, options).and_return(attribute)
     subject
   end
 
@@ -35,7 +35,7 @@ describe Mapper::Builder,'#map' do
     subject { object.map(name) }
 
     it 'should create attribute with default options' do
-      Mapper::Attribute.should_receive(:build).with(name,options).and_return(attribute)
+      Mapper::Attribute.should_receive(:build).with(name, options).and_return(attribute)
       subject
     end
   end

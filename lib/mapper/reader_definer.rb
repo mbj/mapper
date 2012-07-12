@@ -13,7 +13,7 @@ class Mapper
     #
     def define_reader(name)
       source = reader_method_source(name)
-      class_eval(source,__FILE__,__LINE__)
+      class_eval(source, __FILE__, __LINE__)
 
       self
     end

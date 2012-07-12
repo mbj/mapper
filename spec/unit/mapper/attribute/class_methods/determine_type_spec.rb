@@ -10,7 +10,7 @@ describe Mapper::Attribute, '.determine_type' do
     let(:symbol) { :unkown }
 
     it 'should raise error' do
-      expect { subject }.to raise_error(ArgumentError,'Unable to determine mapping from :unkown')
+      expect { subject }.to raise_error(ArgumentError, 'Unable to determine mapping from :unkown')
     end
   end
 

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Mapper::Transformer,'#read' do
+describe Mapper::Transformer, '#read' do
 
-  subject { object.send(:read,name) }
+  subject { object.send(:read, name) }
 
-  let(:object)   { described_class.new(mapper,source) }
+  let(:object)   { described_class.new(mapper, source) }
   let(:mapper)   { mock('Mapper')   }
   let(:source)   { mock('Source')   }
   let(:name)     { mock('Name')     }
@@ -24,13 +24,13 @@ describe Mapper::Transformer,'#read' do
   end
 
   it 'should memonize results' do
-    operations.should_receive(:execute).with(name,source).once.and_return(response)
-    object.send(:read,name)
-    object.send(:read,name)
+    operations.should_receive(:execute).with(name, source).once.and_return(response)
+    object.send(:read, name)
+    object.send(:read, name)
   end
 
   it 'should call execute on operations with name and source' do
-    operations.should_receive(:execute).with(name,source).and_return(response)
+    operations.should_receive(:execute).with(name, source).and_return(response)
     subject
   end
 end

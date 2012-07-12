@@ -34,8 +34,8 @@ class Mapper
     #
     # @api private
     #
-    def initialize(mapper,source)
-      @mapper,@source = mapper,source
+    def initialize(mapper, source)
+      @mapper, @source = mapper, source
     end
 
     # Create hash from executing methods on transformer
@@ -48,7 +48,7 @@ class Mapper
     # @api private
     #
     def map(names)
-      names.each_with_object({}) do |name,hash|
+      names.each_with_object({}) do |name, hash|
         hash[name]=public_send(name)
       end
     end
@@ -77,7 +77,7 @@ class Mapper
     # @api private
     #
     def read_nocache(name)
-      operations.execute(name,@source)
+      operations.execute(name, @source)
     end
 
     # Return attributes
@@ -96,7 +96,7 @@ class Mapper
     #
     # @api private
     def operations
-      raise NotImplementedError,"#{self.class}#operations must be implemented"
+      raise NotImplementedError, "#{self.class}#operations must be implemented"
     end
   end
 end

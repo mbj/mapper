@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Veritas::Builder,'.to_veritas_header_component' do
+describe Mapper::Veritas::Builder, '.to_veritas_header_component' do
 
   subject { object.to_veritas_header_component(attribute) }
 
@@ -13,7 +13,7 @@ describe Mapper::Veritas::Builder,'.to_veritas_header_component' do
   end
 
   context 'with attribute that maps to single dump_name' do
-    let(:attribute) { mock('Attribute', :dump_names => [:foo,:bar]) }
+    let(:attribute) { mock('Attribute', :dump_names => [:foo, :bar]) }
 
     it { should == [[:foo, ::Object], [:bar, ::Object] ] }
   end

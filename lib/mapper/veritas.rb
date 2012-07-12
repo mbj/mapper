@@ -22,7 +22,7 @@ class Mapper
     # @api private
     #
     def reader
-      Reader.new(self,@relation)
+      Reader.new(self, @relation)
     end
 
     # Return relation header
@@ -67,7 +67,7 @@ class Mapper
     # @api private
     #
     def dump_wrapper_class
-      attributes.populate(DumpWrapper,:define_dump_reader)
+      attributes.populate(DumpWrapper, :define_dump_reader)
     end
 
     # Initialize veritas mapper
@@ -78,8 +78,8 @@ class Mapper
     #
     # @api private
     #
-    def initialize(model,attributes,relation)
-      super(model,attributes)
+    def initialize(model, attributes, relation)
+      super(model, attributes)
       @relation = relation
     end
 

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Mapper,'#loader' do
+describe Mapper, '#loader' do
   subject { object.loader(domain_object) }
 
-  let(:object)        { described_class.new(model,attributes)             }
+  let(:object)        { described_class.new(model, attributes)             }
   let(:model)         { mock('Model')                                     }
   let(:attributes)    { mock('Attributes', :loader_class => loader_class) }
   let(:loader)        { mock('Loader')                                    }
@@ -11,7 +11,7 @@ describe Mapper,'#loader' do
   let(:domain_object) { mock('Domain Object')                             }
 
   it 'should instancitate a loader' do 
-    loader_class.should_receive(:new).with(object,domain_object).and_return(loader)
+    loader_class.should_receive(:new).with(object, domain_object).and_return(loader)
 
     should be(loader)
   end

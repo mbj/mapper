@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Custom,'#define_loader' do
+describe Mapper::Attribute::Custom, '#define_loader' do
   let(:object) { described_class.new(:name) }
   let(:loader_class) { Class.new.freeze }
 

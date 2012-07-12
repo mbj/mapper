@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::Custom,'.new' do
+describe Mapper::Attribute::Custom, '.new' do
   let(:object) { described_class }
 
-  subject { object.new(name,options) }
+  subject { object.new(name, options) }
 
   let(:name) { :name }
   let(:options) { {} }
@@ -20,8 +20,8 @@ describe Mapper::Attribute::Custom,'.new' do
   end
 
   context 'with specifing multiple names in :to option' do
-    let(:options) { { :to => [:foo,:bar] } }
+    let(:options) { { :to => [:foo, :bar] } }
     its(:load_names) { should == [name] }
-    its(:dump_names) { should == [:foo,:bar] }
+    its(:dump_names) { should == [:foo, :bar] }
   end
 end

@@ -11,10 +11,10 @@ class Mapper
       #
       # @api private
       #
-      def initialize(load_name,options={})
+      def initialize(load_name, options={})
         @load_name = load_name
-        @dump_name = options.fetch(:to,load_name)
-        @key       = !!options.fetch(:key,false)
+        @dump_name = options.fetch(:to, load_name)
+        @key       = !!options.fetch(:key, false)
       end
 
     public

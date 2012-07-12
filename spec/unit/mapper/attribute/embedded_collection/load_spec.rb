@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::EmbeddedCollection,'#load' do
-  let(:object)  { described_class.new(:name,:mapper => mapper) }
+describe Mapper::Attribute::EmbeddedCollection, '#load' do
+  let(:object)  { described_class.new(:name, :mapper => mapper) }
   let(:mapper)  { Mapper::Attribute::Object.new(:other_name)   }
   let(:item)    { mock }
   let(:coerced) { mock }

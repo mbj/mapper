@@ -16,10 +16,10 @@ class Mapper
     #
     # @api private
     #
-    def self.run(mapper_class,model,&block)
+    def self.run(mapper_class, model, &block)
       raise ArgumentError, 'Need a block to build mapper' unless block_given?
 
-      builder = new(mapper_class,model)
+      builder = new(mapper_class, model)
       builder.instance_eval(&block)
 
       builder.mapper
@@ -32,7 +32,7 @@ class Mapper
     # @api private
     #
     def mapper
-      @mapper_class.new(@model,attributes)
+      @mapper_class.new(@model, attributes)
     end
 
     # Declare a mapping between attribute and database
@@ -47,8 +47,8 @@ class Mapper
     #
     # @api private
     #
-    def map(name,options={})
-      attribute = Attribute.build(name,options)
+    def map(name, options={})
+      attribute = Attribute.build(name, options)
       attributes.add(attribute)
 
       self
@@ -109,8 +109,8 @@ class Mapper
     #
     # @return [undefined]
     #
-    def initialize(mapper_class,model)
-      @mapper_class, @model = mapper_class,model
+    def initialize(mapper_class, model)
+      @mapper_class, @model = mapper_class, model
     end
 
     # Return attribute set

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Mapper, '#model' do
   subject { object.model }
 
-  let(:object) { described_class.new(model,mock) }
+  let(:object) { described_class.new(model, mock) }
   let(:model)  { mock('Model') }
 
   it { should be(model) }

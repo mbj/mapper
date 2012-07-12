@@ -12,11 +12,11 @@ shared_examples_for 'a method adding attributes to attribute set' do
   end
 end
 
-describe Mapper::AttributeSet,'#add' do
+describe Mapper::AttributeSet, '#add' do
   subject { object.add(attribute) }
 
   let(:object)    { described_class.new                                         }
-  let(:attribute) { Mapper::Attribute::Object.new(:load_name,:to => :dump_name) }
+  let(:attribute) { Mapper::Attribute::Object.new(:load_name, :to => :dump_name) }
 
   let(:load_names) { object.load_operations.names }
   let(:dump_names) { object.dump_operations.names }
@@ -49,12 +49,12 @@ describe Mapper::AttributeSet,'#add' do
 
     it 'should still add attribute to load names' do
       subject
-      load_names.should == [:something,:load_name].to_set
+      load_names.should == [:something, :load_name].to_set
     end
 
     it 'should still add attribute to dump names' do
       subject
-      dump_names.should == [:something,:dump_name].to_set
+      dump_names.should == [:something, :dump_name].to_set
     end
 
     it_should_behave_like 'a method adding attributes to attribute set'
