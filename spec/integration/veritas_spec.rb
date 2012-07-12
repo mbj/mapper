@@ -3,8 +3,6 @@ require 'mapper/veritas'
 
 # This is a spike.
 
-# Im about to move some of this classes into lib with specs and docs.
-
 describe Mapper, 'veritas integration' do
   class ObjectReader
     include Enumerable

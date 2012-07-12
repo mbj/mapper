@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mapper::Attribute::EmbeddedDocument, #load' do
+describe Mapper::Attribute::EmbeddedDocument, '#load' do
   let(:object) { described_class.new(:name, mapper => mapper) }
   let(:mapper) { Mapper::Attribute::Object.new(:other_name)   }
 
