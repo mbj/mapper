@@ -15,7 +15,7 @@ class Mapper
     private
 
       # Return dumper operations
-      # 
+      #
       # @return [AttributeSet::Operations]
       #
       # @api private

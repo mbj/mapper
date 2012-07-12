@@ -10,7 +10,7 @@ class Mapper
       # @return [Array]
       #
       # @api private
-      # 
+      #
       def names
         map.keys.to_set
       end
@@ -20,14 +20,14 @@ class Mapper
       # @return [Array]
       #
       # @api private
-      # 
+      #
       def keys
         names.select { |name| key?(name) }.to_set
       end
 
       # Execute operation on value
       #
-      # @param [Symbol] name 
+      # @param [Symbol] name
       # @param [Object] value
       #
       # @return [Object]
@@ -49,12 +49,12 @@ class Mapper
       # @return [undefined]
       #
       # @api private
-      # 
+      #
       def initialize(set, operation)
         @set, @operation = set, operation
       end
 
-      # Return map of name to attributes 
+      # Return map of name to attributes
       #
       # @return [Hash<Symbol, Attribute>]
       #

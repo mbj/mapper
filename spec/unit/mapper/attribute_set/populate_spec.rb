@@ -15,8 +15,8 @@ describe Mapper::AttributeSet, '#populate' do
     Class.stub(:new => new_klass)
   end
 
-  it 'return new class' do 
-    should be(new_klass) 
+  it 'return new class' do
+    should be(new_klass)
   end
 
   it 'should invoke method on attributes with new klass as param' do

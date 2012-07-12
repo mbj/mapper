@@ -18,7 +18,7 @@ describe Mapper::Veritas::Builder, '#mapper' do
 
     it { should be(mapper) }
 
-    it 'should instanctiate mapper' do 
+    it 'should instanctiate mapper' do
       mapper_class.should_receive(:new).with(model, object.send(:attributes), relation)
       subject
     end

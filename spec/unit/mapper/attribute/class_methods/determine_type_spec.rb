@@ -6,7 +6,7 @@ describe Mapper::Attribute, '.determine_type' do
   subject { object.determine_type(symbol) }
 
 
-  context 'with undeterminable type' do 
+  context 'with undeterminable type' do
     let(:symbol) { :unkown }
 
     it 'should raise error' do

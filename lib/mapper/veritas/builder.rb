@@ -52,7 +52,7 @@ class Mapper
       end
       private_class_method :to_veritas_attribute_class
 
-      # Return veritas header components for attribute 
+      # Return veritas header components for attribute
       #
       # @param [Mapper::Attribute] attribute
       #
@@ -66,7 +66,7 @@ class Mapper
         end
       end
 
-    private 
+    private
 
       # Read relation
       #

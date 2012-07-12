@@ -52,7 +52,7 @@ describe 'spike spec' do
         def vat_rate_numerator
           with_vat_rate(&:numerator)
         end
-        
+
         def vat_rate_denominator
           with_vat_rate(&:denominator)
         end
@@ -104,7 +104,7 @@ describe 'spike spec' do
 
     dump = User::Mapper.dump(user)
 
-    dump.should == { 
+    dump.should == {
       :surname  =>'John',
       :lastname =>'Doe',
       :address  =>{:lines=>"Snake Oil Ink\nPostbox foo bar", :postcode=>'085123'},

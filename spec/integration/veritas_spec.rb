@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'mapper/veritas'
 
-# This is a spike. 
+# This is a spike.
 
 # Im about to move some of this classes into lib with specs and docs.
 

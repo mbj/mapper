@@ -5,7 +5,7 @@ describe Mapper::Attribute::Object, '#key?' do
 
   subject { object.key? }
 
- 
+
   context 'when options are empty' do
     let(:options) { {} }
     it { should be(false) }

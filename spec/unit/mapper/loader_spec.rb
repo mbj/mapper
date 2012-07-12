@@ -10,7 +10,7 @@ describe Mapper, '#loader' do
   let(:loader_class)  { mock('Loader Class', :new => loader)              }
   let(:domain_object) { mock('Domain Object')                             }
 
-  it 'should instancitate a loader' do 
+  it 'should instancitate a loader' do
     loader_class.should_receive(:new).with(object, domain_object).and_return(loader)
 
     should be(loader)

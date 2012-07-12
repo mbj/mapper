@@ -56,14 +56,14 @@ class Mapper
     dumper_class.new(self, object)
   end
 
-  # Return attributes of this mapper 
+  # Return attributes of this mapper
   #
   # @return [AttributeSet]
   #
   # @api private
   #
   def attributes
-    @attributes 
+    @attributes
   end
 
   # Return model of this mappe
@@ -79,7 +79,7 @@ class Mapper
 
   # Wrap a query into reader object
   #
-  # This is handled by specialized adpaters. 
+  # This is handled by specialized adpaters.
   #
   # @raise [NotImplentedError]
   #   when called on ::Mapper

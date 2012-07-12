@@ -10,7 +10,7 @@ describe Mapper::Document::DumpWrapper, '#read' do
 
   context 'when name does exist' do
     let(:name) { :foo }
-    
+
     it 'should return value' do
       should == :bar
     end
@@ -20,7 +20,7 @@ describe Mapper::Document::DumpWrapper, '#read' do
 
   context 'when name does NOT exist' do
     let(:name) { :unexistend }
-    
+
     it 'should raise error' do
       expect { subject }.to raise_error(IndexError)
     end

@@ -48,7 +48,7 @@ class Mapper
 
   private
 
-    # Return dump wrapped 
+    # Return dump wrapped
     #
     # @param [Veritas::Tuple] tuple
     #

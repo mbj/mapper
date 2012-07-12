@@ -19,5 +19,5 @@ describe Mapper::Transformer, '#key' do
 
   it 'should return domain objects key' do
     should == { :id => :some_key }
-  end 
+  end
 end

@@ -1,6 +1,6 @@
 class Mapper
   class Document
-    # Wraps a raw dump to abstract away hash 
+    # Wraps a raw dump to abstract away hash
     class DumpWrapper
       extend ReaderDefiner
 

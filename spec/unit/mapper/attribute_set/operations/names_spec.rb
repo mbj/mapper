@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 
 describe Mapper::AttributeSet::Operations, '#names' do
   let(:object) { described_class.new(set, operation) }

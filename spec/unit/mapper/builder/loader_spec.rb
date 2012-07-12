@@ -18,7 +18,7 @@ describe Mapper::Builder, '#loader' do
   end
 
   context 'with block' do
-    let(:block) do 
+    let(:block) do
       lambda do |context|
         def foo
           :bar

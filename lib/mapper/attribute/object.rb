@@ -24,7 +24,7 @@ class Mapper
       # @return [true|false]
       #
       # @api private
-      # 
+      #
       def key?
         @key
       end

@@ -7,7 +7,7 @@ describe Mapper::Transformer::Loader, '#attributes' do
   let(:dump)            { mock('Dump', :foo => value)       }
   let(:value)           { mock('Value')                    }
 
-  let(:mapper) do 
+  let(:mapper) do
     ::Mapper.build(DomainObject) do
       map :foo
     end
@@ -24,7 +24,7 @@ describe Mapper::Transformer::Loader, '#attributes' do
   end
 
   it 'should return attribute hash' do
-    should == { :foo => value } 
+    should == { :foo => value }
   end
 
   it_should_behave_like 'an idempotent method'

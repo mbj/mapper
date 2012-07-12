@@ -17,7 +17,7 @@ describe Mapper::Transformer, '#read' do
     operations.stub(:execute => response)
   end
 
-  it_should_behave_like 'an idempotent method' 
+  it_should_behave_like 'an idempotent method'
 
   it 'should return response' do
     should be(response)

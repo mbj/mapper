@@ -3,7 +3,7 @@ class Mapper
   class Attribute
     # An attribute mapped to embedded collection
     class EmbeddedCollection < Embedded
-      
+
       # Load attribute from dump
       #
       # This method uses wrapped mapper to transform items.

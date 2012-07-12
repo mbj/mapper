@@ -4,7 +4,7 @@ describe Mapper::Transformer::Loader, '#object' do
   subject { object.object }
 
   let(:object)        { described_class.new(mapper, mock)                  }
-  let(:mapper)        { mock('Mapper', :loaders => mock, :model => model) } 
+  let(:mapper)        { mock('Mapper', :loaders => mock, :model => model) }
   let(:model)         { mock('Model', :new => domain_object)              }
   let(:domain_object) { mock('Domain Object')                             }
   let(:attributes)    { mock('Attributes')                                }

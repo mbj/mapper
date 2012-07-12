@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mapper::Attribute::Object, '#define_loader' do
   let(:object)  { described_class.new(name, options) }
-               
+    
   let(:name)    { :name }
   let(:options) { {} }
 

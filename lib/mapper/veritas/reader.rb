@@ -38,7 +38,7 @@ class Mapper
       # Handle method missing messages
       #
       # @param [Symbol] method
-      # 
+      #
       # @return [Object]
       #
       # @api private
@@ -51,7 +51,7 @@ class Mapper
       #
       # @param [Symbol] method
       # @param [Array] args
-      # 
+      #
       # @return [Object]
       #
       # @api private

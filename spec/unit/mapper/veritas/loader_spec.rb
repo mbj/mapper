@@ -6,7 +6,7 @@ describe Mapper::Veritas, '#loader' do
   let(:object) do
     mapped_relation = self.relation
 
-    described_class.build(DomainObject) do 
+    described_class.build(DomainObject) do
       map :id,  :key => true
       map :foo
 
@@ -15,7 +15,7 @@ describe Mapper::Veritas, '#loader' do
   end
 
 
-  let(:tuple) do 
+  let(:tuple) do
     Veritas::Tuple.new(header, [1, :bar])
   end
 

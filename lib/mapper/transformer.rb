@@ -40,7 +40,7 @@ class Mapper
 
     # Create hash from executing methods on transformer
     #
-    # @param [Array] names 
+    # @param [Array] names
     #   the methods to execute and map
     #
     # @return [Hash]

@@ -10,7 +10,7 @@ describe Mapper, '#dumper' do
   let(:dumper_class)  { mock('Dumper Class', :new => dumper)            }
   let(:domain_object) { mock('Domain Object')                            }
 
-  it 'should instancitate a dumper' do 
+  it 'should instancitate a dumper' do
     dumper_class.should_receive(:new).with(object, domain_object).and_return(dumper)
 
     should be(dumper)

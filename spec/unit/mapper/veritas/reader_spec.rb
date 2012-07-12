@@ -13,11 +13,11 @@ describe Mapper::Veritas, '#reader' do
   let(:reader)     { mock('Reader')     }
 
   before do
-    Mapper::Veritas::Reader.stub(:new => reader) 
+    Mapper::Veritas::Reader.stub(:new => reader)
   end
 
   it { should be(reader) }
-  
+
   it 'should create a new reader' do
     Mapper::Veritas::Reader.should_receive(:new).with(object, relation).and_return(reader)
     subject

@@ -24,7 +24,7 @@ class Mapper
 
       builder.mapper
     end
-    
+
     # Return new mapper
     #
     # @return [Mapper]

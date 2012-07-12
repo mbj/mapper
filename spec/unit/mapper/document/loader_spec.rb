@@ -4,7 +4,7 @@ describe Mapper::Document, '#loader' do
   subject { object.loader(dump) }
 
   let(:object) do
-    described_class.build(DomainObject) do 
+    described_class.build(DomainObject) do
       map :id, :key => true
       map :foo
     end
