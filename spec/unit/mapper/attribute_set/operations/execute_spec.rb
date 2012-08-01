@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Mapper::AttributeSet::Operations, '#execute' do
   let(:object)    { described_class.new(set, operation) }
-      
+
   let(:set)       { Set.new }
   let(:name)      { :foo }
   let(:result)    { mock }
