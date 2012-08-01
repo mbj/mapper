@@ -18,9 +18,6 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.8.10'
 
   s.add_dependency 'backports' 
-
-  # These dependencies will be readded as dev deps once
-  # the {Virtus,Veritas}::Support parts are ripped out into a support gem
-  s.add_dependency 'virtus', '~> 0.5.1'
-  s.add_dependency 'veritas', '~> 0.0.7'
+  s.add_development_dependency 'virtus', '~> 0.5.1'
+  s.add_development_dependency 'veritas', '~> 0.0.7'
 end
