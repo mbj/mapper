@@ -1,7 +1,7 @@
 class Mapper
   # mapped attribute base class
   class Attribute
-    extend ::Virtus::DescendantsTracker
+    extend DescendantsTracker
 
     # Build a mapper after resolving class or name
     #

@@ -1,10 +1,10 @@
 require 'backports'
-require 'virtus'
-require 'veritas'
+require 'immutable'
+require 'descendants_tracker'
 
 # Library namespace and abstract root mapper class
 class Mapper
-  include Veritas::Immutable
+  include Immutable
 
   # Load domain object from dump
   #

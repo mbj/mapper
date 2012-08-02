@@ -2,6 +2,9 @@ source :rubyforge
 
 gemspec
 
+gem 'immutable',           :git  => 'https://github.com/mbj/immutable'
+gem 'descendants_tracker', :git  => 'https://github.com/mbj/descendants_tracker'
+
 group :development do
   gem 'rake'
   gem 'guard',          '~> 1.1.1'

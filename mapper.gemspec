@@ -7,7 +7,6 @@ Gem::Specification.new do |s|
 
   s.authors  = ['Markus Schirp']
   s.email    = 'mbj@seonic.net'
-  s.date     = '2012-02-14'
   s.summary  = 'Agnostic Mapper'
   s.homepage = 'http://github.com/mbj/mapper'
 
@@ -17,7 +16,10 @@ Gem::Specification.new do |s|
 
   s.rubygems_version = '1.8.10'
 
-  s.add_dependency 'backports' 
+  s.add_dependency('backports',           '~> 2.6.1')
+  s.add_dependency('immutable',           '~> 0.0.1')
+  s.add_dependency('descendants_tracker', '~> 0.0.1')
+
   s.add_development_dependency 'virtus', '~> 0.5.1'
   s.add_development_dependency 'veritas', '~> 0.0.7'
 end

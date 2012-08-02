@@ -3,7 +3,7 @@ class Mapper
   class AttributeSet
     # An attribute set scoped to specific operation (dump or load)
     class Operations
-      include ::Veritas::Immutable
+      include Immutable
 
       # Return names of attributes
       #

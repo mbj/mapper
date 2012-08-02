@@ -19,6 +19,8 @@ class DomainObject
   end
 end
 
+# Some of the spec support stuff uses virtus
+require 'virtus'
 require 'mapper'
 require 'mapper/veritas'
 
