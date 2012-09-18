@@ -2,19 +2,25 @@ source :rubyforge
 
 gemspec
 
-gem 'immutable',           :git  => 'https://github.com/mbj/immutable'
-gem 'descendants_tracker', :git  => 'https://github.com/mbj/descendants_tracker'
+gem 'immutable',           :git  => 'https://github.com/dkubb/immutable', :branch => :experimental
+gem 'descendants_tracker', :git  => 'https://github.com/dkubb/descendants_tracker'
 
 group :development do
   gem 'rake'
-  gem 'guard',          '~> 1.1.1'
-  gem 'guard-bundler',  '~> 0.1.3'
-  gem 'guard-rspec',    '~> 0.7.3'
   gem 'rspec',          '~> 1.3.2'
   gem 'veritas',                       :git => 'https://github.com/dkubb/veritas'
   gem 'veritas-optimizer',             :git => 'https://github.com/dkubb/veritas-optimizer'
   gem 'veritas-elasticsearch-adapter', :git => 'https://github.com/mbj/veritas-elasticsearch-adapter'
   gem 'veritas-mongo-adapter',         :git => 'https://github.com/mbj/veritas-mongo-adapter'
+end
+
+group :guard do
+  gem 'guard',         '~> 1.3.2'
+  gem 'guard-bundler', '~> 1.0.0'
+  gem 'guard-rspec',   '~> 1.2.1'
+  # Remove this once https://github.com/nex3/rb-inotify/pull/20 is solved.
+  # This patch makes rb-inotify a nice player with listen so it does not poll.
+  gem 'rb-inotify', :git => 'https://github.com/mbj/rb-inotify'
 end
 
 group :metrics do

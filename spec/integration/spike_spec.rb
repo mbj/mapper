@@ -5,7 +5,7 @@ describe 'spike spec' do
     include Virtus::ValueObject
 
     attribute :number, String
-    attribute :type, String
+    attribute :type,   String
 
     Mapper = ::Mapper::Document.build(self) do
       map :number
@@ -17,7 +17,7 @@ describe 'spike spec' do
   class Address
     include Virtus::ValueObject
 
-    attribute :lines, String
+    attribute :lines,    String
     attribute :postcode, String
 
     Mapper = ::Mapper::Document.build(self) do
@@ -29,12 +29,12 @@ describe 'spike spec' do
   class User
     include Virtus::ValueObject
 
-    attribute :firstname, String
-    attribute :lastname, String
-    attribute :address, Address
-    attribute :phones, Array[Phone]
+    attribute :firstname,       String
+    attribute :lastname,        String
+    attribute :address,         Address
+    attribute :phones,          Array[Phone]
     attribute :preferred_phone, Phone
-    attribute :vat_rate, Rational
+    attribute :vat_rate,        Rational
 
     Mapper = ::Mapper::Document.build(self) do
       map :firstname,       :to => :surname
