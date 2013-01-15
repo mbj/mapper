@@ -1,6 +1,9 @@
 mapper
 ======
 
+THIS PROJECT IS ABANDONED. See [dm-mapper](https://github.com/datamapper/dm-mapper). A better implementation.
+
+
 [![Build Status](https://secure.travis-ci.org/mbj/mapper.png?branch=master)](http://travis-ci.org/mbj/mapper)
 [![Dependency Status](https://gemnasium.com/mbj/mapper.png)](https://gemnasium.com/mbj/mapper)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mbj/mapper)
